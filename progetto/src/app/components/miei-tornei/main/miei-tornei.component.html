@@ -1,1 +1,45 @@
-<p>miei-tornei works!</p>
+<table class="table">
+    <thead class="bg-dark text-light">
+        <tr>
+            <th *ngFor="let th of thLabels">{{th.label}}</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let torneo of mieiTornei | async">
+            <td>{{torneo.nome}}</td>
+            <td>{{torneo.gioco}}</td>
+            <td>{{torneo.piattaforma}}</td>
+            <td>{{torneo.capienza}}</td>
+            <td>{{torneo.capienzaMinima}}</td>
+            <td>{{torneo.iscrizioni}}</td>
+            <td>{{torneo.postiLiberi}}</td>
+            <td>{{torneo.partite}}</td>
+            <td>{{torneo.quota}}</td>
+            <td>{{torneo.premioPrimo}}</td>
+            <td>{{torneo.premioSecondo}}</td>
+            <td>{{torneo.premioTerzo}}</td>
+            <td>{{torneo.idCreatore}}</td>
+            <td>{{torneo.stato}}</td>
+            <td>edita</td>
+            <td>elimina</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="insert">
+    <form [formGroup]="creaNuovoTorneoForm" (ngSubmit)="crea()">
+        <!-- trovare modo per creare automaticamente layout magari -->
+        <div class="row" *ngFor="let input of inputForm; let i = index">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-sm" formControlName="{{input.formControlName}}" placeholder="{{input.placeholder}}">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-dark" [disabled]="creaNuovoTorneoForm.invalid">
+            add
+        </button>
+    </form>
+</div>
