@@ -10,7 +10,12 @@ import { TorneiComponent } from './components/tornei/main/tornei.component';
 import { MieiTorneiComponent } from './components/miei-tornei/main/miei-tornei.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CoreModule } from 'src/core/core.module';
+import { CoreModule } from 'src/app/core/core.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './redux';
+import { TorneoEffects } from './redux/miei-tornei/miei-tornei.effect';
+import { UtenteEffects } from './redux/utente/utente.effects';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,12 @@ import { CoreModule } from 'src/core/core.module';
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    StoreModule.forRoot(reducers),
+     EffectsModule.forRoot([
+      TorneoEffects, 
+      UtenteEffects,
+     ])
   ],
   providers: [],
   bootstrap: [AppComponent],
