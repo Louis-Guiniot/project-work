@@ -1,1 +1,37 @@
-<p>tornei works!</p>
+<table class="table">
+    <thead class="bg-dark text-light">
+        <tr>
+            <th *ngFor="let th of thLabels">{{ th.label }}</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let torneo of mieiTornei | async">
+
+        <tr *ngIf="torneo.idCreatore != idCreatore">
+            <td>{{ torneo.nome }}</td>
+            <td>{{ torneo.gioco }}</td>
+            <td>{{ torneo.piattaforma }}</td>
+            <td>{{ torneo.capienza }}</td>
+            <td>{{ torneo.capienzaMinima }}</td>
+            <td>{{ torneo.iscrizioni }}</td>
+            <td>{{ torneo.postiLiberi }}</td>
+            <td>{{ torneo.partite }}</td>
+            <td>{{ torneo.quota }}</td>
+            <td>{{ torneo.premioPrimo }}</td>
+            <td>{{ torneo.premioSecondo }}</td>
+            <td>{{ torneo.premioTerzo }}</td>
+            <td>{{ torneo.idCreatore }}</td>
+            <td>{{ torneo.stato }}</td>
+            <td (click)="openDetailModal(detailTorneo,torneo.id)">dettaglio</td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #detailTorneo let-modal>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+</ng-template>

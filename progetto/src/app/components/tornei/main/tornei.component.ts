@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Torneo } from 'src/app/core/model/Torneo.interface';
+import { selectTorneo } from 'src/app/redux/miei-tornei';
+import { MieiTorneiService } from 'src/app/services/miei-tornei/miei-tornei.service';
 
 @Component({
   selector: 'app-tornei',
@@ -7,9 +15,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TorneiComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb:FormBuilder,private store: Store, private router: Router,private mieiTorneiService: MieiTorneiService,private modalService: NgbModal) { 
+    // console.log(this.mieiTorneiService.elencoTorneiPerCreatore(sessionStorage.getItem('id')));
+    console.log(this.mieiTorneiService.elencoTornei());
+  }
+
+  thLabels = [
+    {label:'nome'},{label:'gioco'},{label:'piattaforma'},{label:'capienza'},
+    {label:'capienza_min'},{label:'iscrizioni'},{label:'posti_liberi'},{label:'partite'},
+    {label:'quota'},{label:'premio_1^'},{label:'premio_2^'},{label:'premio_3^'},{label:'id_creatore'},{label:'stato'},
+  ]
+
+  idCreatore = Number(sessionStorage.getItem('id'))
+
+  idTorneoDaEditare: number
+  openDetailModal(content:string,idtorneo:number) {
+    this.modalService.open(content, { size: 'xl' });
+    console.log("aperto modale modifica torneo con id : ", idtorneo)
+    this.idTorneoDaEditare = idtorneo
+  }
 
   ngOnInit(): void {
+  }
+
+  get mieiTornei():Observable<Torneo[]>{
+    return this.store.pipe(select(selectTorneo))
   }
 
 }
