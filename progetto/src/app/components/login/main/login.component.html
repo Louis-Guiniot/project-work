@@ -1,37 +1,52 @@
-<div class="insert">
-    <form [formGroup]="creaNuovoUtenteForm" (ngSubmit)="registrati()">
-        <!-- trovare modo per creare automaticamente layout magari -->
-        <div class="row" *ngFor="let input of inputFormRegistrazione; let i = index">
-            <div class="col">
-                <div class="input-group mb-3">
-                    <input type="{{input.type}}" class="form-control form-control-sm" formControlName="{{input.formControlName}}" placeholder="{{input.placeholder}}">
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="1">
+        <a ngbNavLink>Accedi</a>
+        <ng-template ngbNavContent>
+            <form [formGroup]="loginUtenteForm" (ngSubmit)="login()">
+                <!-- trovare modo per creare automaticamente layout magari -->
+                <div class="row" *ngFor="let input of inputFormLogin; let i = index">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="{{input.type}}" class="form-control form-control-sm" formControlName="{{input.formControlName}}" placeholder="{{input.placeholder}}">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="form-check" *ngFor="let radio of radioFormRegistrazione">
-            <input class="form-check-input" type="radio" formControlName="genere" value="{{radio.label}}" checked>
-            <label class="form-check-label" for="exampleRadios1">
-                {{radio.label}}
-            </label>
-        </div>
-
-        <button type="submit" class="btn btn-dark" [disabled]="creaNuovoUtenteForm.invalid">
-            registrati
-        </button>
-    </form>
-
-    <form [formGroup]="loginUtenteForm" (ngSubmit)="login()">
-        <!-- trovare modo per creare automaticamente layout magari -->
-        <div class="row" *ngFor="let input of inputFormLogin; let i = index">
-            <div class="col">
-                <div class="input-group mb-3">
-                    <input type="{{input.type}}" class="form-control form-control-sm" formControlName="{{input.formControlName}}" placeholder="{{input.placeholder}}">
+                <button type="submit" class="btn btn-dark" [disabled]="loginUtenteForm.invalid">
+                    entra
+                </button>
+            </form>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+        <a ngbNavLink>Registrati</a>
+        <ng-template ngbNavContent>
+            <form [formGroup]="creaNuovoUtenteForm" (ngSubmit)="registrati()">
+                <!-- trovare modo per creare automaticamente layout magari -->
+                <div class="row" *ngFor="let input of inputFormRegistrazione; let i = index">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="{{input.type}}" class="form-control form-control-sm" formControlName="{{input.formControlName}}" placeholder="{{input.placeholder}}">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-dark" [disabled]="loginUtenteForm.invalid">
-            entra
-        </button>
-    </form>
-</div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <select class="form-control form-control-sm" formControlName="genere">
+                                <option selected="selected" hidden>seleziona il tuo sesso</option>
+                            <option *ngFor="let radio of radioFormRegistrazione" value="{{radio.label}}">{{radio.label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-dark" [disabled]="creaNuovoUtenteForm.invalid">
+                            registrati
+                        </button>
+            </form>
+        </ng-template>
+    </li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
