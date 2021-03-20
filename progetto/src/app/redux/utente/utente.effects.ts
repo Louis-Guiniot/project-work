@@ -5,7 +5,7 @@ import { Action } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { switchMap, map, tap } from "rxjs/operators";
 import { HttpCommunicationsService } from "src/app/core/model/http/http-communications.service";
-import { createUtente, deleteUtente, initUtenti, retreiveAllUtenti, updateUtente } from "./utente.actions";
+import { createUtente, deleteUtente, findUtenteByUsernameAndPassword, initUserAdmin, initUtenti, loginAdminUserFailure, loginAdminUserSuccess, retreiveAllUtenti, updateUtente } from "./utente.actions";
 import { Response } from "src/app/core/model/Response.interface";
 
 @Injectable()
@@ -45,9 +45,8 @@ export class UtenteEffects {
         username:string,
         password:string,
         email:string,
-        genere:string,
         datanascita:string
-    ) {
+    ): Observable<Response> {
         return this.http.retrievePostCall<Response>('utente/aggiornaUtente', {
             id,
             nome,
@@ -55,8 +54,17 @@ export class UtenteEffects {
             username,
             password,
             email,
-            genere,
             datanascita
+        });
+    }
+
+    findUtenteByUsernameAndPassword(
+        username:string,
+        password:string,
+    ): Observable<Response> {
+        return this.http.retrievePostCall<Response>('utente/findUtente', {
+            username,
+            password,
         });
     }
 
@@ -71,13 +79,12 @@ export class UtenteEffects {
             action.nome,
             action.cognome,
             action.username,
-            action.password,
             action.email,
-            action.genere,
+            action.password,
             action.datanascita,
             ).pipe(
                 map((response) => initUtenti({ response }))
-                , tap(() => this.router.navigateByUrl('/redirectTorneo'))
+                , tap(() => this.router.navigateByUrl('/profilo'))
             ))
     ));
 
@@ -87,13 +94,13 @@ export class UtenteEffects {
             action.nome,
             action.cognome,
             action.username,
-            action.password,
             action.email,
+            action.password,
             action.genere,
             action.datanascita,
             ).pipe(
                 map((response) => initUtenti({ response }))
-                , tap(() => this.router.navigateByUrl('/redirectTorneo'))
+                , tap(() => this.router.navigateByUrl('/home'))
             ))
     ));
 
@@ -102,7 +109,7 @@ export class UtenteEffects {
         switchMap((action) => this.deleteUtente(
             action.id).pipe(
                 map((response) => initUtenti({ response }))
-                , tap(() => this.router.navigateByUrl('/redirectTorneo'))
+                , tap(() => this.router.navigateByUrl('/login'))
             ))
     ));
 
@@ -112,5 +119,30 @@ export class UtenteEffects {
             map((response) => initUtenti({ response }))
         ))
     ));
- 
+
+    loginAdmin$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(findUtenteByUsernameAndPassword),
+        switchMap((action) => this.findUtenteByUsernameAndPassword(
+            action.username,
+            action.password
+        ).pipe(
+            map((response) => {
+                if(response.result === null){
+                  return loginAdminUserFailure({error:'Username e/o Password non corretta'})
+                }else{
+                    sessionStorage.setItem('username',action.username)
+                    sessionStorage.setItem('id',response.result.id)
+                    return loginAdminUserSuccess({admin: response.result})
+                }
+              })
+        ))
+    ));
+  
+
+//******************************/
+loginUserSuccess$=createEffect(()=>this.actions$.pipe(
+    ofType(loginAdminUserSuccess),
+    map( (action) => initUserAdmin( {admin: action.admin} )),
+    tap(()=>this.router.navigateByUrl('/home'))
+  ));
 }
