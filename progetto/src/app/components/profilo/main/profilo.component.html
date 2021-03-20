@@ -1,1 +1,51 @@
-<p>profilo works!</p>
+<div *ngFor="let utente of utenti | async">
+    <div *ngIf="utente.id == idutente">
+        <form [formGroup]="editaUtenteForm" (ngSubmit)="edita()">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" formControlName="nome" placeholder="{{utente.nome}}">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" formControlName="cognome" placeholder="{{utente.cognome}}">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" formControlName="email" placeholder="{{utente.email}}">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control form-control-sm" formControlName="password" placeholder="{{utente.password}}">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" formControlName="datanascita" placeholder="{{utente.datanascita}}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" formControlName="genere" placeholder="{{utente.genere}}">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark">
+                edita
+            </button>
+        </form>
+    </div>
+</div>
