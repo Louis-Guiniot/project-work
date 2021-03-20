@@ -1,45 +1,119 @@
+<button class="btn btn-dark" (click)="openInsertModal(insertFormTorneo)">
+    add
+</button>
+
 <table class="table">
     <thead class="bg-dark text-light">
         <tr>
-            <th *ngFor="let th of thLabels">{{th.label}}</th>
+            <th *ngFor="let th of thLabels">{{ th.label }}</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let torneo of mieiTornei | async">
-            <td>{{torneo.nome}}</td>
-            <td>{{torneo.gioco}}</td>
-            <td>{{torneo.piattaforma}}</td>
-            <td>{{torneo.capienza}}</td>
-            <td>{{torneo.capienzaMinima}}</td>
-            <td>{{torneo.iscrizioni}}</td>
-            <td>{{torneo.postiLiberi}}</td>
-            <td>{{torneo.partite}}</td>
-            <td>{{torneo.quota}}</td>
-            <td>{{torneo.premioPrimo}}</td>
-            <td>{{torneo.premioSecondo}}</td>
-            <td>{{torneo.premioTerzo}}</td>
-            <td>{{torneo.idCreatore}}</td>
-            <td>{{torneo.stato}}</td>
-            <td>edita</td>
-            <td>elimina</td>
+    <tbody *ngFor="let torneo of mieiTornei | async">
+
+        <tr *ngIf="torneo.idCreatore == idCreatore">
+            <td>{{ torneo.nome }}</td>
+            <td>{{ torneo.gioco }}</td>
+            <td>{{ torneo.piattaforma }}</td>
+            <td>{{ torneo.capienza }}</td>
+            <td>{{ torneo.capienzaMinima }}</td>
+            <td>{{ torneo.iscrizioni }}</td>
+            <td>{{ torneo.postiLiberi }}</td>
+            <td>{{ torneo.partite }}</td>
+            <td>{{ torneo.quota }}</td>
+            <td>{{ torneo.premioPrimo }}</td>
+            <td>{{ torneo.premioSecondo }}</td>
+            <td>{{ torneo.premioTerzo }}</td>
+            <td>{{ torneo.idCreatore }}</td>
+            <td>{{ torneo.stato }}</td>
+            <td (click)="openEditModal(updateTorneoForm,torneo.id)">edita</td>
+            <td (click)="openDeleteModal(deleteTorneo,torneo.id,torneo.nome)">elimina</td>
         </tr>
     </tbody>
 </table>
 
-<div class="insert">
+<ng-template #insertFormTorneo let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Creazione nuovo torneo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <form [formGroup]="creaNuovoTorneoForm" (ngSubmit)="crea()">
-        <!-- trovare modo per creare automaticamente layout magari -->
-        <div class="row" *ngFor="let input of inputForm; let i = index">
-            <div class="col">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control form-control-sm" formControlName="{{input.formControlName}}" placeholder="{{input.placeholder}}">
+        <div class="modal-body">
+            <!-- trovare modo per creare automaticamente layout magari -->
+            <div class="row" *ngFor="let input of inputForm; let i = index">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" formControlName="{{ input.formControlName }}" placeholder="{{ input.placeholder }}" />
+                    </div>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-dark" [disabled]="creaNuovoTorneoForm.invalid">
-            add
-        </button>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
+                Close
+            </button>
+            <button type="submit" class="btn btn-dark" [disabled]="creaNuovoTorneoForm.invalid" (click)="modal.close('Save click')">
+                add
+            </button>
+        </div>
     </form>
-</div>
+</ng-template>
+
+<ng-template #updateTorneoForm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modifica torneo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form [formGroup]="editaTorneoForm" (ngSubmit)="edita()">
+        <div *ngFor="let torneo of mieiTornei | async">
+            <div *ngIf="torneo.id == idTorneoDaEditare">
+                <div class="modal-body">
+                    <!-- trovare modo per creare automaticamente layout magari -->
+                    <div class="row" *ngFor="let edit of editForm; let i = index">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control form-control-sm" formControlName="{{ edit.formControlName }}" placeholder="{{ edit.placeholder }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
+                        close
+                    </button>
+                    <button type="submit" class="btn btn-dark" (click)="modal.close('Update click')">
+                        save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #deleteTorneo let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Elimina torneo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form (ngSubmit)="elimina()">
+        <div class="modal-body">
+            <!-- trovare modo per creare automaticamente layout magari -->
+            <p>Sei sicuro di voler eliminare il torneo {{nomeTorneoDaEliminare}}?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
+                        close
+                    </button>
+            <button type="submit" class="btn btn-dark">
+                        elimina
+                    </button>
+        </div>
+    </form>
+</ng-template>
