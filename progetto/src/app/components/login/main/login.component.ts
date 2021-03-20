@@ -12,7 +12,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class LoginComponent implements OnInit {
 
   constructor(private fb:FormBuilder,private store: Store, private router: Router,private loginService: LoginService) { 
-    console.log(this.loginService.elencoUtenti())
+
   }
 
   creaNuovoUtenteForm:FormGroup
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-
+    this.loginService.loginUtente(this.loginUtenteForm.value.username,this.loginUtenteForm.value.password)
   }
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createUtente, retreiveAllUtenti, updateUtente } from 'src/app/redux/utente/utente.actions';
+import { createUtente, findUtenteByUsernameAndPassword, retreiveAllUtenti, updateUtente } from 'src/app/redux/utente/utente.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,13 @@ export class LoginService {
 
   elencoUtenti(){
     this.store.dispatch(retreiveAllUtenti())
+  }
+
+
+  loginUtente(username:string,password:string){
+    this.store.dispatch(findUtenteByUsernameAndPassword({
+      username,password
+    }))
   }
   
 }
