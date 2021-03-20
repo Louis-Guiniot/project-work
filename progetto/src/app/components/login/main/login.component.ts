@@ -26,12 +26,15 @@ export class LoginComponent implements OnInit {
   inputFormRegistrazione = [
     {formControlName:'nome',placeholder:'nome',type:'text'},{formControlName:'cognome',placeholder:'cognome',type:'text'},
     {formControlName:'username',placeholder:'username',type:'text'},{formControlName:'password',placeholder:'password',type:'password'},
-    {formControlName:'email',placeholder:'email',type:'text'},{formControlName:'datanascita',placeholder:'data di nascita',type:'text'},
+    {formControlName:'email',placeholder:'email',type:'text'},{formControlName:'datanascita',placeholder:'data di nascita gg-mm-aaaa',type:'text'},
   ]
 
   radioFormRegistrazione = [
     {label:'maschio'},{label:'femmina'},{label:'altro'}
   ]
+
+
+  active = 1
 
   ngOnInit(): void {
 
@@ -43,7 +46,6 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       genere: ['', Validators.required],
       datanascita: ['', Validators.required],
-      
     })
 
     this.loginUtenteForm = this.fb.group({
