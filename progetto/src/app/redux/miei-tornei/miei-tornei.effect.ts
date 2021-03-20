@@ -5,7 +5,7 @@ import { Action } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { switchMap, map, tap } from "rxjs/operators";
 import { HttpCommunicationsService } from "src/app/core/model/http/http-communications.service";
-import { createTorneo, deleteTorneo, initTornei, retreiveAllTornei, retreiveAllTorneiByGioco, retreiveAllTorneiByPiattaforma, updateTorneo } from "./miei-tornei.actions";
+import { createTorneo, deleteTorneo, initTornei, retreiveAllTornei, retreiveAllTorneiByGioco, retreiveAllTorneiByIdCreatore, retreiveAllTorneiByPiattaforma, updateTorneo } from "./miei-tornei.actions";
 import { Response } from "src/app/core/model/Response.interface";
 
 @Injectable()
@@ -29,14 +29,16 @@ export class TorneoEffects {
         });
     }
 
+    retreiveAllTorneiByIdCreatore(idCreatore:string): Observable<Response> {
+        return this.http.retrieveGetCall<Response>("torneo/elencoTorneiC/"+idCreatore);
+    }
+
     createTorneo(
         nome: string,
         gioco: string,
         piattaforma: string,
         capienza: number,
         capienzaMinima: number,
-        iscrizioni: number,
-        postiLiberi: number,
         partite: number,
         quota: number,
         premioPrimo: string,
@@ -51,8 +53,6 @@ export class TorneoEffects {
             piattaforma,
             capienza,
             capienzaMinima,
-            iscrizioni,
-            postiLiberi,
             partite,
             quota,
             premioPrimo,
@@ -70,37 +70,31 @@ export class TorneoEffects {
         piattaforma: string,
         capienza: number,
         capienzaMinima: number,
-        iscrizioni: number,
-        postiLiberi: number,
         partite: number,
         quota: number,
         premioPrimo: string,
         premioSecondo: string,
         premioTerzo: string,
-        idCreatore: number,
         stato: string
     ) {
-        return this.http.retrievePostCall<Response>('torneo/update', {
+        return this.http.retrievePostCall<Response>('torneo/aggiornaTorneo', {
             id,
             nome,
             gioco,
             piattaforma,
             capienza,
             capienzaMinima,
-            iscrizioni,
-            postiLiberi,
             partite,
             quota,
             premioPrimo,
             premioSecondo,
             premioTerzo,
-            idCreatore,
             stato
         });
     }
 
     deleteTorneo(id: number): Observable<Response> {
-        return this.http.retrievePostCall<Response>('torneo/delete', { id });
+        return this.http.retrievePostCall<Response>('torneo/eliminaTorneo', { id });
     }
 
     findUpdateTorneo$: Observable<Action> = createEffect(() => this.actions$.pipe(
@@ -112,17 +106,14 @@ export class TorneoEffects {
             action.piattaforma,
             action.capienza,
             action.capienzaMinima,
-            action.iscrizioni,
-            action.postiLiberi,
             action.partite,
             action.quota,
             action.premioPrimo,
             action.premioSecondo,
             action.premioTerzo,
-            action.idCreatore,
             action.stato).pipe(
                 map((response) => initTornei({ response }))
-                , tap(() => this.router.navigateByUrl('/redirectTorneo'))
+                , tap(() => this.router.navigateByUrl('/miei-tornei'))
             ))
     ));
 
@@ -131,7 +122,7 @@ export class TorneoEffects {
         switchMap((action) => this.deleteTorneo(
             action.id).pipe(
                 map((response) => initTornei({ response }))
-                , tap(() => this.router.navigateByUrl('/redirectTorneo'))
+                , tap(() => this.router.navigateByUrl('/miei-tornei'))
             ))
     ));
 
@@ -160,6 +151,15 @@ export class TorneoEffects {
         ))
     ));
 
+    getAllTorneiByC$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(retreiveAllTorneiByIdCreatore),
+        switchMap((action) => this.retreiveAllTorneiByIdCreatore(
+            action.idCreatore
+        ).pipe(
+            map((response) => initTornei({ response }))
+        ))
+    ));
+
     createTorneo$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(createTorneo),
         switchMap((action) => this.createTorneo(
@@ -168,8 +168,6 @@ export class TorneoEffects {
             action.piattaforma,
             action.capienza,
             action.capienzaMinima,
-            action.iscrizioni,
-            action.postiLiberi,
             action.partite,
             action.quota,
             action.premioPrimo,

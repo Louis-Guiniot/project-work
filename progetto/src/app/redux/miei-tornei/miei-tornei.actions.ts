@@ -11,14 +11,11 @@ props<{
     piattaforma: string,
     capienza: number,
     capienzaMinima: number,
-    iscrizioni: number,
-    postiLiberi: number,
     partite: number,
     quota: number,
     premioPrimo: string,
     premioSecondo: string,
     premioTerzo: string,
-    idCreatore: number,
     stato: string,
 }>())
 export const createTorneo = createAction('[Torneo] creazione Torneo', props<{
@@ -27,8 +24,6 @@ export const createTorneo = createAction('[Torneo] creazione Torneo', props<{
     piattaforma: string,
     capienza: number,
     capienzaMinima: number,
-    iscrizioni: number,
-    postiLiberi: number,
     partite: number,
     quota: number,
     premioPrimo: string,
@@ -40,3 +35,4 @@ export const createTorneo = createAction('[Torneo] creazione Torneo', props<{
 export const retreiveAllTornei = createAction('[Torneo] Torneo');
 export const retreiveAllTorneiByGioco = createAction('[Torneo] Torneo',props<{gioco: string}>());
 export const retreiveAllTorneiByPiattaforma = createAction('[Torneo] Torneo',props<{piattaforma: string}>());
+export const retreiveAllTorneiByIdCreatore = createAction('[Torneo] Torneo',props<{idCreatore: string}>());

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createTorneo, deleteTorneo, retreiveAllTornei, retreiveAllTorneiByGioco, retreiveAllTorneiByPiattaforma, updateTorneo } from 'src/app/redux/miei-tornei/miei-tornei.actions';
+import { createTorneo, deleteTorneo, retreiveAllTornei, retreiveAllTorneiByGioco, retreiveAllTorneiByIdCreatore, retreiveAllTorneiByPiattaforma, updateTorneo } from 'src/app/redux/miei-tornei/miei-tornei.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,6 @@ export class MieiTorneiService {
         piattaforma: string,
         capienza: number,
         capienzaMinima: number,
-        iscrizioni: number,
-        postiLiberi: number,
         partite: number,
         quota: number,
         premioPrimo: string,
@@ -33,8 +31,6 @@ export class MieiTorneiService {
       piattaforma,
       capienza,
       capienzaMinima,
-      iscrizioni,
-      postiLiberi,
       partite,
       quota,
       premioPrimo,
@@ -55,14 +51,11 @@ export class MieiTorneiService {
     piattaforma: string,
     capienza: number,
     capienzaMinima: number,
-    iscrizioni: number,
-    postiLiberi: number,
     partite: number,
     quota: number,
     premioPrimo: string,
     premioSecondo: string,
     premioTerzo: string,
-    idCreatore: number,
     stato: string
   ){
     this.store.dispatch(updateTorneo({
@@ -72,14 +65,11 @@ export class MieiTorneiService {
       piattaforma,
       capienza,
       capienzaMinima,
-      iscrizioni,
-      postiLiberi,
       partite,
       quota,
       premioPrimo,
       premioSecondo,
       premioTerzo,
-      idCreatore,
       stato
     }))
   }
@@ -94,5 +84,9 @@ export class MieiTorneiService {
 
   elencoTorneiPerPiattaforma(piattaforma: string){
     this.store.dispatch(retreiveAllTorneiByPiattaforma({piattaforma}))
+  }
+
+  elencoTorneiPerCreatore(idCreatore:string){
+    this.store.dispatch(retreiveAllTorneiByIdCreatore({idCreatore}))
   }
 }

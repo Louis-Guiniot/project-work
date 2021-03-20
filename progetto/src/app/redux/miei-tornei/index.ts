@@ -10,6 +10,11 @@ export const selectTorneo = createSelector(
     (state: TorneoState) => state.arrayTornei
 );
 
+export const selectTorneoByCreatore = createSelector(
+    selectTorneoState,
+    (state: TorneoState) => state.arrayTornei
+);
+
 export const getCurrentTorneo = createSelector(
     selectTorneoState,
     (state: TorneoState, params: Params) => state.arrayTornei.find(item => item.id === Number(params['id']))
