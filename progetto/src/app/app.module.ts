@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './redux';
 import { TorneoEffects } from './redux/miei-tornei/miei-tornei.effect';
 import { UtenteEffects } from './redux/utente/utente.effects';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UtenteEffects } from './redux/utente/utente.effects';
     ProfiloComponent,
     TorneiComponent,
     MieiTorneiComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
