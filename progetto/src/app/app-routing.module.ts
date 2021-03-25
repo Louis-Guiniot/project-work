@@ -8,6 +8,8 @@ const routes: Routes = [
   {path:'profilo', loadChildren: () => import('./components/profilo/profilo.module').then(m => m.ProfiloModule),canActivate: [LoginGuardService]},
   {path:'tornei', loadChildren: () => import('./components/tornei/tornei.module').then(m => m.TorneiModule),canActivate: [LoginGuardService]},
   {path:'miei-tornei', loadChildren: () => import('./components/miei-tornei/miei-tornei.module').then(m => m.MieiTorneiModule),canActivate: [LoginGuardService]},
+  {path:'registrazione', loadChildren: () => import('./components/registrazione/registrazione.module').then(m => m.RegistrazioneModule)},
+
 ];
 
 @NgModule({
