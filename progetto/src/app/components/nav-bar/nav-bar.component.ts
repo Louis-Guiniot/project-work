@@ -10,13 +10,6 @@ export class NavBarComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-
-  pages = [
-    {path:'/home',label: 'Home'},
-    {path:'/profilo',label: 'Profilo'},
-    {path:'/login',label: 'Login'},
-  ]
-
   mieiTorneiUrl = '/miei-tornei'
   torneiUrl = '/tornei'
 

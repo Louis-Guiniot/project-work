@@ -1,0 +1,18 @@
+.nav-item {
+    font-size: 28px;
+    font-weight: 200;
+}
+
+.dropdown-item {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.float-left-nav {
+    font-size: 28px;
+    font-weight: 200;
+    &:hover {
+        text-decoration: none;
+    }
+    margin-right: 2%;
+}
