@@ -1,52 +1,31 @@
-<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-    <li [ngbNavItem]="1">
-        <a ngbNavLink>Accedi</a>
-        <ng-template ngbNavContent>
-            <form [formGroup]="loginUtenteForm" (ngSubmit)="login()">
-                <!-- trovare modo per creare automaticamente layout magari -->
-                <div class="row" *ngFor="let input of inputFormLogin; let i = index">
-                    <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="{{input.type}}" class="form-control form-control-sm" formControlName="{{input.formControlName}}" placeholder="{{input.placeholder}}">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-dark" [disabled]="loginUtenteForm.invalid">
-                    entra
-                </button>
-            </form>
-        </ng-template>
-    </li>
-    <li [ngbNavItem]="2">
-        <a ngbNavLink>Registrati</a>
-        <ng-template ngbNavContent>
-            <form [formGroup]="creaNuovoUtenteForm" (ngSubmit)="registrati()">
-                <!-- trovare modo per creare automaticamente layout magari -->
-                <div class="row" *ngFor="let input of inputFormRegistrazione; let i = index">
-                    <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="{{input.type}}" class="form-control form-control-sm" formControlName="{{input.formControlName}}" placeholder="{{input.placeholder}}">
-                        </div>
-                    </div>
-                </div>
+<div class="box">
 
-                <div class="row">
-                    <div class="col">
-                        <div class="input-group mb-3">
-                            <select class="form-control form-control-sm" formControlName="genere">
-                                <option selected="selected" hidden>seleziona il tuo sesso</option>
-                            <option *ngFor="let radio of radioFormRegistrazione" value="{{radio.label}}">{{radio.label}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+    <div class="form">
+        <form [formGroup]="loginUtenteForm" (ngSubmit)="login()">
+            <div class="modal-header">
+                <div class="header">Accedi</div>
+            </div>
+            <div class="modal-body">
 
-                <button type="submit" class="btn btn-dark" [disabled]="creaNuovoUtenteForm.invalid">
-                            registrati
+                <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="insert" formControlName="username">
+                            <label for="floatingInput">Username</label>
+                        </span>
+
+                <span class="form-group has-float-label">
+                            <input type="password" class="form-control" placeholder="insert" formControlName="password">
+                            <label for="floatingPassword">Password</label>
+                        </span>
+
+                <button type="submit" class="btn btn-outline-success">
+                            accedi
                         </button>
-            </form>
-        </ng-template>
-    </li>
-</ul>
+                <button type="reset" class="btn btn-outline-danger">
+                            cancella
+                        </button>
 
-<div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
+
+        </form>
+    </div>
+</div>

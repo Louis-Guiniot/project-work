@@ -1,0 +1,106 @@
+<div class="box">
+    <div class="form">
+        <form [formGroup]="creaNuovoUtenteForm" (ngSubmit)="registrati()">
+            <div class="modal-header">
+                <div class="header">Registrati</div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <span class="form-group has-float-label">
+                                <input type="text" class="form-control" placeholder="inserisci il tuo nome"
+                                    formControlName="nome">
+                                <label for="floatingInput">Nome</label>
+                            </span>
+                    </div>
+                    <div class="col">
+                        <span class="form-group has-float-label">
+                                <input type="text" class="form-control" placeholder="inserisci il tuo cognome"
+                                    formControlName="cognome">
+                                <label for="floatingPassword">Cognome</label>
+                            </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <span class="form-group has-float-label">
+                                <input type="text" class="form-control" placeholder="inserisci il tuo username"
+                                    formControlName="username">
+                                <label for="floatingInput">Username</label>
+                            </span>
+                    </div>
+                    <div class="col">
+                        <span class="form-group has-float-label">
+                                <input type="password" class="form-control" placeholder="inserisci la tua password"
+                                    formControlName="password">
+                                <label for="floatingPassword">Password</label>
+                            </span>
+                    </div>
+                </div>
+
+                <span class="form-group has-float-label">
+                        <input class="form-control" type="text" placeholder="inserisci la tua mail" formControlName="email">
+                        <label for="floatingInput">Email</label>
+                    </span>
+
+
+                <div class="row">
+                    <div class="col">
+                        <span class="form-group has-float-label">
+                            <select class="form-control" formControlName="genere">
+                                <option selected disable>seleziona sesso</option>
+                                <option *ngFor="let sesso of sessoSelect" value="{{sesso.label}}">
+                                    {{sesso.label}}</option>
+                            </select>
+                                <label for="floatingInput">Sesso</label>
+                            </span>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                        <select class="form-control" formControlName="mese">
+                                            <option selected disable>mm</option>
+                                            <option *ngFor="let mese of mesiSelect" value="{{mese.value}}">
+                                                {{mese.label}}</option>
+                                        </select>
+                                        <label for="floatingInput">Mese</label>
+                                    </span>
+                            </div>
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                        <select class="form-control" formControlName="giorno">
+                                            <option selected disable>gg</option>
+                                            <option *ngFor="let giorno of giorniSelect" value="{{giorno.label}}">
+                                                {{giorno.label}}</option>
+                                        </select>
+                                        <label for="floatingInput">Giorno</label>
+                                    </span>
+                            </div>
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                        <select class="form-control" formControlName="anno">
+                                            <option selected disable>aaaa</option>
+                                            <option *ngFor="let anno of anniSelect" value="{{anno.label}}">
+                                                {{anno.label}}</option>
+                                        </select>
+                                        <label for="floatingInput">Anno</label>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-success">
+                        salva
+                    </button>
+                <button type="reset" class="btn btn-outline-danger">
+                        cancella
+                    </button>
+
+
+            </div>
+        </form>
+    </div>
+</div>
