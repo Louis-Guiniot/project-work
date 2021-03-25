@@ -1,5 +1,6 @@
 @import "src/styles/modal-actions.scss";
 @import "src/styles/input.scss";
+@import "src/styles/buttons.scss";
 .box {
     display: grid;
     grid-template-rows: auto;
@@ -15,6 +16,7 @@
 }
 
 table {
+    width: 100%;
     th,
     td {
         font-size: 20px;
@@ -30,11 +32,26 @@ table {
 }
 
 #detail-span {
-    padding: 5px;
-    font-size: 20px;
+    padding: 1px;
+    font-size: 25px;
     font-weight: 500;
     width: 100%;
-    border-bottom: 1px lightgrey solid;
+}
+
+#detail-label {
+    font-size: 20px;
+    font-weight: 200;
+    width: 100%;
+}
+
+.modal-header {
+    border-bottom: 1px solid lightgray;
+    color: #000;
+    padding: 0;
+}
+
+.col-bg {
+    background-color: #000;
 }
 
 .img-tournament {

@@ -12,7 +12,9 @@ export class NavBarComponent implements OnInit {
 
   mieiTorneiUrl = '/miei-tornei'
   torneiUrl = '/tornei'
-
+  loginUrl = '/login'
+  signUpUrl = '/registrazione'
+  homeUrl = '/home'
   
   ngOnInit(): void {
   }

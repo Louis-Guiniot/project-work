@@ -30,85 +30,101 @@
 </div>
 
 <ng-template #detailTorneo let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title text-dark">Dettaglio Torneo</h4>
-    </div>
     <div class="modal-body">
         <div *ngFor="let torneo of mieiTornei | async">
             <ng-container *ngIf="torneo.id == idTorneoDaVedere">
-
                 <div class="row">
-                    <div class="col-4">
-                        <img src="../assets/cod-game.png" alt="" class="img-tournament">
+                    <div class="col-5 col-bg">
+
                     </div>
-                    <div class="col">
-                        <span id="detail-span">info generali</span>
+                    <div class="col-7">
+                        <div class="modal-header">
+                            <span id="detail-span">info generali</span>
+                        </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col">
-                                    <label for="floatingInput">Nome torneo - {{ torneo.nome }}</label>
+                                    <label id="detail-label">Nome torneo - {{ torneo.nome }}</label>
                                 </div>
                                 <div class="col">
-                                    <label for="floatingPassword">Gioco topic - {{ torneo.gioco }}</label>
+                                    <label id="detail-label">Gioco topic - {{ torneo.gioco }}</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <label for="floatingInput">Piattaforma - {{ torneo.piattaforma }}</label>
+                                    <label id="detail-label">Piattaforma - {{ torneo.piattaforma }}</label>
                                 </div>
                                 <div class="col">
-                                    <label for="floatingPassword">Stato - {{ torneo.stato }}</label>
+                                    <label id="detail-label">Stato - {{ torneo.stato }}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label id="detail-label">Iscrizioni ora - {{ torneo.iscrizioni }}</label>
+                                </div>
+                                <div class="col">
+                                    <label id="detail-label">postiLiberi ora - {{ torneo.postiLiberi }}</label>
                                 </div>
                             </div>
                         </div>
 
-                        <span id="detail-span">Specifiche del torneo</span>
+                        <div class="modal-header">
+                            <span id="detail-span">Specifiche del torneo</span>
+                        </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col">
-                                    <label for="floatingInput">Capienza max - {{ torneo.capienza }}</label>
+                                    <label id="detail-label">Capienza max - {{ torneo.capienza }} giocatori</label>
                                 </div>
                                 <div class="col">
-                                    <label for="floatingPassword">N° partite - {{ torneo.partite }}</label>
+                                    <label id="detail-label">N° partite da completare - {{ torneo.partite }}</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <label for="floatingPassword">Capienza min - {{ torneo.capienzaMinima }}</label>
+                                    <label id="detail-label">Capienza min - {{ torneo.capienzaMinima }} giocatori</label>
                                 </div>
                                 <div class="col">
-                                    <label for="floatingInput">Quota - {{ torneo.quota }}</label>
+                                    <label id="detail-label">Quota - {{ torneo.quota }}€ a giocatore</label>
                                 </div>
                             </div>
                         </div>
 
-                        <span id="detail-span">premi</span>
+                        <div class="modal-header">
+                            <span id="detail-span">premi</span>
+                        </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col">
-                                    <label for="floatingInput">1° premio - {{ torneo.premioPrimo }}</label>
+                                    <label id="detail-label">1° premio - {{ torneo.premioPrimo }}</label>
 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <label for="floatingInput">2° premio - {{ torneo.premioSecondo }}</label>
+                                    <label id="detail-label">2° premio - {{ torneo.premioSecondo }}</label>
 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <label for="floatingPassword">3° premio - {{ torneo.premioTerzo }}</label>
+                                    <label id="detail-label">3° premio - {{ torneo.premioTerzo }}</label>
 
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </ng-container>
         </div>
     </div>
-    <div class="modal-footer"></div>
+    <div class="modal-footer">
+        <button class="btn btn-danger">
+            esci
+        </button>
+        <button class="btn btn-submit" type="submit">
+            iscriviti
+        </button>
+    </div>
 </ng-template>
