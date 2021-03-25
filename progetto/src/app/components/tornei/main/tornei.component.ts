@@ -19,20 +19,20 @@ export class TorneiComponent implements OnInit {
     // console.log(this.mieiTorneiService.elencoTorneiPerCreatore(sessionStorage.getItem('id')));
     console.log(this.mieiTorneiService.elencoTornei());
   }
-
+  
   thLabels = [
     {label:'nome'},{label:'gioco'},{label:'piattaforma'},{label:'capienza'},
-    {label:'capienza_min'},{label:'iscrizioni'},{label:'posti_liberi'},{label:'partite'},
-    {label:'quota'},{label:'premio_1^'},{label:'premio_2^'},{label:'premio_3^'},{label:'id_creatore'},{label:'stato'},
+    {label:'iscrizioni'},{label:'posti_liberi'},{label:'partite'},
+    {label:'quota'},{label:'stato'},
   ]
 
   idCreatore = Number(sessionStorage.getItem('id'))
 
-  idTorneoDaEditare: number
+  idTorneoDaVedere: number
   openDetailModal(content:string,idtorneo:number) {
     this.modalService.open(content, { size: 'xl' });
     console.log("aperto modale modifica torneo con id : ", idtorneo)
-    this.idTorneoDaEditare = idtorneo
+    this.idTorneoDaVedere = idtorneo
   }
 
   ngOnInit(): void {
