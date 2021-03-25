@@ -23,29 +23,9 @@ export class MieiTorneiComponent implements OnInit {
 
   thLabels = [
     {label:'nome'},{label:'gioco'},{label:'piattaforma'},{label:'capienza'},
-    {label:'capienza_min'},{label:'iscrizioni'},{label:'posti_liberi'},{label:'partite'},
-    {label:'quota'},{label:'premio_1^'},{label:'premio_2^'},{label:'premio_3^'},{label:'id_creatore'},{label:'stato'},
+    {label:'iscrizioni'},{label:'posti_liberi'},{label:'partite'},
+    {label:'quota'},{label:'stato'},
   ]
-
-  inputForm = [
-    {formControlName:'nome',placeholder:'nome'},{formControlName:'gioco',placeholder:'gioco'},
-    {formControlName:'piattaforma',placeholder:'piattaforma'},{formControlName:'capienza',placeholder:'capienza'},
-    {formControlName:'capienzaMinima',placeholder:'capienza minima'},{formControlName:'partite',placeholder:'partite'},
-    {formControlName:'quota',placeholder:'quota'},{formControlName:'premioPrimo',placeholder:'premio 1^'},
-    {formControlName:'premioSecondo',placeholder:'premio 2^'},{formControlName:'premioTerzo',placeholder:'premio 3^'},
-    {formControlName:'stato',placeholder:'stato'},
-  ]
-
-  editForm = [
-    {formControlName:'nome',placeholder:'torneo.nome'},{formControlName:'gioco',placeholder:'torneo.gioco'},
-    {formControlName:'piattaforma',placeholder:'torneo.piattaforma'},{formControlName:'capienza',placeholder:'torneo.capienza'},
-    {formControlName:'capienzaMinima',placeholder:'torneo.capienzaMinima'},{formControlName:'partite',placeholder:'torneo.partite'},
-    {formControlName:'quota',placeholder:'torneo.quota'},{formControlName:'premioPrimo',placeholder:'torneo.premioPrimo'},
-    {formControlName:'premioSecondo',placeholder:'torneo.premioSecondo'},{formControlName:'premioTerzo',placeholder:'torneo.premioTerzo'},
-    {formControlName:'stato',placeholder:'torneo.stato'},
-  ]
-
-
 
   closeResult: string
   openInsertModal(content:string) {

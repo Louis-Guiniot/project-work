@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MieiTorneiRoutingModule } from './miei-tornei-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -8,6 +9,7 @@ import { MieiTorneiRoutingModule } from './miei-tornei-routing.module';
   declarations: [],
   imports: [
     CommonModule,
+    SharedModule,
     MieiTorneiRoutingModule
   ]
 })

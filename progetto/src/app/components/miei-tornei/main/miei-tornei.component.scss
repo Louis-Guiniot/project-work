@@ -1,6 +1,33 @@
+@import "src/styles/modal-actions.scss";
 @import "src/styles/input.scss";
-.insert {
-    width: 50%;
-    margin: auto;
-    padding: 1%;
+.box {
+    display: grid;
+    grid-template-columns: 10% 90%;
+    row-gap: 15px;
+    column-gap: 15px;
+    width: 100%;
+    padding: 2%;
+}
+
+.grid-button {
+    grid-column-end: 2;
+}
+
+.grid-table {
+    grid-column-end: 3;
+}
+
+table {
+    th,
+    td {
+        font-size: 20px;
+        font-weight: 300;
+    }
+    th {
+        font-weight: 400;
+    }
+}
+
+.button-insert {
+    width: 100%;
 }

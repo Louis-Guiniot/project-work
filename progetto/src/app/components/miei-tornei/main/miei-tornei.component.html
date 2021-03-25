@@ -1,61 +1,147 @@
-<button class="btn btn-dark" (click)="openInsertModal(insertFormTorneo)">
-    add
-</button>
+<div class="box">
+    <div class="grid-button">
+        <button class="btn btn-dark button-insert" (click)="openInsertModal(insertFormTorneo)">
+            <i class="bi bi-plus"></i>
+        </button>
+    </div>
+    <div class="grid-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th *ngFor="let th of thLabels">{{ th.label }}</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let torneo of mieiTornei | async">
+                    <ng-container *ngIf="torneo.idCreatore == idCreatore">
+                        <td>{{ torneo.nome }}</td>
+                        <td>{{ torneo.gioco }}</td>
+                        <td>{{ torneo.piattaforma }}</td>
+                        <td>{{ torneo.capienza }}</td>
+                        <td>{{ torneo.iscrizioni }}</td>
+                        <td>{{ torneo.postiLiberi }}</td>
+                        <td>{{ torneo.partite }}</td>
+                        <td>{{ torneo.quota }}</td>
+                        <td>{{ torneo.stato }}</td>
+                        <td (click)="openEditModal(updateTorneoForm,torneo.id)">edita</td>
+                        <td (click)="openDeleteModal(deleteTorneo,torneo.id,torneo.nome)">elimina</td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<table class="table">
-    <thead class="bg-dark text-light">
-        <tr>
-            <th *ngFor="let th of thLabels">{{ th.label }}</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody *ngFor="let torneo of mieiTornei | async">
 
-        <tr *ngIf="torneo.idCreatore == idCreatore">
-            <td>{{ torneo.nome }}</td>
-            <td>{{ torneo.gioco }}</td>
-            <td>{{ torneo.piattaforma }}</td>
-            <td>{{ torneo.capienza }}</td>
-            <td>{{ torneo.capienzaMinima }}</td>
-            <td>{{ torneo.iscrizioni }}</td>
-            <td>{{ torneo.postiLiberi }}</td>
-            <td>{{ torneo.partite }}</td>
-            <td>{{ torneo.quota }}</td>
-            <td>{{ torneo.premioPrimo }}</td>
-            <td>{{ torneo.premioSecondo }}</td>
-            <td>{{ torneo.premioTerzo }}</td>
-            <td>{{ torneo.idCreatore }}</td>
-            <td>{{ torneo.stato }}</td>
-            <td (click)="openEditModal(updateTorneoForm,torneo.id)">edita</td>
-            <td (click)="openDeleteModal(deleteTorneo,torneo.id,torneo.nome)">elimina</td>
-        </tr>
-    </tbody>
-</table>
 
 <ng-template #insertFormTorneo let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Creazione nuovo torneo</h4>
+        <h4 class="modal-title text-dark">Creazione nuovo torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <form [formGroup]="creaNuovoTorneoForm" (ngSubmit)="crea()">
         <div class="modal-body">
-            <!-- trovare modo per creare automaticamente layout magari -->
-            <div class="row" *ngFor="let input of inputForm; let i = index">
+            <div class="row">
                 <div class="col">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" formControlName="{{ input.formControlName }}" placeholder="{{ input.placeholder }}" />
-                    </div>
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="inserisci nome torneo"
+                                formControlName="nome" ngbAutofocus>
+                            <label for="floatingInput">Nome torneo</label>
+                        </span>
+                </div>
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="inserisci gioco"
+                                formControlName="gioco">
+                            <label for="floatingPassword">Gioco topic</label>
+                        </span>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="inserisci piattaforma"
+                                formControlName="piattaforma">
+                            <label for="floatingInput">Piattaforma</label>
+                        </span>
+                </div>
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="scegli il numero di partite"
+                                formControlName="partite">
+                            <label for="floatingPassword">N° partite</label>
+                        </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="definisci capienza massima"
+                                formControlName="capienza">
+                            <label for="floatingInput">Capienza max</label>
+                        </span>
+                </div>
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="definisci capienza minima"
+                                formControlName="capienzaMinima">
+                            <label for="floatingPassword">Capienza min</label>
+                        </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="scegli primo premio"
+                                formControlName="premioPrimo">
+                            <label for="floatingInput">1° premio</label>
+                        </span>
+                </div>
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="scegli secondo premio"
+                                formControlName="premioSecondo">
+                            <label for="floatingInput">2° premio</label>
+                        </span>
+                </div>
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="scegli terzo premio"
+                                formControlName="premioTerzo">
+                            <label for="floatingPassword">3° premio</label>
+                        </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="definisci quota di partecipazione"
+                                formControlName="quota">
+                            <label for="floatingInput">Quota</label>
+                        </span>
+                </div>
+                <div class="col">
+                    <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="stato del torneo"
+                                formControlName="stato">
+                            <label for="floatingPassword">Stato</label>
+                        </span>
+                </div>
+            </div>
+
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
-                Close
+            <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">
+                close
             </button>
-            <button type="submit" class="btn btn-dark" [disabled]="creaNuovoTorneoForm.invalid" (click)="modal.close('Save click')">
+            <button type="submit" class="btn btn-outline-success" [disabled]="creaNuovoTorneoForm.invalid" (click)="modal.close('Save click')">
                 add
             </button>
         </div>
@@ -64,29 +150,111 @@
 
 <ng-template #updateTorneoForm let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Modifica torneo</h4>
+        <h4 class="modal-title text-dark">Modifica torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true" id="span-close">&times;</span>
         </button>
     </div>
     <form [formGroup]="editaTorneoForm" (ngSubmit)="edita()">
         <div *ngFor="let torneo of mieiTornei | async">
             <div *ngIf="torneo.id == idTorneoDaEditare">
                 <div class="modal-body">
-                    <!-- trovare modo per creare automaticamente layout magari -->
-                    <div class="row" *ngFor="let edit of editForm; let i = index">
+                    <div class="row">
                         <div class="col">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control form-control-sm" formControlName="{{ edit.formControlName }}" placeholder="{{ edit.placeholder }}" />
-                            </div>
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.nome}}"
+                                        formControlName="nome" ngbAutofocus>
+                                    <label for="floatingInput">Nome torneo - {{torneo.nome}}</label>
+                                </span>
+                        </div>
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="i{{torneo.gioco}}"
+                                        formControlName="gioco">
+                                    <label for="floatingPassword">Gioco topic - {{torneo.gioco}}</label>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.piattaforma}}"
+                                        formControlName="piattaforma">
+                                    <label for="floatingInput">Piattaforma - {{torneo.piattaforma}}</label>
+                                </span>
+                        </div>
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.partite}}"
+                                        formControlName="partite">
+                                    <label for="floatingPassword">N° partite - {{torneo.partite}}</label>
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.capienza}}"
+                                        formControlName="capienza">
+                                    <label for="floatingInput">Capienza max - {{torneo.capienza}}</label>
+                                </span>
+                        </div>
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.capienzaMinima}}"
+                                        formControlName="capienzaMinima">
+                                    <label for="floatingPassword">Capienza min - {{torneo.capienzaMinima}}</label>
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.premioPrimo}}"
+                                        formControlName="premioPrimo">
+                                    <label for="floatingInput">1° premio - {{torneo.premioPrimo}}</label>
+                                </span>
+                        </div>
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.premioSecondo}}"
+                                        formControlName="premioSecondo">
+                                    <label for="floatingInput">2° premio - {{torneo.premioSecondo}}</label>
+                                </span>
+                        </div>
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="- {{torneo.premioTerzo}}"
+                                        formControlName="premioTerzo">
+                                    <label for="floatingPassword">3° premio - {{torneo.premioTerzo}}</label>
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.quota}}"
+                                        formControlName="quota">
+                                    <label for="floatingInput">Quota - {{torneo.quota}}</label>
+                                </span>
+                        </div>
+                        <div class="col">
+                            <span class="form-group has-float-label">
+                                    <input type="text" class="form-control" placeholder="{{torneo.stato}}"
+                                        formControlName="stato">
+                                    <label for="floatingPassword">Stato - {{torneo.stato}}</label>
+                                </span>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
+                    <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">
                         close
                     </button>
-                    <button type="submit" class="btn btn-dark" (click)="modal.close('Update click')">
+                    <button type="submit" class="btn btn-outline-success" (click)="modal.close('Save click')">
                         save
                     </button>
                 </div>
@@ -97,21 +265,20 @@
 
 <ng-template #deleteTorneo let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Elimina torneo</h4>
+        <h4 class="modal-title text-dark">Elimina torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <form (ngSubmit)="elimina()">
         <div class="modal-body">
-            <!-- trovare modo per creare automaticamente layout magari -->
-            <p>Sei sicuro di voler eliminare il torneo {{nomeTorneoDaEliminare}}?</p>
+            <p>Sei sicuro di voler eliminare il torneo <b>{{nomeTorneoDaEliminare}}</b> ?</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
+            <button type="button" class="btn btn-dark" (click)="modal.close('Close click')" ngbAutofocus>
                         close
                     </button>
-            <button type="submit" class="btn btn-dark">
+            <button type="submit" class="btn btn-outline-danger">
                         elimina
                     </button>
         </div>
