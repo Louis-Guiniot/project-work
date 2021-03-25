@@ -1,0 +1,26 @@
+.header {
+    font-size: 45px;
+    width: 100%;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #000
+}
+
+.modal-body {
+    margin-top: 2%;
+}
+
+.close span :focus {
+    border: 1px transparent solid;
+    outline: 0;
+}
+
+@media (max-width: 800px) {
+    .header {
+        font-size: 30px;
+        width: 100%;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: #000
+    }
+}
