@@ -18,6 +18,8 @@ import { TorneoEffects } from './redux/miei-tornei/miei-tornei.effect';
 import { UtenteEffects } from './redux/utente/utente.effects';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RegistrazioneComponent } from './components/registrazione/main/registrazione.component';
+import { IscrizioneEffects } from './redux/iscrizioni/iscrizioni.effects';
+import { PageNfoundComponent } from './components/page-nfound/main/page-nfound.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { RegistrazioneComponent } from './components/registrazione/main/registra
     MieiTorneiComponent,
     NavBarComponent,
     RegistrazioneComponent,
+    PageNfoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import { RegistrazioneComponent } from './components/registrazione/main/registra
      EffectsModule.forRoot([
       TorneoEffects, 
       UtenteEffects,
+      IscrizioneEffects
      ])
   ],
   providers: [],
