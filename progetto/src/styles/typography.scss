@@ -1,0 +1,37 @@
+.header {
+    font-size: 45px;
+    width: 100%;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #000
+}
+
+.text {
+    width: 100%;
+    font-weight: 100;
+    font-size: 30px;
+    margin: 0;
+}
+
+.text-purple {
+    color: #8C52FF;
+}
+
+.bolder {
+    font-weight: 500;
+}
+
+@media screen and (max-width: 800px) {
+    .header {
+        font-size: 30px;
+        width: 100%;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #000
+    }
+    .text {
+        width: 100%;
+        font-size: 20px;
+        margin: 0;
+    }
+}

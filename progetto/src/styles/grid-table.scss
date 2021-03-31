@@ -1,0 +1,43 @@
+.box {
+    width: 100%;
+    padding: 2%;
+}
+
+.wrapper {
+    display: grid;
+    width: 100%;
+    margin: 0;
+    grid-template-rows: auto auto;
+    gap: 15px;
+}
+
+.grid-button {
+    grid-row-end: 2;
+}
+
+.grid-table {
+    margin: 0;
+    grid-row-end: 3;
+}
+
+table {
+    width: 100%;
+    th,
+    td {
+        font-size: 30px;
+        font-weight: 300;
+    }
+    th {
+        font-weight: 400;
+    }
+}
+
+thead {
+    background: #8C52FF;
+    color: #fff;
+    font-size: 30px;
+}
+
+#td-detail {
+    text-align: right;
+}

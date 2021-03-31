@@ -7,12 +7,45 @@
 }
 
 .modal-body {
+    width: 100%;
     margin-top: 2%;
 }
 
 .close span :focus {
     border: 1px transparent solid;
     outline: 0;
+}
+
+.modal-body {
+    border-radius: 0;
+    p {
+        font-size: 25px;
+        font-weight: 200;
+    }
+}
+
+.modal-body b {
+    text-transform: uppercase;
+}
+
+.modal-header {
+    border-radius: 0;
+    background-color: #8C52FF;
+    text-transform: uppercase;
+}
+
+.modal-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.close {
+    box-shadow: none;
+}
+
+.modal-body label {
+    font-size: 20px;
 }
 
 @media (max-width: 800px) {
