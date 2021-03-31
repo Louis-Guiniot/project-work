@@ -20,6 +20,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RegistrazioneComponent } from './components/registrazione/main/registrazione.component';
 import { IscrizioneEffects } from './redux/iscrizioni/iscrizioni.effects';
 import { PageNfoundComponent } from './components/page-nfound/main/page-nfound.component';
+import { ClassificaEffects } from './redux/classifica/classifica.effects';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PageNfoundComponent } from './components/page-nfound/main/page-nfound.c
      EffectsModule.forRoot([
       TorneoEffects, 
       UtenteEffects,
-      IscrizioneEffects
+      IscrizioneEffects,
+      ClassificaEffects
      ])
   ],
   providers: [],
