@@ -15,6 +15,7 @@ export class NavBarComponent implements OnInit {
   loginUrl = '/login'
   signUpUrl = '/registrazione'
   homeUrl = '/home'
+  profiloUrl = '/profilo'
   
   ngOnInit(): void {
   }
