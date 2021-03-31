@@ -9,6 +9,13 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  images = [
+    {path:'./assets/carousel-img-1.png'},
+    {path:'./assets/carousel-img-2.jpg'},
+    {path:'./assets/carousel-img-3.jpg'},
+  ]
+
+
   ngOnInit(): void {
   }
 
