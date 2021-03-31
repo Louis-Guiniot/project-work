@@ -9,7 +9,9 @@ const routes: Routes = [
   {path:'tornei', loadChildren: () => import('./components/tornei/tornei.module').then(m => m.TorneiModule),canActivate: [LoginGuardService]},
   {path:'miei-tornei', loadChildren: () => import('./components/miei-tornei/miei-tornei.module').then(m => m.MieiTorneiModule),canActivate: [LoginGuardService]},
   {path:'registrazione', loadChildren: () => import('./components/registrazione/registrazione.module').then(m => m.RegistrazioneModule)},
-
+  {path:'', redirectTo:'login', pathMatch: 'full'},
+  {path:'**', loadChildren: () => import('./components/page-nfound/page-nfound.module').then(m => m.PageNfoundModule)},
+  
 ];
 
 @NgModule({
