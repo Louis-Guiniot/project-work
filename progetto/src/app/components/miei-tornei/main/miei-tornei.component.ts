@@ -23,7 +23,7 @@ export class MieiTorneiComponent implements OnInit {
 
   thLabels = [
     {label:'nome'},{label:'gioco'},{label:'piattaforma'},{label:'capienza'},
-    {label:'iscrizioni'},{label:'posti_liberi'},{label:'partite'},
+    {label:'iscrizioni'},{label:'posti liberi'},{label:'partite'},
     {label:'quota'},{label:'stato'},
   ]
 

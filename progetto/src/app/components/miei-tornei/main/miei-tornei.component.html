@@ -1,36 +1,38 @@
 <div class="box">
-    <div class="grid-button">
-        <button class="btn btn-dark button-insert" (click)="openInsertModal(insertFormTorneo)">
-            <i class="bi bi-plus"></i>
-        </button>
-    </div>
-    <div class="grid-table">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th *ngFor="let th of thLabels">{{ th.label }}</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let torneo of mieiTornei | async">
-                    <ng-container *ngIf="torneo.idCreatore == idCreatore">
-                        <td>{{ torneo.nome }}</td>
-                        <td>{{ torneo.gioco }}</td>
-                        <td>{{ torneo.piattaforma }}</td>
-                        <td>{{ torneo.capienza }}</td>
-                        <td>{{ torneo.iscrizioni }}</td>
-                        <td>{{ torneo.postiLiberi }}</td>
-                        <td>{{ torneo.partite }}</td>
-                        <td>{{ torneo.quota }}</td>
-                        <td>{{ torneo.stato }}</td>
-                        <td (click)="openEditModal(updateTorneoForm,torneo.id)">edita</td>
-                        <td (click)="openDeleteModal(deleteTorneo,torneo.id,torneo.nome)">elimina</td>
-                    </ng-container>
-                </tr>
-            </tbody>
-        </table>
+    <div class="wrapper">
+        <div class="grid-button text-center">
+            <button class="btn btn-submit" (click)="openInsertModal(insertFormTorneo)">
+                <i class="bi bi-plus btn-insert"></i>
+            </button>
+        </div>
+        <div class="grid-table">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th *ngFor="let th of thLabels">{{ th.label }}</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let torneo of mieiTornei | async">
+                        <ng-container *ngIf="torneo.idCreatore == idCreatore">
+                            <td>{{ torneo.nome }}</td>
+                            <td>{{ torneo.gioco }}</td>
+                            <td>{{ torneo.piattaforma }}</td>
+                            <td>{{ torneo.capienza }}</td>
+                            <td>{{ torneo.iscrizioni }}</td>
+                            <td>{{ torneo.postiLiberi }}</td>
+                            <td>{{ torneo.partite }}</td>
+                            <td>{{ torneo.quota }}</td>
+                            <td>{{ torneo.stato }}</td>
+                            <td (click)="openEditModal(updateTorneoForm,torneo.id)">edita</td>
+                            <td (click)="openDeleteModal(deleteTorneo,torneo.id,torneo.nome)">elimina</td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -38,7 +40,7 @@
 
 <ng-template #insertFormTorneo let-modal>
     <div class="modal-header">
-        <h4 class="modal-title text-dark">Creazione nuovo torneo</h4>
+        <h4 class="modal-title">Creazione nuovo torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -138,11 +140,11 @@
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">
-                close
+            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">
+                chiudi
             </button>
-            <button type="submit" class="btn btn-outline-success" [disabled]="creaNuovoTorneoForm.invalid" (click)="modal.close('Save click')">
-                add
+            <button type="submit" class="btn btn-submit" [disabled]="creaNuovoTorneoForm.invalid" (click)="modal.close('Save click')">
+                aggiungi
             </button>
         </div>
     </form>
@@ -150,7 +152,7 @@
 
 <ng-template #updateTorneoForm let-modal>
     <div class="modal-header">
-        <h4 class="modal-title text-dark">Modifica torneo</h4>
+        <h4 class="modal-title">Modifica torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true" id="span-close">&times;</span>
         </button>
@@ -251,11 +253,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">
-                        close
+                    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">
+                        chiudi
                     </button>
                     <button type="submit" class="btn btn-submit" (click)="modal.close('Save click')">
-                        save
+                        salva
                     </button>
                 </div>
             </div>
@@ -265,7 +267,7 @@
 
 <ng-template #deleteTorneo let-modal>
     <div class="modal-header">
-        <h4 class="modal-title text-dark">Elimina torneo</h4>
+        <h4 class="modal-title">Elimina torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -275,10 +277,10 @@
             <p>Sei sicuro di voler eliminare il torneo <b>{{nomeTorneoDaEliminare}}</b> ?</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-dark" (click)="modal.close('Close click')" ngbAutofocus>
-                        close
+            <button type="button" class="btn btn-submit" (click)="modal.close('Close click')" ngbAutofocus>
+                        chiudi
                     </button>
-            <button type="submit" class="btn btn-outline-danger">
+            <button type="submit" class="btn btn-danger">
                         elimina
                     </button>
         </div>

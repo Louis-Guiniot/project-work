@@ -1,34 +1,30 @@
-@import "src/styles/modal-actions.scss";
+@import "src/styles/modal.scss";
 @import "src/styles/input.scss";
 @import "src/styles/buttons.scss";
-.box {
-    display: grid;
-    grid-template-columns: 10% 90%;
-    row-gap: 15px;
-    column-gap: 15px;
+@import "src/styles/grid-table.scss";
+.card-detail {
     width: 100%;
-    padding: 2%;
 }
 
-.grid-button {
-    grid-column-end: 2;
-}
-
-.grid-table {
-    grid-column-end: 3;
-}
-
-table {
-    th,
-    td {
-        font-size: 20px;
-        font-weight: 300;
-    }
-    th {
-        font-weight: 400;
-    }
-}
-
-.button-insert {
+#detail-span {
+    padding: 1px;
+    font-size: 25px;
+    font-weight: 500;
     width: 100%;
+}
+
+#detail-label {
+    font-size: 20px;
+    font-weight: 200;
+    width: 100%;
+    color: #000;
+}
+
+@-moz-keyframes open {
+    0% {
+        transform: scale(0.7)
+    }
+    100% {
+        transform: scale(1)
+    }
 }
