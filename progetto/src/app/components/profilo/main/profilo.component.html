@@ -1,51 +1,125 @@
-<div *ngFor="let utente of utenti | async">
-    <div *ngIf="utente.id == idutente">
-        <form [formGroup]="editaUtenteForm" (ngSubmit)="edita()">
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" formControlName="nome" placeholder="{{utente.nome}}">
+<div class="box">
+    <div class="form">
+        <div *ngFor="let utente of utenti | async">
+            <div *ngIf="utente.id == idutente">
+                <form [formGroup]="editaUtenteForm" (ngSubmit)="edita()">
+
+                    <div class="header">Benevenuto <span class="text-purple"><u>{{utente.username}}</u></span></div>
+                    <div class="text">
+                        <p>In questa sezione del sito potrai visualizzare e aggiornare i tuoi dati personali</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                        <input type="text" class="form-control" placeholder="modifica il tuo nome"
+                                            formControlName="nome">
+                                        <label for="floatingInput">Nome - <span class="bolder">{{utente.nome}}</span></label>
+                                </span>
+                            </div>
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                        <input type="text" class="form-control" placeholder="modifica il tuo cognome"
+                                            formControlName="cognome">
+                                        <label for="floatingPassword">Cognome - <span class="bolder">{{utente.cognome}}</span></label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                        <input type="text" class="form-control" placeholder="modifica il tuo username"
+                                            formControlName="username">
+                                        <label for="floatingInput">Username - <span class="bolder">{{utente.username}}</span></label>
+                                </span>
+                            </div>
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                <input type="password" class="form-control" placeholder="modifica la tua password" formControlName="password">
+                                <label for="floatingPassword">Password - <span class="bolder">{{utente.password}}</span></label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <span class="form-group has-float-label">
+                                <input class="form-control" type="text" placeholder="modifica la tua mail" formControlName="email">
+                                <label for="floatingInput">Email - <span class="bolder">{{utente.email}}</span></label>
+                        </span>
+
+
+
+
+                        <div class="row">
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                    <select class="form-control" formControlName="genere">
+                                        <option selected disable>seleziona sesso</option>
+                                        <option *ngFor="let sesso of sessoSelect" value="{{sesso.label}}">
+                                            {{sesso.label}}</option>
+                                    </select>
+                                        <label for="floatingInput">Sesso - <span class="bolder">{{utente.genere}}</span></label>
+                                </span>
+                            </div>
+
+
+                            <div class="col">
+                                <span class="form-group has-float-label">
+                                    <input class="form-control" type="text" formControlName="email" readonly>
+                                    <label for="floatingInput">Data di nascita - <span class="bolder">{{utente.datanascita}}</span></label>
+                                </span>
+                            </div>
+
+                            <!-- <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="form-group has-float-label">
+                                                <select class="form-control" formControlName="mese">
+                                                    <option selected disable>mm</option>
+                                                    <option *ngFor="let mese of mesiSelect" value="{{mese.value}}">
+                                                        {{mese.label}}</option>
+                                                </select>
+                                                <label for="floatingInput">Mese - <span class="bolder">{{utente.nome}}</span></label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="form-group has-float-label">
+                                                <select class="form-control" formControlName="giorno">
+                                                    <option selected disable>gg</option>
+                                                    <option *ngFor="let giorno of giorniSelect" value="{{giorno.label}}">
+                                                        {{giorno.label}}</option>
+                                                </select>
+                                                <label for="floatingInput">Giorno - <span class="bolder">{{utente.nome}}</span></label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="form-group has-float-label">
+                                                <select class="form-control" formControlName="anno">
+                                                    <option selected disable>aaaa</option>
+                                                    <option *ngFor="let anno of anniSelect" value="{{anno.label}}">
+                                                        {{anno.label}}</option>
+                                                </select>
+                                                <label for="floatingInput">Anno - <span class="bolder">{{utente.datanascita}}</span></label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <button type="submit" class="btn btn-submit">
+                                salva
+                            </button>
+                        <button type="reset" class="btn btn-outline-danger">
+                                cancella
+                            </button>
+
 
                     </div>
-                </div>
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" formControlName="cognome" placeholder="{{utente.cognome}}">
 
-                    </div>
-                </div>
+
+
+                </form>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" formControlName="email" placeholder="{{utente.email}}">
-
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control form-control-sm" formControlName="password" placeholder="{{utente.password}}">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" formControlName="datanascita" placeholder="{{utente.datanascita}}">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" formControlName="genere" placeholder="{{utente.genere}}">
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-dark">
-                edita
-            </button>
-        </form>
+        </div>
     </div>
 </div>

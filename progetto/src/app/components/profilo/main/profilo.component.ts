@@ -22,7 +22,39 @@ export class ProfiloComponent implements OnInit {
 
   editaUtenteForm: FormGroup
 
+  sessoSelect = [
+    {label:'maschio'},{label:'femmina'},{label:'altro'}
+  ]
+
+  giorniSelect = []
+  anniSelect = []
+  mesiSelect = []
+
+
   ngOnInit(): void {
+
+    this.mesiSelect = [
+      {label:'Gennaio',value:'01'},
+      {label:'Febbraio',value:'02'}, 
+      {label:'Marzo',value:'03'},
+      {label:'Aprile',value:'04'},
+      {label:'Maggio',value:'05'}, 
+      {label:'Giugno',value:'06'},
+      {label:'Luglio',value:'07'},
+      {label:'Agosto',value:'08'},
+      {label:'Settembre',value:'09'},
+      {label:'Ottombre',value:'10'},
+      {label:'Novembre',value:'11'},
+      {label:'Dicembre',value:'12'}
+    ]
+
+    for(let i = 1; i<=31; i++){
+      this.giorniSelect.push({label:i})
+    }
+
+    for(let i = 1970; i<=2021; i++){
+      this.anniSelect.push({label:i})
+    }
 
     console.log("utente: ",this.idutente)
 
@@ -33,8 +65,10 @@ export class ProfiloComponent implements OnInit {
       password: ['', Validators.required],
       email: ['', Validators.required],
       genere: ['', Validators.required],
-      datanascita: ['', Validators.required],
-      
+      mese: ['', Validators.required],
+      giorno: ['', Validators.required],
+      anno: ['', Validators.required],
+
     })
 
   }
@@ -42,6 +76,8 @@ export class ProfiloComponent implements OnInit {
   get utenti():Observable<Utente[]>{
     return this.store.pipe(select(selectUtente))
   }
+
+  datanascita = ""
 
   edita(){
     this.utenteService.aggiornaUtente(
@@ -51,8 +87,7 @@ export class ProfiloComponent implements OnInit {
       this.editaUtenteForm.value.username,
       this.editaUtenteForm.value.email,
       this.editaUtenteForm.value.password,
-      this.editaUtenteForm.value.datanascita
-
+      this.datanascita
     )
 
     window.location.reload()
