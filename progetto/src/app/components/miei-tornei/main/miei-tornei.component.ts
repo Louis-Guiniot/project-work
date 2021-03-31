@@ -7,6 +7,7 @@ import { selectTorneo } from 'src/app/redux/miei-tornei';
 import { MieiTorneiService } from 'src/app/services/miei-tornei/miei-tornei.service';
 import { Torneo } from 'src/app/core/model/Torneo.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpCommunicationsService } from 'src/app/core/model/http/http-communications.service';
 
 @Component({
   selector: 'app-miei-tornei',
@@ -16,9 +17,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MieiTorneiComponent implements OnInit {
 
-  constructor(private fb:FormBuilder,private store: Store, private router: Router,private mieiTorneiService: MieiTorneiService,private modalService: NgbModal) { 
-    // console.log(this.mieiTorneiService.elencoTorneiPerCreatore(sessionStorage.getItem('id')));
-    console.log(this.mieiTorneiService.elencoTornei());
+  constructor(private fb:FormBuilder,private store: Store, private router: Router,private mieiTorneiService: MieiTorneiService,private modalService: NgbModal, private http: HttpCommunicationsService) { 
+    this.mieiTorneiService.elencoTornei()
   }
 
   thLabels = [
