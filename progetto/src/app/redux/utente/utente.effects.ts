@@ -143,6 +143,7 @@ export class UtenteEffects {
 loginUserSuccess$=createEffect(()=>this.actions$.pipe(
     ofType(loginAdminUserSuccess),
     map( (action) => initUserAdmin( {admin: action.admin} )),
-    tap(()=>this.router.navigateByUrl('/home'))
+    tap(()=>this.router.navigateByUrl('/tornei'))
   ));
 }
+
