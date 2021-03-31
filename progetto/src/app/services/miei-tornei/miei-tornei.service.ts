@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createTorneo, deleteTorneo, retreiveAllTornei, retreiveAllTorneiByGioco, retreiveAllTorneiExcept, updateTorneo } from 'src/app/redux/miei-tornei/miei-tornei.actions';
+import { createTorneo, deleteTorneo, retreiveAllTornei, retreiveAllTorneiByGioco, retreiveAllTorneiByIdCreatore, retreiveAllTorneiExcept, updateTorneo } from 'src/app/redux/miei-tornei/miei-tornei.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -76,14 +76,6 @@ export class MieiTorneiService {
 
   elencoTornei(){
     this.store.dispatch(retreiveAllTornei())
-  }
-
-  elencoTorneiPerGioco(gioco:string){
-    this.store.dispatch(retreiveAllTorneiByGioco({gioco}))
-  }
-
-  elencoTorneiExcept(idCreatore: number){
-    this.store.dispatch(retreiveAllTorneiExcept({idCreatore}))
   }
 
 }
