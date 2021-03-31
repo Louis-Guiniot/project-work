@@ -34,5 +34,4 @@ export const createTorneo = createAction('[Torneo] creazione Torneo', props<{
 }>());
 export const retreiveAllTornei = createAction('[Torneo] Torneo');
 export const retreiveAllTorneiByGioco = createAction('[Torneo] Torneo',props<{gioco: string}>());
-export const retreiveAllTorneiByPiattaforma = createAction('[Torneo] Torneo',props<{piattaforma: string}>());
-export const retreiveAllTorneiByIdCreatore = createAction('[Torneo] Torneo',props<{idCreatore: string}>());
+export const retreiveAllTorneiExcept = createAction('[Torneo] Torneo',props<{idCreatore: number}>());

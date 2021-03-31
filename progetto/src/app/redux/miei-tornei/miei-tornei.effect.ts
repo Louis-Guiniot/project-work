@@ -5,7 +5,7 @@ import { Action } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { switchMap, map, tap } from "rxjs/operators";
 import { HttpCommunicationsService } from "src/app/core/model/http/http-communications.service";
-import { createTorneo, deleteTorneo, initTornei, retreiveAllTornei, retreiveAllTorneiByGioco, retreiveAllTorneiByIdCreatore, retreiveAllTorneiByPiattaforma, updateTorneo } from "./miei-tornei.actions";
+import { createTorneo, deleteTorneo, initTornei, retreiveAllTornei, retreiveAllTorneiExcept, updateTorneo } from "./miei-tornei.actions";
 import { Response } from "src/app/core/model/Response.interface";
 
 @Injectable()
@@ -17,21 +17,23 @@ export class TorneoEffects {
         return this.http.retrieveGetCall<Response>("torneo/elencoTornei");
     }
 
-    retreiveAllTorneiByGioco(gioco:string): Observable<Response> {
-        return this.http.retrieveGetCall<Response>("torneo/elencoTorneiG",{
-            gioco
+    // retreiveAllTorneiByGioco(gioco:string): Observable<Response> {
+    //     return this.http.retrievePostCall<Response>("torneo/elencoTorneiG",{
+    //         gioco
+    //     });
+    // }
+
+    retreiveAllTorneiExcept(idCreatore:number): Observable<Response> {
+        return this.http.retrievePostCall<Response>("torneo/elencoTorneiExcept", {
+            idCreatore
         });
     }
 
-    retreiveAllTorneiByPiattaforma(piattaforma:string): Observable<Response> {
-        return this.http.retrieveGetCall<Response>("torneo/elencoTorneiP", {
-            piattaforma
-        });
-    }
-
-    retreiveAllTorneiByIdCreatore(idCreatore:string): Observable<Response> {
-        return this.http.retrieveGetCall<Response>("torneo/elencoTorneiC/"+idCreatore);
-    }
+    // retreiveAllTorneiByIdCreatore(idCreatore:string): Observable<Response> {
+    //     return this.http.retrieveGetCall<Response>("torneo/elencoTorneiC" , {
+    //         idCreatore
+    //     });
+    // }
 
     createTorneo(
         nome: string,
@@ -133,32 +135,32 @@ export class TorneoEffects {
         ))
     ));
 
-    getAllTorneiByG$: Observable<Action> = createEffect(() => this.actions$.pipe(
-        ofType(retreiveAllTorneiByGioco),
-        switchMap((action) => this.retreiveAllTorneiByGioco(
-            action.gioco
-        ).pipe(
-            map((response) => initTornei({ response }))
-        ))
-    ));
+    // getAllTorneiByG$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    //     ofType(retreiveAllTorneiByGioco),
+    //     switchMap((action) => this.retreiveAllTorneiByGioco(
+    //         action.gioco
+    //     ).pipe(
+    //         map((response) => initTornei({ response }))
+    //     ))
+    // ));
 
-    getAllTorneiByP$: Observable<Action> = createEffect(() => this.actions$.pipe(
-        ofType(retreiveAllTorneiByPiattaforma),
-        switchMap((action) => this.retreiveAllTorneiByPiattaforma(
-            action.piattaforma
-        ).pipe(
-            map((response) => initTornei({ response }))
-        ))
-    ));
-
-    getAllTorneiByC$: Observable<Action> = createEffect(() => this.actions$.pipe(
-        ofType(retreiveAllTorneiByIdCreatore),
-        switchMap((action) => this.retreiveAllTorneiByIdCreatore(
+    getAllTorneiExcept$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(retreiveAllTorneiExcept),
+        switchMap((action) => this.retreiveAllTorneiExcept(
             action.idCreatore
         ).pipe(
             map((response) => initTornei({ response }))
         ))
     ));
+
+    // getAllTorneiByC$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    //     ofType(retreiveAllTorneiByIdCreatore),
+    //     switchMap((action) => this.retreiveAllTorneiByIdCreatore(
+    //         action.idCreatore
+    //     ).pipe(
+    //         map((response) => initTornei({ response }))
+    //     ))
+    // ));
 
     createTorneo$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(createTorneo),
