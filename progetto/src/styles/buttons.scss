@@ -5,6 +5,26 @@
         background-color: #8C52FF;
         color: #fff;
     }
+    font-size: 20px;
+}
+
+.btn-info {
+    width: auto;
+    border: 1px solid transparent;
+    background-color: #fff;
+    color: #8C52FF;
+    font-size: 30px;
+}
+
+.btn-iscriviti {
+    color: #8C52FF;
+    border: 1px solid #8C52FF;
+    &:hover {
+        background-color: #8C52FF;
+        color: #fff;
+    }
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 .btn-insert {
