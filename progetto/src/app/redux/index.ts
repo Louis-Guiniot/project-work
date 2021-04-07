@@ -1,6 +1,7 @@
 import { routerReducer, RouterReducerState } from "@ngrx/router-store";
 import { ActionReducerMap } from "@ngrx/store";
 import { classificaReducer, ClassificaState } from "./classifica/classifica.reducers";
+import { classificaGlobaleReducer, ClassificaGlobaleState } from "./classificaGlobale/classificaGlobale.reducers";
 import { iscrizioneReducer, IscrizioneState } from "./iscrizioni/iscrizioni.reducers";
 import { torneoReducer, TorneoState } from "./miei-tornei/miei.tornei.reducers";
 import { utenteReducer, UtenteState } from "./utente/utente.reducers";
@@ -10,7 +11,8 @@ export interface AppState{
     torneoState: TorneoState,
     utenteState: UtenteState,
     iscrizioneState: IscrizioneState,
-    classificaState: ClassificaState
+    classificaState: ClassificaState, 
+    classificaGlobaleState: ClassificaGlobaleState,
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -18,5 +20,7 @@ export const reducers: ActionReducerMap<AppState> = {
     torneoState: torneoReducer,
     utenteState: utenteReducer,
     iscrizioneState: iscrizioneReducer,
-    classificaState: classificaReducer
+    classificaState: classificaReducer,
+    classificaGlobaleState: classificaGlobaleReducer
+
 }
