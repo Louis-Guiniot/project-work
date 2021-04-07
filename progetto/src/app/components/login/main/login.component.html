@@ -1,30 +1,43 @@
 <div class="box">
 
     <div class="form">
-        <form [formGroup]="loginUtenteForm" (ngSubmit)="login()">
-            <div class="modal-header">
-                <div class="header">Accedi</div>
-            </div>
+        <form [formGroup]="loginUtenteForm">
             <div class="modal-body">
+                <div class="header">Accedi</div>
 
-                <span class="form-group has-float-label">
-                            <input type="text" class="form-control" placeholder="insert" formControlName="username">
+                <div class="row">
+                    <div class="col">
+                        <span class="form-group has-float-label">
+                            <input type="text" class="form-control" placeholder="inserisci username" formControlName="username">
                             <label for="floatingInput">Username</label>
                         </span>
-
-                <span class="form-group has-float-label">
-                            <input type="password" class="form-control" placeholder="insert" formControlName="password">
+                    </div>
+                    <div class="col">
+                        <span class="form-group has-float-label">
+                            <input type="password" class="form-control" placeholder="inserisci password" formControlName="password">
                             <label for="floatingPassword">Password</label>
                         </span>
+                    </div>
+                </div>
 
-                <button type="submit" class="btn btn-submit">
+
+
+
+                <button (click)="login();" type="submit" class="btn btn-submit">
                             accedi
-                        </button>
-                <button type="reset" class="btn btn-outline-danger">
+                </button>
+                <button (click)="resetForm();" class="btn btn-outline-danger">
                             cancella
                         </button>
 
+                <ng-container *ngIf="erroreLogin != null ">
+                    <span class="msg-error">credenziali errate, riprova</span>
+                </ng-container>
+
             </div>
+
+
+
 
         </form>
     </div>
