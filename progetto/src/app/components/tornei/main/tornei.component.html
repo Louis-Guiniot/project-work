@@ -3,20 +3,27 @@
         <div class="grid-cards">
             <ng-container class="item" *ngFor="let torneo of mieiTornei| async">
                 <ng-container *ngIf="torneo.idCreatore != idCreatore">
-                    <div class="card" (click)="openDetailModal(detailTorneo, torneo.id)">
+                    <div class="card">
                         <div class="card-body">
-                            <span id="detail-span">{{torneo.nome}}</span>
-                            <h6 class="card-subtitle mb-2 text-muted">{{torneo.gioco}} - {{torneo.piattaforma}}</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <p class="card-text">Iscrizioni al momento {{torneo.iscrizioni}} <br> Posti liberi {{torneo.postiLiberi}} <br> Stato {{torneo.stato | uppercase}}</p>
+                            <div class="card-intestazione">
+                                <span id="detail-span">{{torneo.nome}}</span>
+                                <button class="btn btn-info" ngbAutofocus (click)="openDetailModal(detailTorneo, torneo.id)">
+                                    <i class="bi bi-info-circle-fill"></i>
+                                </button>
+                            </div>
+                            <h3 class="card-subtitle mb-2 text-muted">{{torneo.gioco}} - {{torneo.piattaforma}}</h3>
+                            <p class="card-text">{{torneo.descrizione}}</p>
+                            <p class="card-text informazioni">Iscrizioni al momento {{torneo.iscrizioni}} <br> Posti liberi {{torneo.postiLiberi}} <br> Stato {{torneo.stato | uppercase}}</p>
                             <div *ngFor="let utente of utenti | async">
-                                <div *ngIf="utente.id == torneo.idCreatore">
-                                    creato da <span class="text-purple">
+                                <div *ngIf="utente.id == torneo.idCreatore" class="card-text">
+                                    creato da <span class="text-purple ">
                                         {{utente.username}}
                                     </span>
                                 </div>
                             </div>
-
+                            <button class="btn btn-iscriviti" (click)="iscriviti(torneo.id)" [disabled]="torneo.postiLiberi == 0">
+                                iscriviti
+                            </button>
                         </div>
                     </div>
                 </ng-container>
@@ -26,30 +33,14 @@
     </div>
 
     <ng-template #detailTorneo let-modal>
-        <div class="modal-header">
-            <h4 class="modal-title">Dettaglio torneo</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
+        <div class="modal-header ">
+            <h4 class="modal-title ">Dettaglio torneo</h4>
+            <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
+                <span aria-hidden="true ">&times;</span>
             </button>
         </div>
-        <div *ngFor="let torneo of mieiTornei | async">
-            <ng-container *ngIf="torneo.id == idTorneoDaVedere">
-                <div class="card-body">
-                    <span id="detail-span">{{torneo.nome}}</span>
-                    <h6 class="card-subtitle mb-2 text-muted">{{torneo.gioco}} - {{torneo.piattaforma}}</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p class="card-text">Iscrizioni al momento {{torneo.iscrizioni}} <br> Posti liberi {{torneo.postiLiberi}} <br> Stato {{torneo.stato | uppercase}}</p>
-                    <p class="card-text">
-                        <span id="detail-span">info generali</span> <br> Iscrizioni al momento {{torneo.iscrizioni}} <br> Posti liberi {{torneo.postiLiberi}} <br> Stato {{torneo.stato | uppercase}}</p>
-                    <button class="btn btn-submit" ngbAutofocus (click)="iscriviti(torneo.id,idCreatore)">
-                        iscriviti
-                    </button>
-                </div>
-            </ng-container>
+        <div class="modal-body">
+            ciao
         </div>
 
     </ng-template>
-
-    <span *ngFor="let class of classifica | async">
-        {{class.id}} - {{class.idIscrizione}} - {{class.idTorneo}} - {{class.idUtente}} - {{class.punteggio}} <br>
-    </span>
