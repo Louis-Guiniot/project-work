@@ -69,6 +69,7 @@ export class MieiTorneiComponent implements OnInit {
       premioSecondo: ['', Validators.required],
       premioTerzo: ['', Validators.required],
       stato: ['', Validators.required],
+      descrizione: ['', Validators.required],
     })
 
     this.editaTorneoForm = this.fb.group({
@@ -83,6 +84,7 @@ export class MieiTorneiComponent implements OnInit {
       premioSecondo: ['', Validators.required],
       premioTerzo: ['', Validators.required],
       stato: ['', Validators.required],
+      descrizione: ['', Validators.required],
     })
 
   }
@@ -107,7 +109,8 @@ export class MieiTorneiComponent implements OnInit {
       this.creaNuovoTorneoForm.value.premioSecondo,
       this.creaNuovoTorneoForm.value.premioTerzo,
       this.idCreatore,
-      this.creaNuovoTorneoForm.value.stato
+      this.creaNuovoTorneoForm.value.stato,
+      this.creaNuovoTorneoForm.value.descrizione
     )
 
     window.location.reload()
@@ -127,7 +130,8 @@ export class MieiTorneiComponent implements OnInit {
       this.editaTorneoForm.value.premioPrimo,
       this.editaTorneoForm.value.premioSecondo,
       this.editaTorneoForm.value.premioTerzo,
-      this.editaTorneoForm.value.stato
+      this.editaTorneoForm.value.stato,
+      this.editaTorneoForm.value.descrizione
     )
 
     window.location.reload()
@@ -139,6 +143,7 @@ export class MieiTorneiComponent implements OnInit {
     this.mieiTorneiService.eliminaTorneo(this.idTorneoDaEliminare)
 
     window.location.reload()
+
   }
 
 }
