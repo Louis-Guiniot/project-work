@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { switchMap, map } from "rxjs/operators";
+import { switchMap, map, tap } from "rxjs/operators";
 import { HttpCommunicationsService } from "src/app/core/model/http/http-communications.service";
 import { initClassifica, retreiveAllRecordsOfClassifica } from "./classifica.actions";
 import { Response } from "src/app/core/model/Response.interface";
@@ -20,7 +20,8 @@ export class ClassificaEffects {
 
     getAllElencoClassifica$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(retreiveAllRecordsOfClassifica),
-        switchMap(() => this.elencoClassifica().pipe(
+        switchMap(() => this.elencoClassifica()
+        .pipe(
             map((response) => initClassifica({ response }))
         ))
     ));
