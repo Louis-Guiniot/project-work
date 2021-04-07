@@ -29,7 +29,8 @@ export class TorneoEffects {
         premioSecondo: string,
         premioTerzo: string,
         idCreatore: number,
-        stato: string
+        stato: string,
+        descrizione: string
     ): Observable<Response> {
         return this.http.retrievePostCall<Response>('torneo/creaTorneo', {
             nome,
@@ -43,7 +44,8 @@ export class TorneoEffects {
             premioSecondo,
             premioTerzo,
             idCreatore,
-            stato
+            stato,
+            descrizione
         });
     }
 
@@ -59,7 +61,8 @@ export class TorneoEffects {
         premioPrimo: string,
         premioSecondo: string,
         premioTerzo: string,
-        stato: string
+        stato: string,
+        descrizione: string
     ) {
         return this.http.retrievePostCall<Response>('torneo/aggiornaTorneo', {
             id,
@@ -73,7 +76,8 @@ export class TorneoEffects {
             premioPrimo,
             premioSecondo,
             premioTerzo,
-            stato
+            stato,
+            descrizione
         });
     }
 
@@ -95,7 +99,8 @@ export class TorneoEffects {
             action.premioPrimo,
             action.premioSecondo,
             action.premioTerzo,
-            action.stato).pipe(
+            action.stato,
+            action.descrizione).pipe(
                 map((response) => initTornei({ response }))
                 , tap(() => this.router.navigateByUrl('/miei-tornei'))
             ))
@@ -131,7 +136,8 @@ export class TorneoEffects {
             action.premioSecondo,
             action.premioTerzo,
             action.idCreatore,
-            action.stato
+            action.stato,
+            action.descrizione
         ).pipe(
             map((response) => initTornei({ response }))
             // prova senza redirect

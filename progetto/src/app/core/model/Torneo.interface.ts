@@ -14,4 +14,5 @@ export interface Torneo {
     premioTerzo: string
     idCreatore: number
     stato: string
+    descrizione: string
 }

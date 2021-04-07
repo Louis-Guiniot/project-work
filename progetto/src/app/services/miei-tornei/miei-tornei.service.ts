@@ -23,7 +23,8 @@ export class MieiTorneiService {
         premioSecondo: string,
         premioTerzo: string,
         idCreatore: number,
-        stato: string
+        stato: string,
+        descrizione: string
   ){
     this.store.dispatch(createTorneo({ 
       nome,
@@ -37,7 +38,9 @@ export class MieiTorneiService {
       premioSecondo,
       premioTerzo,
       idCreatore,
-      stato}))
+      stato,
+      descrizione
+    }))
   }
   
   eliminaTorneo(id:number){
@@ -56,7 +59,9 @@ export class MieiTorneiService {
     premioPrimo: string,
     premioSecondo: string,
     premioTerzo: string,
-    stato: string
+    stato: string,
+    descrizione: string
+
   ){
     this.store.dispatch(updateTorneo({
       id,
@@ -70,7 +75,8 @@ export class MieiTorneiService {
       premioPrimo,
       premioSecondo,
       premioTerzo,
-      stato
+      stato,
+      descrizione
     }))
   }
 
