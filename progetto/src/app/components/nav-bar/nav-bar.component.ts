@@ -29,6 +29,10 @@ export class NavBarComponent implements OnInit {
 
   logout(){
     sessionStorage.removeItem("username")
+    sessionStorage.removeItem("id")
+    sessionStorage.removeItem("error")
+    sessionStorage.removeItem("errorSignUp")
+
     this.router.navigateByUrl("/login")
   }
 

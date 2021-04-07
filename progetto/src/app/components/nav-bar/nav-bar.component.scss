@@ -1,21 +1,11 @@
 .nav-item {
     font-size: 28px;
-    font-weight: 200;
+    font-weight: 300;
     padding: 5px;
-}
-
-.dropdown-item {
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.float-left-nav {
-    font-size: 28px;
-    font-weight: 400;
     &:hover {
         text-decoration: none;
+        text-transform: none;
     }
-    margin-right: 2%;
 }
 
 .navbar {
