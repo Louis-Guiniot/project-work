@@ -5,7 +5,7 @@ import { Action } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { switchMap, map, tap } from "rxjs/operators";
 import { HttpCommunicationsService } from "src/app/core/model/http/http-communications.service";
-import { createUtente, deleteUtente, findUtenteByUsernameAndPassword, initUserAdmin, initUtenti, loginAdminUserFailure, loginAdminUserSuccess, retreiveAllUtenti, updateUtente } from "./utente.actions";
+import { createUtente, deleteUtente, findUtenteByUsernameAndPassword, initUserAdmin, initUtenti, loginAdminUserFailure, loginAdminUserSuccess, registrationAdminUserFailure, registrationAdminUserSuccess, retreiveAllUtenti, updateUtente } from "./utente.actions";
 import { Response } from "src/app/core/model/Response.interface";
 
 @Injectable()
@@ -79,8 +79,8 @@ export class UtenteEffects {
             action.nome,
             action.cognome,
             action.username,
-            action.email,
             action.password,
+            action.email,
             action.datanascita,
             ).pipe(
                 map((response) => initUtenti({ response }))
@@ -94,13 +94,21 @@ export class UtenteEffects {
             action.nome,
             action.cognome,
             action.username,
-            action.email,
             action.password,
+            action.email,
             action.genere,
             action.datanascita,
             ).pipe(
-                map((response) => initUtenti({ response }))
-                , tap(() => this.router.navigateByUrl('/home'))
+                map((response) => {
+                
+                    if(response.result === null){
+                        sessionStorage.setItem('errorSignUp','erroreSignUp')
+                        return registrationAdminUserFailure({error:'Username e/o Email gia presente'})
+                    }else{
+                        sessionStorage.removeItem('errorSignUp')
+                        return registrationAdminUserSuccess({admin: response.result})
+                    }
+                })
             ))
     ));
 
@@ -128,8 +136,10 @@ export class UtenteEffects {
         ).pipe(
             map((response) => {
                 if(response.result === null){
-                  return loginAdminUserFailure({error:'Username e/o Password non corretta'})
+                    sessionStorage.setItem('error','errore')
+                    return loginAdminUserFailure({error:'Username e/o Password non corretta'})
                 }else{
+                    sessionStorage.removeItem('error')
                     sessionStorage.setItem('username',action.username)
                     sessionStorage.setItem('id',response.result.id)
                     return loginAdminUserSuccess({admin: response.result})
@@ -137,13 +147,18 @@ export class UtenteEffects {
               })
         ))
     ));
-  
 
-//******************************/
-loginUserSuccess$=createEffect(()=>this.actions$.pipe(
-    ofType(loginAdminUserSuccess),
-    map( (action) => initUserAdmin( {admin: action.admin} )),
-    tap(()=>this.router.navigateByUrl('/tornei'))
-  ));
-}
+    registrationAdminUserSuccess$ = createEffect(()=>this.actions$.pipe(
+        ofType(registrationAdminUserSuccess),
+        map( (action) => initUserAdmin( {admin: action.admin} )),
+        tap(()=>this.router.navigateByUrl('/login'))
+    ));
+  
+    loginAdminUserSuccess$=createEffect(()=>this.actions$.pipe(
+        ofType(loginAdminUserSuccess),
+        map( (action) => initUserAdmin( {admin: action.admin} )),
+        tap(()=>this.router.navigateByUrl('/tornei'))
+    ));
+    }
+
 

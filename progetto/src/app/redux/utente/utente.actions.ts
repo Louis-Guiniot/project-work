@@ -32,6 +32,10 @@ export const findUtenteByUsernameAndPassword = createAction('[Utente] login Uten
     password:string,
 }>());
 
+
+export const registrationAdminUserSuccess = createAction('[User] Reg Success', props<{admin: Utente}>());
+export const registrationAdminUserFailure = createAction('[User] Reg Failure', props<{error: string}>());
+
 export const loginAdminUserSuccess = createAction('[User] Login Success', props<{admin: Utente}>());
 export const loginAdminUserFailure = createAction('[User] Login Failure', props<{error: string}>());
 export const initUserAdmin = createAction('[UserInit] init', props<{admin: Utente}>());
