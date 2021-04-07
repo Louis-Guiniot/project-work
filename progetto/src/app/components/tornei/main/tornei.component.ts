@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { Classifica } from 'src/app/core/model/Classifica';
 import { HttpCommunicationsService } from 'src/app/core/model/http/http-communications.service';
 import { Torneo } from 'src/app/core/model/Torneo.interface';
@@ -36,8 +37,6 @@ export class TorneiComponent implements OnInit {
 
     this.utentiService.elencoUtenti()
     this.mieiTorneiService.elencoTornei()
-    this.classificaService.classifica()
-    
 
   }
   
@@ -69,12 +68,10 @@ export class TorneiComponent implements OnInit {
     return this.store.pipe(select(selectUtente))
   }
 
-  get classifica():Observable<Classifica[]>{
-    return this.store.pipe(select(selectClassifica))
-  }
-
-  iscriviti(){
-    this.iscrizioniService.iscriviUtente(this.idTorneoDaVedere, this.idCreatore)
+  iscriviti(id:number){
+    console.log('id  '+id)
+    console.log('idUtente    '+this.idCreatore)
+    this.iscrizioniService.iscriviUtente(id, this.idCreatore)
   }
 
 }
