@@ -13,8 +13,20 @@
     margin: 0;
 }
 
+.table-text {
+    th {
+        font-weight: 400;
+        font-size: 20px;
+    }
+    td {
+        font-weight: 200;
+        font-size: 20px;
+    }
+}
+
 .text-purple {
     color: #8C52FF;
+    font-weight: 300;
 }
 
 .bolder {
