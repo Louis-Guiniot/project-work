@@ -31,8 +31,7 @@ export class IscrizioneEffects {
             action.idUtente
         ).pipe(
             map((response) => initIscrizioni({ response }))
-            // prova senza redirect
-            , tap(() => this.router.navigateByUrl('/tornei'))
+            , tap(() => this.router.navigateByUrl('/classifica'))
         ))
     ));
 }
