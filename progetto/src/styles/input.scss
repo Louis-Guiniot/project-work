@@ -10,17 +10,26 @@ label {
 }
 
 .form-control {
+    border-radius: 0;
     font-size: 25px;
     font-weight: 300!important;
      ::placeholder {
         font-weight: 200!important;
         color: #000;
     }
+    border-bottom: 2px rgb(205, 212, 219) solid;
+    border-left: 2px transparent solid;
+    border-top: 2px transparent solid;
+    border-right: 2px transparent solid;
+    margin-top: 10px;
 }
 
 .form-control:focus {
     box-shadow: none;
-    border: 1px #8C52FF solid;
+    border-bottom: 2px #8C52FF solid;
+    border-left: 2px transparent solid;
+    border-top: 2px transparent solid;
+    border-right: 2px transparent solid
 }
 
 @media (max-width: 800px) {
