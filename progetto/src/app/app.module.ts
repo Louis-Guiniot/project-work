@@ -21,6 +21,8 @@ import { RegistrazioneComponent } from './components/registrazione/main/registra
 import { IscrizioneEffects } from './redux/iscrizioni/iscrizioni.effects';
 import { PageNfoundComponent } from './components/page-nfound/main/page-nfound.component';
 import { ClassificaEffects } from './redux/classifica/classifica.effects';
+import { ClassificaComponent } from './components/classifica/main/classifica.component';
+import { ClassificaGlobaleEffects } from './redux/classificaGlobale/classificaGlobale.effects';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { ClassificaEffects } from './redux/classifica/classifica.effects';
     NavBarComponent,
     RegistrazioneComponent,
     PageNfoundComponent,
+    ClassificaComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { ClassificaEffects } from './redux/classifica/classifica.effects';
       TorneoEffects, 
       UtenteEffects,
       IscrizioneEffects,
-      ClassificaEffects
+      ClassificaEffects,
+      ClassificaGlobaleEffects
      ])
   ],
   providers: [],
