@@ -13,21 +13,6 @@ export class RegistrazioneComponent implements OnInit {
 
   constructor(private fb:FormBuilder,private store: Store, private router: Router,private loginService: LoginService) { 
 
-  }
-  
-  creaNuovoUtenteForm:FormGroup
-
-  sessoSelect = [
-    {label:'maschio'},{label:'femmina'},{label:'altro'}
-  ]
-
-  giorniSelect = []
-  anniSelect = []
-  mesiSelect = []
-
-  datanascita:string
-
-  ngOnInit(): void {
 
     this.mesiSelect = [
       {label:'Gennaio',value:'01'},
@@ -52,6 +37,23 @@ export class RegistrazioneComponent implements OnInit {
       this.anniSelect.push({label:i})
     }
 
+  }
+  
+  creaNuovoUtenteForm:FormGroup
+
+  sessoSelect = [
+    {label:'maschio'},{label:'femmina'},{label:'altro'}
+  ]
+
+  giorniSelect = []
+  anniSelect = []
+  mesiSelect = []
+
+  datanascita:string
+
+
+  ngOnInit(): void {
+
     this.creaNuovoUtenteForm = this.fb.group({
       nome: ['', Validators.required],
       cognome: ['', Validators.required],
@@ -65,11 +67,10 @@ export class RegistrazioneComponent implements OnInit {
     })
   }
 
-  
+  erroreSign : string
 
   registrati(){
     this.datanascita = this.creaNuovoUtenteForm.value.mese + "-" + this.creaNuovoUtenteForm.value.giorno + "-" + this.creaNuovoUtenteForm.value.anno
-    console.log(this.datanascita)
     this.loginService.nuovoUtente(
       this.creaNuovoUtenteForm.value.nome,
       this.creaNuovoUtenteForm.value.cognome,
@@ -79,5 +80,14 @@ export class RegistrazioneComponent implements OnInit {
       this.creaNuovoUtenteForm.value.genere,
       this.datanascita
     )
+
+    this.erroreSign = sessionStorage.getItem('errorSignUp')
+    console.log('errore ?',this.erroreSign)
+  }
+
+
+  resetForm(){
+    this.creaNuovoUtenteForm.reset()
+    sessionStorage.removeItem('errorSignUp')    
   }
 }
