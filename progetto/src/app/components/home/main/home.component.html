@@ -10,4 +10,28 @@
             </div>
         </div>
     </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>idGiocatore</th>
+                <th>punteggio totale</th>
+                <th>punteggio medio per torneo</th>
+                <th>vittorie</th>
+                <th>tornei giocati</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let class of classificaGlobale | async">
+                <ng-container *ngFor="let utente of utenti | async">
+                    <td *ngIf="class.idPlayer == utente.id">{{utente.username}}</td>
+                </ng-container>
+
+                <td>{{class.punteggioTotale}}</td>
+                <td>{{class.mediaPunteggio}}</td>
+                <td>{{class.vittorie}}</td>
+                <td>{{class.torneiGiocati}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
