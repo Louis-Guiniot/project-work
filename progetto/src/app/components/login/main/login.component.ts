@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { windowWhen } from 'rxjs/operators';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -38,16 +39,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.creaNuovoUtenteForm = this.fb.group({
-      nome: ['', Validators.required],
-      cognome: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', Validators.required],
-      genere: ['', Validators.required],
-      datanascita: ['', Validators.required],
-    })
-
     this.loginUtenteForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -55,21 +46,38 @@ export class LoginComponent implements OnInit {
 
   }
 
-  registrati(){
-
-    this.loginService.nuovoUtente(
-      this.creaNuovoUtenteForm.value.nome,
-      this.creaNuovoUtenteForm.value.cognome,
-      this.creaNuovoUtenteForm.value.username,
-      this.creaNuovoUtenteForm.value.password,
-      this.creaNuovoUtenteForm.value.email,
-      this.creaNuovoUtenteForm.value.genere,
-      this.creaNuovoUtenteForm.value.datanascita
-    )
-  }
+  erroreLogin: string
+  count = 0
 
   login(){
     this.loginService.loginUtente(this.loginUtenteForm.value.username,this.loginUtenteForm.value.password)
+
+    this.erroreLogin = sessionStorage.getItem('error')
+    console.log('errore ?',this.erroreLogin)
+
+    if(sessionStorage.getItem('error')){
+      this.count ++
+    }
+
+    console.log("conta", this.count)
+
+    if(this.count == 5){
+      window.alert("login sbagliata troppe volte, per motivi di sicurezza la pagina verrà ricaricata")
+      this.count = 0
+
+      sessionStorage.removeItem('error')
+      window.location.reload()
+    }
+
+
+  }
+
+ 
+
+  resetForm(){
+
+    this.erroreLogin = null
+    this.loginUtenteForm.reset()
   }
 
 }
