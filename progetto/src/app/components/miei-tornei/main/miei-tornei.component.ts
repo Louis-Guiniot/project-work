@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { selectTorneo } from 'src/app/redux/miei-tornei';
 import { MieiTorneiService } from 'src/app/services/miei-tornei/miei-tornei.service';
 import { Torneo } from 'src/app/core/model/Torneo.interface';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpCommunicationsService } from 'src/app/core/model/http/http-communications.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { HttpCommunicationsService } from 'src/app/core/model/http/http-communic
 })
 export class MieiTorneiComponent implements OnInit {
 
-  constructor(private fb:FormBuilder,private store: Store, private router: Router,private mieiTorneiService: MieiTorneiService,private modalService: NgbModal, private http: HttpCommunicationsService) { 
+  constructor(private fb:FormBuilder,private store: Store, private router: Router,private mieiTorneiService: MieiTorneiService,private modalService: NgbModal, private http: HttpCommunicationsService) {
     this.mieiTorneiService.elencoTornei()
   }
 
@@ -27,7 +27,7 @@ export class MieiTorneiComponent implements OnInit {
     {label:'quota'},{label:'stato'},
   ]
 
-  closeResult: string
+  closeResult = ''
   openInsertModal(content:string) {
     this.modalService.open(content, { size: 'xl' });
     console.log("aperto modale creazione torneo")
@@ -43,10 +43,27 @@ export class MieiTorneiComponent implements OnInit {
   idTorneoDaEliminare:number
   nomeTorneoDaEliminare: string
   openDeleteModal(content:string,idtorneo:number,nometorneo:string) {
-    this.modalService.open(content, { size: 'xl' });
+    this.modalService.open(content, { size: 'xl' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.editaTorneoForm.reset();
+      this.creaNuovoTorneoForm.reset();
+    });
+    
     console.log("aperto modale eliminazione torneo con id : " , idtorneo)
     this.idTorneoDaEliminare = idtorneo
     this.nomeTorneoDaEliminare = nometorneo
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 
@@ -68,7 +85,6 @@ export class MieiTorneiComponent implements OnInit {
       premioPrimo: ['', Validators.required],
       premioSecondo: ['', Validators.required],
       premioTerzo: ['', Validators.required],
-      stato: ['', Validators.required],
       descrizione: ['', Validators.required],
     })
 
@@ -83,7 +99,6 @@ export class MieiTorneiComponent implements OnInit {
       premioPrimo: ['', Validators.required],
       premioSecondo: ['', Validators.required],
       premioTerzo: ['', Validators.required],
-      stato: ['', Validators.required],
       descrizione: ['', Validators.required],
     })
 
@@ -109,11 +124,10 @@ export class MieiTorneiComponent implements OnInit {
       this.creaNuovoTorneoForm.value.premioSecondo,
       this.creaNuovoTorneoForm.value.premioTerzo,
       this.idCreatore,
-      this.creaNuovoTorneoForm.value.stato,
       this.creaNuovoTorneoForm.value.descrizione
     )
 
-    window.location.reload()
+    // window.location.reload()
 
   }
 
@@ -130,12 +144,9 @@ export class MieiTorneiComponent implements OnInit {
       this.editaTorneoForm.value.premioPrimo,
       this.editaTorneoForm.value.premioSecondo,
       this.editaTorneoForm.value.premioTerzo,
-      this.editaTorneoForm.value.stato,
       this.editaTorneoForm.value.descrizione
     )
 
-    window.location.reload()
-    
   }
 
   elimina(){

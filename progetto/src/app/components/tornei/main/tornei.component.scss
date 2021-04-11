@@ -1,5 +1,46 @@
 @import "src/styles/buttons.scss";
 @import "src/styles/typography.scss";
 @import "src/styles/modal.scss";
-@import "src/styles/grid-table.scss";
+@import "src/styles/input.scss";
 @import "src/styles/tornei-card.scss";
+@import "src/styles/grid-base.scss";
+.card-body {
+    display: grid;
+    grid-template-rows: auto auto 25%;
+    gap: 10px;
+    width: 100%;
+}
+
+.card-intestazione {
+    grid-row-end: 2;
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.card-informaizoni {
+    grid-row-end: 3;
+}
+
+.card-button {
+    grid-row-end: 4;
+}
+
+.torneo-card-full {
+    .detail-span {
+        color: rgb(184, 11, 11);
+    }
+    .text-purple {
+        color: rgb(184, 11, 11);
+    }
+    .btn-info {
+        color: rgb(184, 11, 11);
+    }
+    .posti-full {
+        color: rgb(184, 11, 11);
+    }
+}
+
+.form-control:read-only {
+    background-color: transparent;
+    text-decoration: none;
+}
