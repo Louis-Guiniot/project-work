@@ -1,32 +1,30 @@
-.btn {
-    width: 20%;
-    font-size: 20px;
-    margin-right: 1%;
-}
-
 label {
-    font-weight: 300 !important;
+    font-weight: 400;
     font-size: 20px;
+    color: #fff;
 }
 
 .form-control {
+    background: transparent !important;
     border-radius: 0;
     font-size: 25px;
-    font-weight: 300!important;
-     ::placeholder {
-        font-weight: 200!important;
-        color: #000;
-    }
-    border-bottom: 2px rgb(205, 212, 219) solid;
+    font-weight: 300;
+    color: #fff;
+    border-bottom: 2px rgb(223, 231, 238) solid;
     border-left: 2px transparent solid;
     border-top: 2px transparent solid;
     border-right: 2px transparent solid;
     margin-top: 10px;
 }
 
+.has-float-label label::after,
+.has-float-label>span::after {
+    content: none;
+}
+
 .form-control:focus {
     box-shadow: none;
-    border-bottom: 2px #8C52FF solid;
+    border-bottom: 2px #fff solid;
     border-left: 2px transparent solid;
     border-top: 2px transparent solid;
     border-right: 2px transparent solid
@@ -40,11 +38,6 @@ label {
     }
     .form-control {
         font-size: 20px;
-        font-weight: 200!important;
-         ::placeholder {
-            font-weight: 200!important;
-            color: #000;
-        }
     }
     label {
         font-size: 15px;
@@ -52,11 +45,6 @@ label {
 }
 
 @media (max-width: 400px) {
-    .btn {
-        width: 30%;
-        font-size: 20px;
-        margin-top: 1%;
-    }
     .form-control,
     select {
         font-size: 15px;

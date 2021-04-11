@@ -1,32 +1,25 @@
-.btn-submit {
-    color: #8C52FF;
-    border: 1px solid #8C52FF;
-    &:hover {
-        background-color: #8C52FF;
-        color: #fff;
-    }
-    font-size: 20px;
+.btn {
+    font-size: 25px;
+    border-radius: 15px;
 }
 
-.btn-info {
-    width: auto;
-    border: 1px solid transparent;
-    background-color: #fff;
-    color: #8C52FF;
-    font-size: 30px;
+.close {
+    color: #fff;
 }
 
-.btn-iscriviti {
-    color: #8C52FF;
-    border: 1px solid #8C52FF;
-    &:hover {
-        background-color: #8C52FF;
-        color: #fff;
-    }
-    margin-top: 20px;
-    font-size: 20px;
+.btn-card {
+    width: 100%;
 }
 
 .btn-insert {
     font-size: 25px;
+}
+
+.primary-button {
+    background-color: #BB86FC;
+    color: #fff;
+    &:hover {
+        background-color: #a56aee;
+        color: #fff;
+    }
 }
