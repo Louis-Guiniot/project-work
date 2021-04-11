@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { retreiveAllRecordsOfClassifica } from 'src/app/redux/classifica/classifica.actions';
+import { retreiveAllRecordsOfClassifica, simulaTorneo } from 'src/app/redux/classifica/classifica.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,10 @@ export class ClassificaService {
 
   classifica(){
     this.store.dispatch(retreiveAllRecordsOfClassifica())
+  }
+
+  simulazione(idTorneo: number, idUtente:number){
+    this.store.dispatch(simulaTorneo({idTorneo, idUtente}))
   }
 
 }
