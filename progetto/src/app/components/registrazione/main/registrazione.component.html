@@ -1,7 +1,7 @@
 <div class="box">
     <div class="form">
         <form [formGroup]="creaNuovoUtenteForm">
-            <div class="modal-body">
+            <div class="body">
                 <div class="header">Registrati</div>
                 <div class="row">
                     <div class="col">
@@ -90,12 +90,13 @@
                     </div>
                 </div>
 
-                <button (click)="registrati();" type="submit" class="btn btn-submit" [disabled]="creaNuovoUtenteForm.invalid">
-                        salva
-                    </button>
-                <button (click)="resetForm();" class="btn btn-outline-danger">
-                        cancella
-                    </button>
+                <button (click)="registrati();" type="submit" class="btn primary-button" [disabled]="creaNuovoUtenteForm.invalid" style="margin-right: 15px;">
+                    conferma
+                </button>
+                <button (click)="resetForm();" class="btn btn-danger">
+                    cancella
+                </button>
+
 
                 <ng-container *ngIf="erroreSign != null ">
                     <span class="msg-error">credenziali errate, riprova</span>
