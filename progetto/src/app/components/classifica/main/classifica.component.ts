@@ -19,28 +19,27 @@ export class ClassificaComponent implements OnInit {
   constructor(private classificaService: ClassificaService, private store: Store, private utenteService: UtenteService, private torneoService: MieiTorneiService) {
 
     this.classificaService.classifica()
-    this.utenteService.elencoUtenti()
-    this.torneoService.elencoTornei()
-
+    
    }
 
    utente = sessionStorage.getItem('username')
+   generata
+
+
 
    home = "/home"
 
   ngOnInit(): void {
-
     console.log("username", this.utente)
 
   }
 
+  genera(){
+    window.location.reload()
+  }
 
   get classifica():Observable<Classifica[]>{
     return this.store.pipe(select(selectClassifica))
-  }
-
-  get utenti():Observable<Utente[]>{
-    return this.store.pipe(select(selectUtente))
   }
 
 }

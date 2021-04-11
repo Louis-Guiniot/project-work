@@ -1,61 +1,80 @@
 @import "src/styles/input.scss";
 @import "src/styles/buttons.scss";
 @import "src/styles/typography.scss";
-.table-classifica {
-    width: 80%;
-    margin: auto;
-    border-collapse: collapse;
-    grid-column-end: 3;
-}
-
 .box {
     width: 100%;
     padding: 2%;
 }
 
 .wrapper {
+    padding: 1%;
     display: grid;
     width: 100%;
-    margin: 0;
-    grid-template-rows: auto;
     grid-template-columns: 50% 50%;
-    gap: 2%;
+    grid-template-rows: auto;
+    gap: 20px;
+}
+
+.header {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 .content {
     grid-column-end: 2;
 }
 
+.table-classifica {
+    grid-column-end: 3;
+}
+
+table {
+    width: 100%;
+}
+
 .mioRisultato {
     color: #fff;
-    background-color: #8C52FF;
 }
 
 .primo {
     color: #fff;
-    background-color: #e7b41a;
+    border-bottom: 2px solid #e7b41a;
 }
 
 .secondo {
     color: #fff;
-    background-color: #CECECE;
+    border-bottom: 2px solid #CECECE;
 }
 
 .terzo {
     color: #fff;
-    background-color: #cd7f32;
+    border-bottom: 2px solid #cd7f32;
 }
 
-.stacco-podio {
-    padding-top: 30px;
+.table-mioRisultato {
+    td:nth-child(even) {
+        color: #BB86FC;
+        text-align: left;
+    }
+    td:nth-child(odd) {
+        padding-left: 0;
+    }
 }
 
 thead {
-    background-color: #8C52FF;
+    padding-left: 0;
     color: #fff;
     text-transform: uppercase;
 }
 
-.btn-submit {
+.primary-button {
     margin-top: 20px;
 }
+
+a {
+    color: #BB86FC;
+}
+
+@media (max-width: 1200px) {}
