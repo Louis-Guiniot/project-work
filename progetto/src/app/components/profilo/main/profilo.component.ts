@@ -92,5 +92,4 @@ export class ProfiloComponent implements OnInit {
 
     window.location.reload()
   }
-
 }

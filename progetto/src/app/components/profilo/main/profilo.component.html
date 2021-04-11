@@ -4,11 +4,11 @@
             <div *ngIf="utente.id == idutente">
                 <form [formGroup]="editaUtenteForm" (ngSubmit)="edita()">
 
-                    <div class="header">Benevenuto <span class="text-purple"><u>{{utente.username}}</u></span></div>
+                    <div class="header">Benevenuto <span class="primary-text">{{utente.username}}</span></div>
                     <div class="text">
                         <p>In questa sezione del sito potrai visualizzare e aggiornare i tuoi dati personali</p>
                     </div>
-                    <div class="modal-body">
+                    <div class="body">
                         <div class="row">
                             <div class="col">
                                 <span class="form-group has-float-label">
@@ -65,8 +65,8 @@
 
                             <div class="col">
                                 <span class="form-group has-float-label">
-                                    <input class="form-control" type="text" formControlName="email" readonly>
-                                    <label for="floatingInput">Data di nascita - <span class="bolder">{{utente.datanascita}}</span></label>
+                                    <input class="form-control" type="text" value="{{utente.datanascita}}" readonly>
+                                    <label for="floatingInput">Data di nascita</label>
                                 </span>
                             </div>
 
@@ -106,12 +106,12 @@
                             </div> -->
                         </div>
 
-                        <button type="submit" class="btn btn-submit">
-                                salva
-                            </button>
-                        <button type="reset" class="btn btn-outline-danger">
-                                cancella
-                            </button>
+                        <button type="submit" class="btn primary-button" style="margin-right: 15px;" [disabled]="editaUtenteForm.invalid">
+                            conferma
+                        </button>
+                        <button type="reset" class="btn btn-danger">
+                            cancella
+                        </button>
 
 
                     </div>
