@@ -1,5 +1,5 @@
 .nav-item {
-    font-size: 28px;
+    font-size: 35px;
     font-weight: 300;
     padding: 5px;
     &:hover {
@@ -8,11 +8,21 @@
     }
 }
 
+.nav-link {
+    padding: 0;
+    color: rgb(238, 238, 238);
+}
+
 .navbar {
-    background-color: #8C52FF;
-    border-bottom: 1px solid #000;
+    background-color: #121212;
 }
 
 .active {
     font-weight: 400;
+    color: #BB86FC;
+}
+
+.nome-progetto {
+    font-size: 40px;
+    color: rgb(238, 238, 238);
 }

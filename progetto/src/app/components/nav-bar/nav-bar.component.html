@@ -1,22 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="float-left-nav" href="home"><img src="./assets/TT-logo.png" alt=""></a>
+        <span class="nav-item nome-progetto">TheT</span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height:auto;">
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="homeUrl" [routerLinkActive]="['active']">Home</a>
+                    <a class="nav-link" [routerLink]="homeUrl" [routerLinkActive]="['active']"><i class="bi bi-house-door"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="mieiTorneiUrl" [routerLinkActive]="['active']">I miei tornei</a>
+                    <a class="nav-link" [routerLink]="mieiTorneiUrl" [routerLinkActive]="['active']"><i class="bi bi-wrench"></i>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="torneiUrl" [routerLinkActive]="['active']">Elenco tornei online</a>
+                    <a class="nav-link" [routerLink]="torneiUrl" [routerLinkActive]="['active']"><i class="bi bi-globe"></i>
+                    </a>
                 </li>
                 <li class="nav-item" *ngIf="loggato()">
-                    <a class="nav-link" [routerLink]="profiloUrl" [routerLinkActive]="['active']">Profilo</a>
+                    <a class="nav-link" [routerLink]="profiloUrl" [routerLinkActive]="['active']"><i class="bi bi-person-circle"></i></a>
                 </li>
                 <li class="nav-item" *ngIf="!loggato()">
                     <a class="nav-link" [routerLink]="signUpUrl" [routerLinkActive]="['active']">Registrati</a>
@@ -25,7 +27,7 @@
                     <a class="nav-link" [routerLink]="loginUrl" [routerLinkActive]="['active']">Login</a>
                 </li>
                 <li class="nav-item" *ngIf="loggato()">
-                    <a class="nav-link" (click)="logout()">Logout</a>
+                    <a class="nav-link" (click)="logout()"><i class="bi bi-arrow-right-circle"></i></a>
                 </li>
             </ul>
         </div>
