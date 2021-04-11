@@ -18,20 +18,20 @@ export class IscrizioneEffects {
         idTorneo: number,
         idUtente: number
     ): Observable<Response> {
-        return this.http.retrievePostCall<Response>('torneo/iscriviti', {
+        return this.http.retrievePostCall<Response>('iscrizione/iscriviti', {
             idTorneo,
             idUtente
         });
     }
 
-    createIscrizione$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    creaIscrizione$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(creaIscrizione),
         switchMap((action) => this.creaIscrizione(
             action.idTorneo,
             action.idUtente
         ).pipe(
             map((response) => initIscrizioni({ response }))
-            , tap(() => this.router.navigateByUrl('/classifica'))
+            , tap(() => this.router.navigateByUrl('/tornei'))
         ))
     ));
 }
