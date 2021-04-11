@@ -15,4 +15,6 @@ export interface Torneo {
     idCreatore: number
     stato: string
     descrizione: string
+    dataCreazione: string
+    dataModifica: string
 }
