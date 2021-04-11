@@ -16,7 +16,6 @@ props<{
     premioPrimo: string,
     premioSecondo: string,
     premioTerzo: string,
-    stato: string,
     descrizione: string
 }>())
 export const createTorneo = createAction('[Torneo] creazione Torneo', props<{
@@ -31,7 +30,6 @@ export const createTorneo = createAction('[Torneo] creazione Torneo', props<{
     premioSecondo: string,
     premioTerzo: string,
     idCreatore: number,
-    stato: string,
     descrizione: string
 }>());
 export const retreiveAllTornei = createAction('[Torneo] Torneo');
