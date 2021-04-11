@@ -1,6 +1,7 @@
 @import "src/styles/input.scss";
 @import "src/styles/buttons.scss";
 @import "src/styles/typography.scss";
+@import "src/styles/modal.scss";
 .footer {
     position: fixed;
     left: 0;
@@ -37,21 +38,49 @@
     margin: 0;
     grid-template-rows: auto auto;
     grid-template-columns: 100%;
-    gap: 2%;
+    gap: 25px;
 }
 
 .content {
     grid-row-end: 2;
 }
 
-thead {
-    background-color: #8C52FF;
-    color: #fff;
-    font-weight: 300;
-    text-transform: uppercase;
+.grid-players {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 20px;
+    padding: 15px;
 }
 
-table {
-    font-size: 25px;
-    font-weight: 200;
+.card {
+    border: 1px solid #fff;
+    background-color: #1f1b24;
+    &:hover {
+        cursor: pointer;
+        #detail-span {
+            text-decoration: underline;
+        }
+    }
+}
+
+.detail-span {
+    padding: 1px;
+    font-size: 35px;
+    font-weight: 500;
+    width: 100%;
+}
+
+.table-globale {
+    font-size: 35px;
+    border-top: none;
+    width: 100%;
+    td:nth-child(even) {
+        color: #8C52FF;
+        font-weight: 300;
+        text-align: right;
+    }
+    td:nth-child(odd) {
+        font-weight: 300;
+        color: #fff;
+    }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ClassificaGlobale } from 'src/app/core/model/ClassificaGlobale';
@@ -18,11 +19,22 @@ export class HomeComponent implements OnInit {
   constructor(
     private classificaGlobaleService: ClassificaGlobaleService, 
     private utenteService: UtenteService,
-    private store: Store) { 
+    private store: Store, 
+    private modalService: NgbModal) { 
 
     this.classificaGlobaleService.classificaGlobale()
     this.utenteService.elencoUtenti();
 
+  }
+
+  idPlayerPassato : number
+  usernameUtentePassato : string
+  openPlayerDetailModal(content:string, idPlayer:number, utenteUsername: string){
+    this.modalService.open(content, {centered: true})
+    this.idPlayerPassato = idPlayer
+    this.usernameUtentePassato = utenteUsername
+
+    console.log("aperto modale dettaglio globale player : "+ this.idPlayerPassato, this.usernameUtentePassato)
   }
 
   ngOnInit(): void {

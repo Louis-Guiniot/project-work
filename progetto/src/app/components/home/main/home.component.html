@@ -5,33 +5,74 @@
                 Home
             </div>
             <div class="text">
-                Benvenuto su <span class="text-purple">TheTournament</span> ! Questa piattaforma ti permettera' di iscriverti e creare tornei video-ludici online. <br> Potrai gestire infatti i tuoi tornei qual'ora ne avessi: modificando creando ed eliminando.
-                <br> Inoltre potrai iscriverti a qualunque torneo disponibile, simulando la vera partecipazione ad esso. <br>
+                Benvenuto su <span class="text-purple">TheTournament</span> ! <br> Questa piattaforma ti permettera' di <span class="primary-text">iscriverti</span> e <span class="primary-text">gestire</span> tornei video-ludici online.
+                <br> Inoltre potrai <span class="primary-text">iscriverti</span> a qualunque torneo disponibile, <span class="primary-text">simulando</span> la partecipazione ad esso. <br>
             </div>
         </div>
-    </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>idGiocatore</th>
-                <th>punteggio totale</th>
-                <th>punteggio medio per torneo</th>
-                <th>vittorie</th>
-                <th>tornei giocati</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let class of classificaGlobale | async">
+        <div class="grid-players">
+            <ng-container *ngFor="let class of classificaGlobale | async">
                 <ng-container *ngFor="let utente of utenti | async">
-                    <td *ngIf="class.idPlayer == utente.id">{{utente.username}}</td>
-                </ng-container>
+                    <ng-container *ngIf="class.idPlayer == utente.id">
+                        <div class="card" (click)="openPlayerDetailModal(dettaglioGlobale, utente.id, utente.username)">
+                            <div class="card-body">
+                                <span class="detail-span primary-text">
+                                    {{utente.username}}
+                                </span>
+                                <h3 class="text">{{class.partiteGiocate}} partite giocate</h3>
+                                <h3 class="text">{{class.punteggioTotale}} punti fatti</h3>
+                                <h3 class="text">{{class.vittorie}} vittorie</h3>
+                            </div>
 
-                <td>{{class.punteggioTotale}}</td>
-                <td>{{class.mediaPunteggio}}</td>
-                <td>{{class.vittorie}}</td>
-                <td>{{class.torneiGiocati}}</td>
-            </tr>
-        </tbody>
-    </table>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
 </div>
+
+<ng-template #dettaglioGlobale let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Dettaglio globale</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" id="span-close">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngFor="let class of classificaGlobale | async">
+            <ng-container *ngIf="class.idPlayer == idPlayerPassato">
+                <table class="table-globale">
+                    <tr>
+                        <td colspan="2"><span class="bolder">{{usernameUtentePassato}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>Punteggio totale</td>
+                        <td><button class="btn primary-button">{{class.punteggioTotale}}</button></td>
+                    </tr>
+                    <tr>
+                        <td>Media punti x torneo</td>
+                        <td><button class="btn primary-button">{{class.mediaPunteggio}}</button></td>
+                    </tr>
+                    <tr>
+                        <td>Partite giocate</td>
+                        <td><button class="btn primary-button">{{class.partiteGiocate}}</button></td>
+                    </tr>
+                    <tr>
+                        <td>Tornei giocati</td>
+                        <td><button class="btn primary-button">{{class.torneiGiocati}}</button></td>
+                    </tr>
+                    <tr>
+                        <td>Vittorie</td>
+                        <td><button class="btn primary-button">{{class.vittorie}}</button></td>
+                    </tr>
+                </table>
+            </ng-container>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.dismiss('Close click')" ngbAutofocus>
+            chiudi
+        </button>
+    </div>
+</ng-template>
