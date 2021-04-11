@@ -23,7 +23,6 @@ export class MieiTorneiService {
         premioSecondo: string,
         premioTerzo: string,
         idCreatore: number,
-        stato: string,
         descrizione: string
   ){
     this.store.dispatch(createTorneo({ 
@@ -38,7 +37,6 @@ export class MieiTorneiService {
       premioSecondo,
       premioTerzo,
       idCreatore,
-      stato,
       descrizione
     }))
   }
@@ -59,7 +57,6 @@ export class MieiTorneiService {
     premioPrimo: string,
     premioSecondo: string,
     premioTerzo: string,
-    stato: string,
     descrizione: string
 
   ){
@@ -75,7 +72,6 @@ export class MieiTorneiService {
       premioPrimo,
       premioSecondo,
       premioTerzo,
-      stato,
       descrizione
     }))
   }
