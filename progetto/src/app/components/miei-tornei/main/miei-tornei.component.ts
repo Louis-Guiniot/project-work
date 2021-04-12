@@ -71,8 +71,18 @@ export class MieiTorneiComponent implements OnInit {
   editaTorneoForm: FormGroup
 
   idCreatore = Number(sessionStorage.getItem('id'))
+  numeroTornei = 0
 
   ngOnInit(): void {
+
+    this.store.pipe(select(selectTorneo)).subscribe((tornei) => {
+      tornei.forEach(torneo => {
+        if(torneo.idCreatore == this.idCreatore){
+          this.numeroTornei = this.numeroTornei + 1
+          console.log("trovato")
+        }
+      })
+    })
 
     this.creaNuovoTorneoForm = this.fb.group({
       nome: ['', Validators.required],

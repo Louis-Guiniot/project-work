@@ -2,10 +2,21 @@
     <div class="wrapper">
         <div class="text">
             <p>
-                Questa è la pagina di <span class="primary-text">menagement</span> dei tuoi tornei. <br> Qui potrai creare, modificare ed eliminare i tuoi tornei con un semplice <span class="primary-text">click</span>.</p>
+                Questa è la pagina di <span class="primary-text">menagement</span> dei tuoi tornei. <br> Qui potrai creare, modificare ed eliminare i tuoi tornei con un semplice
+                <span class="primary-text">click</span>.
+
+                <br>
+
+                <ng-container *ngIf="numeroTornei == 0">
+                    Oh no, non hai mai creato un torneo fino ad ora. Che aspetti ? <br> Clicca su crea e sbizzarrisciti. <br>
+                </ng-container>
+
+                <!-- Tornei creati : <button class="btn primary-button">{{numeroTornei}}</button> -->
+            </p>
         </div>
         <button class="btn primary-button" (click)="openInsertModal(insertFormTorneo)">crea</button>
     </div>
+
     <div class="grid-cards">
         <ng-container class="item" *ngFor="let torneo of mieiTornei| async">
             <ng-container *ngIf="torneo.idCreatore == idCreatore">
@@ -17,7 +28,6 @@
                     </div>
                 </div>
             </ng-container>
-
         </ng-container>
     </div>
 </div>
@@ -28,7 +38,7 @@
     <div class="modal-header">
         <h4 class="modal-title">Creazione nuovo torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
+            <i class="bi bi-x-circle-fill"></i>
         </button>
     </div>
     <form [formGroup]="creaNuovoTorneoForm" (ngSubmit)="crea()">
@@ -158,7 +168,7 @@
     <div class="modal-header">
         <h4 class="modal-title">Modifica torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true" id="span-close">&times;</span>
+            <i class="bi bi-x-circle-fill"></i>        
         </button>
     </div>
     <form [formGroup]="editaTorneoForm" (ngSubmit)="edita()">
@@ -294,7 +304,7 @@
     <div class="modal-header">
         <h4 class="modal-title">Elimina torneo</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
+            <i class="bi bi-x-circle-fill"></i>
         </button>
     </div>
     <form (ngSubmit)="elimina()">
