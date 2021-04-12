@@ -45,7 +45,7 @@ export class UtenteEffects {
         username:string,
         password:string,
         email:string,
-        datanascita:string
+        genere:string
     ): Observable<Response> {
         return this.http.retrievePostCall<Response>('utente/aggiornaUtente', {
             id,
@@ -54,7 +54,7 @@ export class UtenteEffects {
             username,
             password,
             email,
-            datanascita
+            genere
         });
     }
 
@@ -81,7 +81,7 @@ export class UtenteEffects {
             action.username,
             action.password,
             action.email,
-            action.datanascita,
+            action.genere,
             ).pipe(
                 map((response) => initUtenti({ response }))
                 , tap(() => this.router.navigateByUrl('/profilo'))
@@ -142,6 +142,7 @@ export class UtenteEffects {
                     sessionStorage.removeItem('error')
                     sessionStorage.setItem('username',action.username)
                     sessionStorage.setItem('id',response.result.id)
+                    sessionStorage.setItem('sesso', response.result.genere)
                     return loginAdminUserSuccess({admin: response.result})
                 }
               })

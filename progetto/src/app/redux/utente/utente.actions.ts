@@ -14,7 +14,7 @@ props<{
     username:string,
     password:string,
     email:string,
-    datanascita:string
+    genere:string,
 }>())
 export const createUtente = createAction('[Utente] creazione Utente', props<{
     nome: string,

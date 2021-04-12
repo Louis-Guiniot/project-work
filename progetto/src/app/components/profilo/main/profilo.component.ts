@@ -19,6 +19,8 @@ export class ProfiloComponent implements OnInit {
   }
 
   idutente = Number(sessionStorage.getItem('id'))
+  usernameUtente = (sessionStorage.getItem('username'))
+  sesso = (sessionStorage.getItem('sesso'))
 
   editaUtenteForm: FormGroup
 
@@ -85,10 +87,13 @@ export class ProfiloComponent implements OnInit {
       this.editaUtenteForm.value.nome,
       this.editaUtenteForm.value.cognome,
       this.editaUtenteForm.value.username,
-      this.editaUtenteForm.value.email,
       this.editaUtenteForm.value.password,
+      this.editaUtenteForm.value.email,
+      this.editaUtenteForm.value.genere,
       this.datanascita
     )
+
+    sessionStorage.setItem('sesso',this.editaUtenteForm.value.genere)
 
     window.location.reload()
   }

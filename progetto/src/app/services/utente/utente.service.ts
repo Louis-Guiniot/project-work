@@ -18,6 +18,7 @@ export class UtenteService {
     username:string,
     password:string,
     email:string,
+    genere:string,
     datanascita:string,
   ){
     this.store.dispatch(updateUtente({
@@ -27,7 +28,7 @@ export class UtenteService {
             username,
             password,
             email,
-            datanascita
+            genere
     }))
   }
 
