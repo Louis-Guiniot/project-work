@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { Classifica } from 'src/app/core/model/Classifica';
+import { ClassificaGlobale } from 'src/app/core/model/ClassificaGlobale';
 import { HttpCommunicationsService } from 'src/app/core/model/http/http-communications.service';
 import { Torneo } from 'src/app/core/model/Torneo.interface';
 import { Utente } from 'src/app/core/model/Utente.interface';
-import { selectClassifica } from 'src/app/redux/classifica';
+import { selectClassificaGlobale } from 'src/app/redux/classificaGlobale';
 import { selectTorneo } from 'src/app/redux/miei-tornei';
-import { getCurrentUtente, selectUtente } from 'src/app/redux/utente';
+import { selectUtente } from 'src/app/redux/utente';
 import { ClassificaService } from 'src/app/services/classifica/classifica.service';
+import { ClassificaGlobaleService } from 'src/app/services/classificaGlobale/classifica-globale.service';
 import { IscrizioniService } from 'src/app/services/iscrizioni/iscrizioni.service';
 import { MieiTorneiService } from 'src/app/services/miei-tornei/miei-tornei.service';
 import { UtenteService } from 'src/app/services/utente/utente.service';
-import { convertToObject } from 'typescript';
 
 @Component({
   selector: 'app-tornei',
@@ -32,16 +31,14 @@ export class TorneiComponent implements OnInit {
     private mieiTorneiService: MieiTorneiService,
     private iscrizioniService: IscrizioniService,
     private utentiService: UtenteService,
-    private classificaService: ClassificaService,
-    private modalService: NgbModal, 
-    private config: NgbModalConfig,
+    private classificaGlobaleService: ClassificaGlobaleService,
+    private classificaService : ClassificaService,
+    private modalService: NgbModal,
     private http: HttpCommunicationsService) { 
 
     this.utentiService.elencoUtenti()
     this.mieiTorneiService.elencoTornei()
-
-    this.config.backdrop = 'static'
-    this.config.keyboard = false
+    this.classificaGlobaleService.classificaGlobale()
 
   }
   
@@ -69,6 +66,15 @@ export class TorneiComponent implements OnInit {
     this.idTorneoDaIscrivere = idTorneoIscrizione
   }
 
+  idPlayerPassato : number
+  usernameUtentePassato : string
+  openPlayerDetailModal(content:string, idPlayer:number, utenteUsername: string){
+    this.modalService.open(content, {centered: true})
+    this.idPlayerPassato = idPlayer
+    this.usernameUtentePassato = utenteUsername
+
+    console.log("aperto modale dettaglio globale player : "+ this.idPlayerPassato, this.usernameUtentePassato)
+  }
   
 
   ngOnInit(): void {
@@ -81,6 +87,10 @@ export class TorneiComponent implements OnInit {
 
   get utenti():Observable<Utente[]>{
     return this.store.pipe(select(selectUtente))
+  }
+
+  get classificaGlobale():Observable<ClassificaGlobale[]> {
+    return this.store.pipe(select(selectClassificaGlobale))
   }
 
   iscritto = false

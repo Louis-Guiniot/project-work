@@ -20,13 +20,13 @@
                             <p class="text">
                                 Iscrizioni al momento {{torneo.iscrizioni}} <br> Posti liberi <span [ngClass]="{'posti-full':torneo.postiLiberi == 0}">{{torneo.postiLiberi}}</span> <br> Stato {{torneo.stato | uppercase}} <br>
                                 <span *ngFor="let utente of utenti | async">
-                                        <span *ngIf="utente.id == torneo.idCreatore" class="text">
+                                        <span *ngIf="utente.id == torneo.idCreatore" class="text create-by" (click)="openPlayerDetailModal(dettaglioGlobale, utente.id, utente.username)">
                                             Creato da 
                                             <span class="primary-text" *ngIf="torneo.postiLiberi != 0">
-                                                {{utente.username}}
+                                                {{utente.username | uppercase}}
                                             </span>
                                 <span class="text-danger" *ngIf="torneo.postiLiberi == 0">
-                                                {{utente.username}}
+                                                {{utente.username | uppercase}}
                                             </span>
                                 </span>
                                 </span>
@@ -36,10 +36,10 @@
 
                         <div class="card-button">
                             <button class="btn btn-card primary-button" *ngIf="torneo.postiLiberi != 0" (click)="openIscrivitiModal(iscrivitiModal, torneo.id)">
-                                    iscriviti
+                                    gioca !
                                 </button>
                             <button class="btn btn-card btn-danger" *ngIf="torneo.postiLiberi == 0" [disabled]="torneo.postiLiberi == 0">
-                                    iscriviti
+                                    gioca !
                                 </button>
                         </div>
 
@@ -55,7 +55,8 @@
         <div class="modal-header ">
             <h4 class="modal-title ">Dettaglio torneo - {{nomeTorneoDaVedere}}</h4>
             <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
-                <span aria-hidden="true ">&times;</span>
+                <i class="bi bi-x-circle-fill"></i>        
+
             </button>
         </div>
         <div *ngFor="let torneo of mieiTornei | async">
@@ -78,25 +79,25 @@
                             <div class="row">
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                            <input type="text" readonly class="form-control" placeholder="{{torneo.nome}}">
+                                            <input type="text" disabled class="form-control" placeholder="{{torneo.nome}}">
                                             <label for="floatingInput">Nome torneo - <span class="bolder">{{torneo.nome}}</span></label>
                                     </span>
                                 </div>
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                            <input type="text" readonly class="form-control" placeholder="{{torneo.gioco}}">
+                                            <input type="text" disabled class="form-control" placeholder="{{torneo.gioco}}">
                                             <label for="floatingPassword">Gioco topic - <span class="bolder">{{torneo.gioco}}</span></label>
                                     </span>
                                 </div>
                             </div>
 
                             <span class="form-group has-float-label">
-                                <input type="text" readonly class="form-control" placeholder="{{torneo.piattaforma}}">
+                                <input type="text" disabled class="form-control" placeholder="{{torneo.piattaforma}}" disabled>
                                 <label for="floatingInput">Piattaforma - <span class="bolder">{{torneo.piattaforma}}</span></label>
                             </span>
 
                             <span class="form-group has-float-label">
-                                <textarea type="text" readonly class="form-control" value="{{torneo.descrizione}}"></textarea>
+                                <textarea type="text" disabled class="form-control" value="{{torneo.descrizione}}"></textarea>
                                 <label for="floatingPassword">Descrizione</label>
                             </span>
                         </div>
@@ -105,14 +106,14 @@
                             <div class="row">
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                        <input type="text" readonly class="form-control" placeholder="{{torneo.partite}}">
+                                        <input type="text" disabled class="form-control" placeholder="{{torneo.partite}}">
                                         <label for="floatingPassword">N° partite - <span class="bolder">{{torneo.partite}}</span></label>
                                     </span>
                                 </div>
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                            <input type="text" readonly class="form-control" placeholder="{{torneo.quota}}">
-                                            <label for="floatingInput">Quota - <span class="bolder">{{torneo.quota}}</span></label>
+                                            <input type="text" disabled class="form-control" placeholder="{{torneo.quota}}">
+                                            <label for="floatingInput">Quota : <span class="bolder">{{torneo.quota}}</span></label>
                                     </span>
                                 </div>
                             </div>
@@ -120,14 +121,14 @@
                             <div class="row">
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                        <input type="text" readonly class="form-control" placeholder="{{torneo.capienza}}">
-                                        <label for="floatingInput">Capienza max - <span class="bolder">{{torneo.capienza}}</span></label>
+                                        <input type="text" disabled class="form-control" placeholder="{{torneo.capienza}}">
+                                        <label for="floatingInput">Capienza max : <span class="bolder">{{torneo.capienza}}</span></label>
                                     </span>
                                 </div>
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                        <input type="text" readonly class="form-control" placeholder="{{torneo.capienzaMinima}}">
-                                        <label for="floatingPassword">Capienza min- <span class="bolder">{{torneo.capienzaMinima}}</span></label>
+                                        <input type="text" disabled class="form-control" placeholder="{{torneo.capienzaMinima}}">
+                                        <label for="floatingPassword">Capienza min : <span class="bolder">{{torneo.capienzaMinima}}</span></label>
                                     </span>
                                 </div>
                             </div>
@@ -137,19 +138,19 @@
                             <div class="row">
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                        <input type="text" readonly class="form-control" placeholder="{{torneo.premioPrimo}}">
+                                        <input type="text" disabled class="form-control" placeholder="{{torneo.premioPrimo}}">
                                         <label for="floatingInput">1° premio - <span class="bolder">{{torneo.premioPrimo}}</span></label>
                                     </span>
                                 </div>
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                        <input type="text" readonly class="form-control" placeholder="{{torneo.premioSecondo}}">
+                                        <input type="text" disabled class="form-control" placeholder="{{torneo.premioSecondo}}">
                                         <label for="floatingInput">2° premio - <span class="bolder">{{torneo.premioSecondo}}</span></label>
                                     </span>
                                 </div>
                                 <div class="col">
                                     <span class="form-group has-float-label">
-                                        <input type="text" readonly class="form-control" placeholder="{{torneo.premioTerzo}}">
+                                        <input type="text" disabled class="form-control" placeholder="{{torneo.premioTerzo}}">
                                         <label for="floatingPassword">3° premio - <span class="bolder">{{torneo.premioTerzo}}</span></label>
                                     </span>
                                 </div>
@@ -171,7 +172,8 @@
         <div class="modal-header ">
             <h4 class="modal-title ">Iscrizione torneo</h4>
             <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
-                <span aria-hidden="true ">&times;</span>
+                <i class="bi bi-x-circle-fill"></i>        
+
             </button>
         </div>
         <div class="modal-body">
@@ -220,5 +222,51 @@
                 </button>
             </ng-container>
 
+        </div>
+    </ng-template>
+
+    <ng-template #dettaglioGlobale let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">Dettaglio globale</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" id="span-close">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div *ngFor="let class of classificaGlobale | async">
+                <ng-container *ngIf="class.idPlayer == idPlayerPassato">
+                    <table class="table-globale">
+                        <tr>
+                            <td colspan="2"><span class="bolder">{{usernameUtentePassato}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Punteggio totale</td>
+                            <td><button class="btn primary-button">{{class.punteggioTotale}}</button></td>
+                        </tr>
+                        <tr>
+                            <td>Media punti x torneo</td>
+                            <td><button class="btn primary-button">{{class.mediaPunteggio}}</button></td>
+                        </tr>
+                        <tr>
+                            <td>Partite giocate</td>
+                            <td><button class="btn primary-button">{{class.partiteGiocate}}</button></td>
+                        </tr>
+                        <tr>
+                            <td>Tornei giocati</td>
+                            <td><button class="btn primary-button">{{class.torneiGiocati}}</button></td>
+                        </tr>
+                        <tr>
+                            <td>Vittorie</td>
+                            <td><button class="btn primary-button">{{class.vittorie}}</button></td>
+                        </tr>
+                    </table>
+                </ng-container>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.dismiss('Close click')" ngbAutofocus>
+                chiudi
+            </button>
         </div>
     </ng-template>
