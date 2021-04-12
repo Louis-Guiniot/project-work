@@ -3,6 +3,31 @@
     padding: 2%;
 }
 
-.form {
-    width: 100%;
+.box-log {
+    width: 80%;
+    padding: 8%;
+    margin: auto;
+}
+
+.form-profile {
+    margin: auto;
+    width: 90%;
+    button {
+        margin-top: 40px;
+    }
+}
+
+.error {
+    margin-top: 15px;
+}
+
+.msg-error {
+    color: red;
+    font-size: 25px;
+}
+
+@media (max-width: 1400px) {
+    .form {
+        width: 90%;
+    }
 }
