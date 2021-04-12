@@ -1,5 +1,6 @@
-.nav-item {
-    font-size: 35px;
+.nav-link {
+    color: rgb(238, 238, 238);
+    font-size: 40px;
     font-weight: 300;
     padding: 5px;
     &:hover {
@@ -8,13 +9,13 @@
     }
 }
 
-.nav-link {
-    padding: 0;
-    color: rgb(238, 238, 238);
-}
-
 .navbar {
     background-color: #121212;
+}
+
+.navbar-toggler {
+    color: #fff;
+    font-size: 40px;
 }
 
 .active {
