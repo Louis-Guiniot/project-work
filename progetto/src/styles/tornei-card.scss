@@ -36,9 +36,11 @@
     border: 1px solid rgba(233, 233, 233, 0.555);
     border-radius: 10px;
     &:hover {
-        cursor: pointer;
-        #detail-span {
-            text-decoration: underline;
+        .detail-span {
+            cursor: pointer;
+        }
+        .create-by {
+            cursor: pointer;
         }
     }
 }
