@@ -5,7 +5,7 @@
                 Home
             </div>
             <div class="text">
-                Benvenuto su <span class="text-purple">TheTournament</span> ! <br> Questa piattaforma ti permettera' di <span class="primary-text">iscriverti</span> e <span class="primary-text">gestire</span> tornei video-ludici online.
+                {{sesso === 'femmina' ? 'Benvenuta' : 'Benvenuto'}}<span class="text-purple">TheTournament</span> ! <br> Questa piattaforma ti permettera' di <span class="primary-text">partecipare</span> a tornei video-ludici online e <span class="primary-text">gestirli</span>                .
                 <br> Inoltre potrai <span class="primary-text">iscriverti</span> a qualunque torneo disponibile, <span class="primary-text">simulando</span> la partecipazione ad esso. <br>
             </div>
         </div>
@@ -16,7 +16,7 @@
                         <div class="card" (click)="openPlayerDetailModal(dettaglioGlobale, utente.id, utente.username)">
                             <div class="card-body">
                                 <span class="detail-span primary-text">
-                                    {{utente.username}}
+                                    {{utente.username| uppercase}}
                                 </span>
                                 <h3 class="text">{{class.partiteGiocate}} partite giocate</h3>
                                 <h3 class="text">{{class.punteggioTotale}} punti fatti</h3>

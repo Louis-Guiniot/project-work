@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
 
   }
 
+  sesso = sessionStorage.getItem('sesso')
+
   idPlayerPassato : number
   usernameUtentePassato : string
   openPlayerDetailModal(content:string, idPlayer:number, utenteUsername: string){
