@@ -14,26 +14,32 @@
     padding: 15px;
 }
 
-#tab {
+.nav-link {
     font-size: 30px;
     color: #BB86FC;
-    font-weight: 400;
+    font-weight: 500;
     text-transform: uppercase;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #fff;
+    background-color: #BB86FC;
 }
 
 .modal-body {
     border-radius: 0;
-    background-color: #1f1b24;
+    background-color: #121212;
 }
 
 .modal-footer {
-    background-color: #1f1b24;
+    background-color: #121212;
     border-radius: 0;
 }
 
 .modal-header {
     border-radius: 0;
-    background-color: #1f1b24;
+    background-color: #121212;
     text-transform: uppercase;
 }
 
@@ -43,8 +49,10 @@
     color: #fff;
 }
 
-.close {
-    box-shadow: none;
+.close:hover {
+    .bi {
+        color: #fff;
+    }
 }
 
 .modal-body label {
