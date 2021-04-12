@@ -20,6 +20,17 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isToggle
+  
+  openMenu(){
+    this.isToggle = false
+    
+  }
+
+  closeMenu(){
+    this.isToggle = true
+  }
+
 
   loggato(){
     //se getItem username non c'é non mostro logout se no si
@@ -32,6 +43,7 @@ export class NavBarComponent implements OnInit {
     sessionStorage.removeItem("id")
     sessionStorage.removeItem("error")
     sessionStorage.removeItem("errorSignUp")
+    sessionStorage.removeItem("sesso")
 
     this.router.navigateByUrl("/login")
   }
