@@ -1,8 +1,8 @@
-<div class="box">
+<div class="box-log">
     <div class="form">
         <form [formGroup]="creaNuovoUtenteForm">
             <div class="body">
-                <div class="header">Registrati</div>
+
                 <div class="row">
                     <div class="col">
                         <span class="form-group has-float-label">
@@ -99,7 +99,10 @@
 
 
                 <ng-container *ngIf="erroreSign != null ">
-                    <span class="msg-error">credenziali errate, riprova</span>
+                    <div class="error">
+                        <span class="msg-error">username e/o email  gia' presenti, riprova</span>
+                    </div>
+
                 </ng-container>
 
             </div>
