@@ -40,6 +40,21 @@
     }
 }
 
+.table-globale {
+    font-size: 35px;
+    border-top: none;
+    width: 100%;
+    td:nth-child(even) {
+        color: #8C52FF;
+        font-weight: 300;
+        text-align: right;
+    }
+    td:nth-child(odd) {
+        font-weight: 300;
+        color: #fff;
+    }
+}
+
 .form-control:read-only {
     background-color: transparent;
     text-decoration: none;
