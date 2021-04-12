@@ -1,13 +1,13 @@
 label {
     font-weight: 400;
-    font-size: 20px;
+    font-size: 27px;
     color: #fff;
 }
 
 .form-control {
     background: transparent !important;
     border-radius: 0;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 300;
     color: #fff;
     border-bottom: 2px rgb(223, 231, 238) solid;
@@ -15,11 +15,14 @@ label {
     border-top: 2px transparent solid;
     border-right: 2px transparent solid;
     margin-top: 10px;
+     :disabled {
+        color: #fff;
+    }
 }
 
 .has-float-label label::after,
 .has-float-label>span::after {
-    content: none;
+    content: normal;
 }
 
 .form-control:focus {
