@@ -1,13 +1,14 @@
 <div class="box">
-    <div class="form">
+
+    <div class="header">Profilo</div>
+    <div class="text">
+        <p>{{sesso === 'femmina' ? 'Benvenuta' : 'Benvenuto'}} <span class="primary-text">{{usernameUtente}}</span>, in questa sezione del sito potrai visualizzare e modificare i tuoi dati personali.</p>
+    </div>
+    <div class="form-profile">
         <div *ngFor="let utente of utenti | async">
             <div *ngIf="utente.id == idutente">
                 <form [formGroup]="editaUtenteForm" (ngSubmit)="edita()">
 
-                    <div class="header">Benevenuto <span class="primary-text">{{utente.username}}</span></div>
-                    <div class="text">
-                        <p>In questa sezione del sito potrai visualizzare e aggiornare i tuoi dati personali</p>
-                    </div>
                     <div class="body">
                         <div class="row">
                             <div class="col">
@@ -106,7 +107,7 @@
                             </div> -->
                         </div>
 
-                        <button type="submit" class="btn primary-button" style="margin-right: 15px;" [disabled]="editaUtenteForm.invalid">
+                        <button type="submit" class="btn primary-button" style="margin-right: 15px;">
                             conferma
                         </button>
                         <button type="reset" class="btn btn-danger">
