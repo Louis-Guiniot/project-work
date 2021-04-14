@@ -23,3 +23,11 @@
         color: #fff;
     }
 }
+
+.contrast-button {
+    background-color: #1f1b24;
+    color: #fff;
+    &:hover {
+        cursor: default;
+    }
+}
