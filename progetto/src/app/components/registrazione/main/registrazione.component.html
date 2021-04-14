@@ -5,41 +5,36 @@
 
                 <div class="row">
                     <div class="col">
-                        <span class="form-group has-float-label">
-                                <input type="text" class="form-control" placeholder="inserisci il tuo nome"
+                        <span class="form-group">
+                                <input type="text" class="form-control" placeholder="inserisci nome"
                                     formControlName="nome">
-                                <label for="floatingInput">Nome</label>
                             </span>
                     </div>
                     <div class="col">
-                        <span class="form-group has-float-label">
-                                <input type="text" class="form-control" placeholder="inserisci il tuo cognome"
+                        <span class="form-group">
+                                <input type="text" class="form-control" placeholder="inserisci cognome"
                                     formControlName="cognome">
-                                <label for="floatingPassword">Cognome</label>
                             </span>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <span class="form-group has-float-label">
-                                <input type="text" class="form-control" placeholder="inserisci il tuo username"
+                        <span class="form-group">
+                                <input type="text" class="form-control" placeholder="inserisci username"
                                     formControlName="username">
-                                <label for="floatingInput">Username</label>
                             </span>
                     </div>
                     <div class="col">
-                        <span class="form-group has-float-label">
-                                <input type="password" class="form-control" placeholder="inserisci la tua password"
+                        <span class="form-group">
+                                <input type="password" class="form-control" placeholder="inserisci password"
                                     formControlName="password">
-                                <label for="floatingPassword">Password</label>
                             </span>
                     </div>
                 </div>
 
-                <span class="form-group has-float-label">
-                        <input class="form-control" type="text" placeholder="inserisci la tua mail" formControlName="email">
-                        <label for="floatingInput">Email</label>
+                <span class="form-group">
+                        <input class="form-control" type="text" placeholder="inserisci mail" formControlName="email">
                     </span>
 
 
@@ -90,13 +85,14 @@
                     </div>
                 </div>
 
-                <button (click)="registrati();" type="submit" class="btn primary-button" [disabled]="creaNuovoUtenteForm.invalid" style="margin-right: 15px;">
-                    conferma
-                </button>
-                <button (click)="resetForm();" class="btn btn-danger">
-                    cancella
-                </button>
-
+                <div class="buttons">
+                    <button (click)="registrati();" type="submit" class="btn primary-button" [disabled]="creaNuovoUtenteForm.invalid" style="margin-right: 15px;">
+                        conferma
+                    </button>
+                    <button (click)="resetForm();" class="btn btn-danger">
+                        cancella
+                    </button>
+                </div>
 
                 <ng-container *ngIf="erroreSign != null ">
                     <div class="error">

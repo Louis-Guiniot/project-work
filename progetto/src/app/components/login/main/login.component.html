@@ -4,26 +4,28 @@
         <form [formGroup]="loginUtenteForm">
             <div class="body">
 
-                <span class="form-group has-float-label">
-                            <input type="text" class="form-control" placeholder="inserisci username" formControlName="username">
-                            <label for="floatingInput">Username</label>
-                        </span>
 
-                <span class="form-group has-float-label">
+                <div class="row">
+                    <div class="col">
+                        <span class="form-group">
+                            <input type="text" class="form-control" placeholder="inserisci username" formControlName="username" autocomplete="off">
+                        </span>
+                    </div>
+                    <div class="col">
+                        <span class="form-group">
                             <input type="password" class="form-control" placeholder="inserisci password" formControlName="password">
-                            <label for="floatingPassword">Password</label>
                         </span>
+                    </div>
+                </div>
 
-
-
-
-
-                <button (click)="login();" type="submit" class="btn primary-button" style="margin-right: 15px;" [disabled]="loginUtenteForm.invalid">
-                            conferma
-                </button>
-                <button (click)="resetForm();" class="btn btn-danger">
-                            cancella
-                        </button>
+                <div class="buttons">
+                    <button (click)="login();" type="submit" class="btn primary-button" style="margin-right: 15px;" [disabled]="loginUtenteForm.invalid">
+                        conferma
+                    </button>
+                    <button (click)="resetForm();" class="btn btn-danger">
+                        cancella
+                    </button>
+                </div>
 
 
                 <ng-container *ngIf="erroreLogin != null ">
