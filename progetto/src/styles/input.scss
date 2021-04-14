@@ -1,28 +1,45 @@
-label {
-    font-weight: 400;
-    font-size: 27px;
-    color: #fff;
-}
-
 .form-control {
     background: transparent !important;
     border-radius: 0;
     font-size: 30px;
     font-weight: 300;
     color: #fff;
-    border-bottom: 2px rgb(223, 231, 238) solid;
+    border-bottom: 2px rgba(226, 233, 240, 0.61) solid;
     border-left: 2px transparent solid;
     border-top: 2px transparent solid;
     border-right: 2px transparent solid;
-    margin-top: 10px;
+    margin-top: 20px;
      :disabled {
         color: #fff;
     }
 }
 
+.has-float-label {
+    label {
+        font-weight: 400;
+        font-size: 27px;
+        color: #fff;
+    }
+}
+
+.form-floating {
+    label {
+        font-size: 25px;
+        color: #fff;
+    }
+}
+
+#descrizione-input {
+    margin-top: 30px;
+}
+
+.has-float-label {
+    margin-top: 25px;
+}
+
 .has-float-label label::after,
 .has-float-label>span::after {
-    content: normal;
+    content: none;
 }
 
 .form-control:focus {
