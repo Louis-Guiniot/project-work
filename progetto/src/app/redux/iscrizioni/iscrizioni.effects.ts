@@ -5,7 +5,7 @@ import { Action } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { switchMap, map, tap } from "rxjs/operators";
 import { HttpCommunicationsService } from "src/app/core/model/http/http-communications.service";
-import { creaIscrizione, initIscrizioni } from "./iscrizioni.actions";
+import { creaIscrizione, initIscrizioneAdmin, initIscrizioni, iscrizioneFailure, iscrizioneSuccess } from "./iscrizioni.actions";
 import { Response } from "src/app/core/model/Response.interface";
 
 @Injectable()
@@ -30,8 +30,24 @@ export class IscrizioneEffects {
             action.idTorneo,
             action.idUtente
         ).pipe(
-            map((response) => initIscrizioni({ response }))
-            , tap(() => this.router.navigateByUrl('/tornei'))
+            map((response) => {
+                
+                if(response.result === null){
+                    sessionStorage.setItem('torneoCompleto','true')
+                    console.log(sessionStorage.getItem('torneoCompleto'))
+                    return iscrizioneFailure({error:'Torneo al completo'})
+                }else{
+                    sessionStorage.setItem('torneoCompleto','false')
+                    return iscrizioneSuccess({admin: response.result})
+                }
+            })
         ))
     ));
+
+    iscrizioneSuccess$=createEffect(()=>this.actions$.pipe(
+        ofType(iscrizioneSuccess),
+        map( (action) => initIscrizioneAdmin( {admin: action.admin} )),
+        tap(()=>this.router.navigateByUrl('/tornei'))
+    ));
+
 }

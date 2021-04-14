@@ -76,8 +76,22 @@ export class TorneiComponent implements OnInit {
     console.log("aperto modale dettaglio globale player : "+ this.idPlayerPassato, this.usernameUtentePassato)
   }
   
+  torneiOnline = 0
+  conta = 0
 
   ngOnInit(): void {
+
+    this.store.pipe(select(selectTorneo)).subscribe((tornei) => {
+      tornei.forEach(torneo => {
+        if(torneo.idCreatore != this.idCreatore){
+          this.conta ++ 
+          console.log("trovato")
+        }
+      })
+
+      this.torneiOnline = this.conta
+      this.conta = 0
+    })
 
   }
 
@@ -96,12 +110,17 @@ export class TorneiComponent implements OnInit {
   iscritto = false
 
   classifica = '/classifica'
-
+  isCompleto
   iscriviti(){
     console.log('id  '+this.idTorneoDaIscrivere)
     console.log('idUtente    '+this.idCreatore)
     this.iscritto = true
     this.iscrizioniService.iscriviUtente(this.idTorneoDaIscrivere, this.idCreatore)
+    this.isCompleto = Boolean(sessionStorage.getItem('torneoCompleto'))
+    if(this.isCompleto){
+      sessionStorage.removeItem('torneoCompleto')
+      window.location.reload()
+    }
   }
 
   simulato = false
