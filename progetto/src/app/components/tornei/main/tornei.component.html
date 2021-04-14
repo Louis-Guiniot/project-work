@@ -1,33 +1,42 @@
 <div class="box">
     <div class="wrapper">
-        <div class="text">
+        <div class="text content">
             <p>
                 Questa è la pagina di <span class="primary-text">elenco</span> dei tornei online al momento. <br> Qui potrai <span class="primary-text">iscriverti</span> e <span class="primary-text">giocare</span> a tutti i tornei disponibili. Inoltre
                 potrai vedere il <span class="primary-text">dettaglio</span> di ognuno di essi.</p>
+
+
         </div>
     </div>
+    <div class="count-tournaments">
+        <button class="btn contrast-button">{{torneiOnline}} Tornei online</button>
+
+    </div>
     <div class="grid-cards">
+
         <ng-container class="item" *ngFor="let torneo of mieiTornei| async ">
             <ng-container *ngIf="torneo.idCreatore != idCreatore">
                 <div class="card" [ngClass]="{'torneo-card-full' : torneo.postiLiberi == 0}">
                     <div class="card-body">
                         <div class="card-intestazione">
-                            <span class="detail-span primary-text" *ngIf="torneo.postiLiberi != 0" (click)="openDetailModal(detailTorneo, torneo.id, torneo.nome)">{{torneo.nome}}</span>
+                            <span class="detail-span primary-text" *ngIf="torneo.postiLiberi != 0" (click)="openDetailModal(detailTorneo, torneo.id, torneo.nome)">{{torneo.nome | uppercase}}</span>
                             <span class="detail-span text-danger" *ngIf="torneo.postiLiberi == 0" (click)="openDetailModal(detailTorneo, torneo.id, torneo.nome)">{{torneo.nome}}</span>
                             <h3 class="card-subtitle mb-2 text-muted">{{torneo.gioco}} - {{torneo.piattaforma}}</h3>
                         </div>
                         <div class="card-informazioni">
                             <p class="text">
-                                Iscrizioni al momento {{torneo.iscrizioni}} <br> Posti liberi <span [ngClass]="{'posti-full':torneo.postiLiberi == 0}">{{torneo.postiLiberi}}</span> <br> Stato {{torneo.stato | uppercase}} <br>
+                                Iscrizioni al momento {{torneo.iscrizioni}} <br> Posti liberi <span [ngClass]="{'posti-full':torneo.postiLiberi == 0}">{{torneo.postiLiberi}}</span>
+                                <br> Stato {{torneo.stato | uppercase}} <br>
                                 <span *ngFor="let utente of utenti | async">
-                                        <span *ngIf="utente.id == torneo.idCreatore" class="text create-by" (click)="openPlayerDetailModal(dettaglioGlobale, utente.id, utente.username)">
-                                            Creato da 
-                                            <span class="primary-text" *ngIf="torneo.postiLiberi != 0">
-                                                {{utente.username | uppercase}}
-                                            </span>
+                                    <span *ngIf="utente.id == torneo.idCreatore" class="text create-by"
+                                        (click)="openPlayerDetailModal(dettaglioGlobale, utente.id, utente.username)">
+                                        Creato da
+                                        <span class="primary-text" *ngIf="torneo.postiLiberi != 0">
+                                            {{utente.username | uppercase}}
+                                        </span>
                                 <span class="text-danger" *ngIf="torneo.postiLiberi == 0">
-                                                {{utente.username | uppercase}}
-                                            </span>
+                                            {{utente.username | uppercase}}
+                                        </span>
                                 </span>
                                 </span>
                             </p>
@@ -36,11 +45,13 @@
 
                         <div class="card-button">
                             <button class="btn btn-card primary-button" *ngIf="torneo.postiLiberi != 0" (click)="openIscrivitiModal(iscrivitiModal, torneo.id)">
-                                    gioca !
-                                </button>
+                                <i class="bi bi-controller"></i>
+
+                            </button>
                             <button class="btn btn-card btn-danger" *ngIf="torneo.postiLiberi == 0" [disabled]="torneo.postiLiberi == 0">
-                                    gioca !
-                                </button>
+                                <i class="bi bi-controller"></i>
+
+                            </button>
                         </div>
 
 
@@ -55,7 +66,7 @@
         <div class="modal-header ">
             <h4 class="modal-title ">Dettaglio torneo - {{nomeTorneoDaVedere}}</h4>
             <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
-                <i class="bi bi-x-circle-fill"></i>        
+                <i class="bi bi-x-circle-fill"></i>
 
             </button>
         </div>
@@ -65,71 +76,84 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Generali</button>
+                            <button class="nav-link active" id="tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" ngbTooltip="generali"><i class="bi bi-info-circle-fill"></i>
+                            </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Requisiti</button>
+                            <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" ngbTooltip="requisiti"><i class="bi bi-gear-wide-connected"></i>
+                            </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Premi</button>
+                            <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" ngbTooltip="premi"><i class="bi bi-trophy-fill"></i>
+
+                            </button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="row">
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                            <input type="text" disabled class="form-control" placeholder="{{torneo.nome}}">
-                                            <label for="floatingInput">Nome torneo - <span class="bolder">{{torneo.nome}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Nome : <span
+                                                class="bolder">{{torneo.nome}}</span></label>
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                            <input type="text" disabled class="form-control" placeholder="{{torneo.gioco}}">
-                                            <label for="floatingPassword">Gioco topic - <span class="bolder">{{torneo.gioco}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Gioco : <span
+                                                class="bolder">{{torneo.gioco}}</span></label>
+                                    </div>
                                 </div>
                             </div>
 
-                            <span class="form-group has-float-label">
-                                <input type="text" disabled class="form-control" placeholder="{{torneo.piattaforma}}" disabled>
-                                <label for="floatingInput">Piattaforma - <span class="bolder">{{torneo.piattaforma}}</span></label>
-                            </span>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                <label for="floatingInput">Piattaforma : <span
+                                        class="bolder">{{torneo.piattaforma}}</span></label>
+                            </div>
 
-                            <span class="form-group has-float-label">
-                                <textarea type="text" disabled class="form-control" value="{{torneo.descrizione}}"></textarea>
-                                <label for="floatingPassword">Descrizione</label>
-                            </span>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                <label for="floatingInput">Descrizione : <span
+                                        class="bolder">{{torneo.descrizione}}</span></label>
+                            </div>
+
                         </div>
 
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                        <input type="text" disabled class="form-control" placeholder="{{torneo.partite}}">
-                                        <label for="floatingPassword">N° partite - <span class="bolder">{{torneo.partite}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Numero partite : <span
+                                                class="bolder">{{torneo.partite}}</span></label>
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                            <input type="text" disabled class="form-control" placeholder="{{torneo.quota}}">
-                                            <label for="floatingInput">Quota : <span class="bolder">{{torneo.quota}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Quota da versare : <span
+                                                class="bolder">{{torneo.quota}}€</span></label>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                        <input type="text" disabled class="form-control" placeholder="{{torneo.capienza}}">
-                                        <label for="floatingInput">Capienza max : <span class="bolder">{{torneo.capienza}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Capienza massima : <span
+                                                class="bolder">{{torneo.capienza}}</span></label>
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                        <input type="text" disabled class="form-control" placeholder="{{torneo.capienzaMinima}}">
-                                        <label for="floatingPassword">Capienza min : <span class="bolder">{{torneo.capienzaMinima}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Capienza minima : <span
+                                                class="bolder">{{torneo.capienzaMinima}}</span></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,22 +161,25 @@
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="row">
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                        <input type="text" disabled class="form-control" placeholder="{{torneo.premioPrimo}}">
-                                        <label for="floatingInput">1° premio - <span class="bolder">{{torneo.premioPrimo}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Primo premio : <span
+                                                class="bolder">{{torneo.premioPrimo}}</span></label>
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                        <input type="text" disabled class="form-control" placeholder="{{torneo.premioSecondo}}">
-                                        <label for="floatingInput">2° premio - <span class="bolder">{{torneo.premioSecondo}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Secondo premio : <span
+                                                class="bolder">{{torneo.premioSecondo}}</span></label>
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <span class="form-group has-float-label">
-                                        <input type="text" disabled class="form-control" placeholder="{{torneo.premioTerzo}}">
-                                        <label for="floatingPassword">3° premio - <span class="bolder">{{torneo.premioTerzo}}</span></label>
-                                    </span>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                        <label for="floatingInput">Terzo premio : <span
+                                                class="bolder">{{torneo.premioTerzo}}</span></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +199,7 @@
         <div class="modal-header ">
             <h4 class="modal-title ">Iscrizione torneo</h4>
             <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
-                <i class="bi bi-x-circle-fill"></i>        
+                <i class="bi bi-x-circle-fill"></i>
 
             </button>
         </div>
@@ -186,7 +213,8 @@
             <ng-container *ngIf="iscritto && !simulato">
                 <div class="text">
                     <p>
-                        Iscrizione <span class="primary-text">completata</span>, siamo pronti! <br> Ora non resta che <span class="primary-text">simulare</span> il torneo. <br> I tuoi punti e quelli dei tuoi avversari verranno generati <span class="primary-text">casualmente</span>.
+                        Iscrizione <span class="primary-text">completata</span>, siamo pronti! <br> Ora non resta che
+                        <span class="primary-text">simulare</span> il torneo. <br> I tuoi punti e quelli dei tuoi avversari verranno generati <span class="primary-text">casualmente</span>.
                         <br> Che la forza sia con te.
                     </p>
                 </div>
@@ -194,7 +222,8 @@
             <ng-container *ngIf="simulato">
                 <div class="text">
                     <p>
-                        Simulazione <span class="primary-text">completata</span>, ora vai a vedere il tuo risultato! <br> Avrai vinto?
+                        Simulazione <span class="primary-text">completata</span>, ora vai a vedere il tuo risultato!
+                        <br> Avrai vinto?
                     </p>
                 </div>
             </ng-container>
