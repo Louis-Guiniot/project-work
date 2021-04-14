@@ -33,7 +33,7 @@
 
 <ng-template #dettaglioGlobale let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Dettaglio globale</h4>
+        <h4 class="modal-title">Dettaglio globale : {{usernameUtentePassato | uppercase}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true" id="span-close">&times;</span>
         </button>
@@ -43,27 +43,24 @@
             <ng-container *ngIf="class.idPlayer == idPlayerPassato">
                 <table class="table-globale">
                     <tr>
-                        <td colspan="2"><span class="bolder">{{usernameUtentePassato}}</span></td>
-                    </tr>
-                    <tr>
                         <td>Punteggio totale</td>
-                        <td><button class="btn primary-button">{{class.punteggioTotale}}</button></td>
+                        <td><button class="btn contrast-button">{{class.punteggioTotale}}</button></td>
                     </tr>
                     <tr>
                         <td>Media punti x torneo</td>
-                        <td><button class="btn primary-button">{{class.mediaPunteggio}}</button></td>
+                        <td><button class="btn contrast-button">{{class.mediaPunteggio}}</button></td>
                     </tr>
                     <tr>
                         <td>Partite giocate</td>
-                        <td><button class="btn primary-button">{{class.partiteGiocate}}</button></td>
+                        <td><button class="btn contrast-button">{{class.partiteGiocate}}</button></td>
                     </tr>
                     <tr>
                         <td>Tornei giocati</td>
-                        <td><button class="btn primary-button">{{class.torneiGiocati}}</button></td>
+                        <td><button class="btn contrast-button">{{class.torneiGiocati}}</button></td>
                     </tr>
                     <tr>
                         <td>Vittorie</td>
-                        <td><button class="btn primary-button">{{class.vittorie}}</button></td>
+                        <td><button class="btn contrast-button">{{class.vittorie}}</button></td>
                     </tr>
                 </table>
             </ng-container>
