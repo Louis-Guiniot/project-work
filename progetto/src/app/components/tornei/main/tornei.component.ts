@@ -116,11 +116,16 @@ export class TorneiComponent implements OnInit {
     console.log('idUtente    '+this.idCreatore)
     this.iscritto = true
     this.iscrizioniService.iscriviUtente(this.idTorneoDaIscrivere, this.idCreatore)
-    this.isCompleto = Boolean(sessionStorage.getItem('torneoCompleto'))
-    if(this.isCompleto){
-      sessionStorage.removeItem('torneoCompleto')
+    this.isCompleto = (sessionStorage.getItem('torneoCompleto'))
+    console.log("is completo ", this.isCompleto)
+    if(this.isCompleto == 'true'){
+      console.log("completo")
       window.location.reload()
     }
+
+
+
+
   }
 
   simulato = false
@@ -131,9 +136,11 @@ export class TorneiComponent implements OnInit {
     console.log('id  '+this.idTorneoDaIscrivere)
     console.log('idUtente    '+this.idCreatore)
     this.classificaService.simulazione(this.idTorneoDaIscrivere, this.idCreatore)
+  
   }
 
   goToClassifica(){
     this.router.navigateByUrl("/classifica")
+    sessionStorage.setItem('generata','false')
   }
 }

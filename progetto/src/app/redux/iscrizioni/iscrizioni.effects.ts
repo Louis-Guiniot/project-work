@@ -32,12 +32,13 @@ export class IscrizioneEffects {
         ).pipe(
             map((response) => {
                 
-                if(response.result === null){
+                if(response.result != true){
                     sessionStorage.setItem('torneoCompleto','true')
-                    console.log(sessionStorage.getItem('torneoCompleto'))
+                    console.log("is ? ", sessionStorage.getItem('torneoCompleto'))
                     return iscrizioneFailure({error:'Torneo al completo'})
                 }else{
                     sessionStorage.setItem('torneoCompleto','false')
+                    console.log("is ? ", sessionStorage.getItem('torneoCompleto'))
                     return iscrizioneSuccess({admin: response.result})
                 }
             })

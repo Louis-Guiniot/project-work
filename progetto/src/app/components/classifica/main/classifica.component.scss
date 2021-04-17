@@ -1,4 +1,3 @@
-@import "src/styles/input.scss";
 @import "src/styles/buttons.scss";
 @import "src/styles/typography.scss";
 .box {
@@ -7,12 +6,11 @@
 }
 
 .wrapper {
-    padding: 1%;
     display: grid;
     width: 100%;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: auto auto;
     grid-template-rows: auto;
-    gap: 20px;
+    gap: 25px;
 }
 
 .header {
@@ -53,13 +51,15 @@ table {
     border-bottom: 2px solid #cd7f32;
 }
 
-.table-mioRisultato {
-    td:nth-child(even) {
-        color: #BB86FC;
-        text-align: left;
-    }
-    td:nth-child(odd) {
-        padding-left: 0;
+.card-result {
+    width: fit-content;
+    background-color: transparent;
+}
+
+.table-result {
+    border: collapse;
+    td {
+        padding: 5px;
     }
 }
 
@@ -77,4 +77,22 @@ a {
     color: #BB86FC;
 }
 
-@media (max-width: 1200px) {}
+@media (max-width: 1000px) {
+    .wrapper {
+        grid-template-columns: 100%;
+    }
+    .header {
+        grid-column-end: 2;
+    }
+    .content {
+        grid-row-end: 3;
+        grid-column-end: 2;
+    }
+    .table-classifica {
+        grid-row-end: 4;
+        grid-column-end: 2;
+    }
+    i {
+        font-size: 20px;
+    }
+}

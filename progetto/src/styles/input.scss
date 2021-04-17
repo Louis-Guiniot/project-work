@@ -17,7 +17,7 @@
 .has-float-label {
     label {
         font-weight: 400;
-        font-size: 27px;
+        font-size: 15px;
         color: #fff;
     }
 }
@@ -47,7 +47,17 @@
     border-bottom: 2px #fff solid;
     border-left: 2px transparent solid;
     border-top: 2px transparent solid;
-    border-right: 2px transparent solid
+    border-right: 2px transparent solid;
+}
+
+.input-group-text {
+    background: transparent;
+    border: none;
+    font-size: 35px;
+    height: fit-content;
+    margin-top: 25px;
+    border-radius: 0;
+    padding: 0;
 }
 
 @media (max-width: 800px) {
@@ -59,22 +69,82 @@
     .form-control {
         font-size: 20px;
     }
-    label {
-        font-size: 15px;
+    .has-float-label {
+        label {
+            font-size: 15px;
+        }
+    }
+    .toggle-icon {
+        font-size: 25px;
     }
 }
 
-@media (max-width: 400px) {
-    .form-control,
-    select {
+@media (max-width: 500px) {
+    .form-control {
         font-size: 15px;
-        font-weight: 200!important;
-         ::placeholder {
-            font-weight: 200!important;
-            color: #000;
+    }
+    .has-float-label {
+        label {
+            font-size: 13px;
         }
     }
-    label {
-        font-size: 15px;
+    .has-float-label label:not(:focus) {
+        font-size: 17px;
+    }
+    .toggle-icon {
+        font-size: 20px;
+    }
+}
+
+// ANCHOR INMPORTANTI NUOVE INPUT
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+
+/* Style the form icons */
+
+.icon {
+    padding: 10px;
+    background: transparent;
+    border-bottom: 1px rgba(226, 233, 240, 0.61) solid;
+    color: white;
+    font-size: 30px;
+    text-align: left;
+    width: auto;
+}
+
+.input-container>label {
+    color: #BB86FC;
+    white-space: nowrap;
+    font-weight: 400;
+}
+
+
+/* Style the input fields */
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-size: 30px;
+    font-weight: 300;
+    background: transparent;
+    color: #fff;
+    border: none;
+    border-bottom: 1px rgba(226, 233, 240, 0.61) solid;
+    &::placeholder {
+        color: #fff;
+    }
+}
+
+@media (max-width:800px) {
+    .input-field {
+        font-size: 20px;
+    }
+    .icon {
+        font-size: 20px;
     }
 }

@@ -9,8 +9,7 @@
         </div>
     </div>
     <div class="count-tournaments">
-        <button class="btn contrast-button">{{torneiOnline}} Tornei online</button>
-
+        <button class="btn contrast-button">tornei online {{torneiOnline}}</button>
     </div>
     <div class="grid-cards">
 
@@ -19,22 +18,19 @@
                 <div class="card" [ngClass]="{'torneo-card-full' : torneo.postiLiberi == 0}">
                     <div class="card-body">
                         <div class="card-intestazione">
-                            <span class="detail-span primary-text" *ngIf="torneo.postiLiberi != 0" (click)="openDetailModal(detailTorneo, torneo.id, torneo.nome)">{{torneo.nome | uppercase}}</span>
-                            <span class="detail-span text-danger" *ngIf="torneo.postiLiberi == 0" (click)="openDetailModal(detailTorneo, torneo.id, torneo.nome)">{{torneo.nome}}</span>
+                            <span class="detail-span primary-text" (click)="openDetailModal(detailTorneo, torneo.id, torneo.nome)">{{torneo.nome}}</span>
                             <h3 class="card-subtitle mb-2 text-muted">{{torneo.gioco}} - {{torneo.piattaforma}}</h3>
                         </div>
                         <div class="card-informazioni">
                             <p class="text">
-                                Iscrizioni al momento {{torneo.iscrizioni}} <br> Posti liberi <span [ngClass]="{'posti-full':torneo.postiLiberi == 0}">{{torneo.postiLiberi}}</span>
-                                <br> Stato {{torneo.stato | uppercase}} <br>
+                                Iscrizioni al momento {{torneo.iscrizioni}}
+                                <br> Posti liberi <span class="posti-full">{{torneo.postiLiberi}}</span>
+                                <br> Stato <span class="primary-text posti-full">{{torneo.stato | uppercase}}</span> <br>
                                 <span *ngFor="let utente of utenti | async">
                                     <span *ngIf="utente.id == torneo.idCreatore" class="text create-by"
                                         (click)="openPlayerDetailModal(dettaglioGlobale, utente.id, utente.username)">
                                         Creato da
-                                        <span class="primary-text" *ngIf="torneo.postiLiberi != 0">
-                                            {{utente.username | uppercase}}
-                                        </span>
-                                <span class="text-danger" *ngIf="torneo.postiLiberi == 0">
+                                        <span class="primary-text posti-full">
                                             {{utente.username | uppercase}}
                                         </span>
                                 </span>
@@ -44,13 +40,8 @@
                         </div>
 
                         <div class="card-button">
-                            <button class="btn btn-card primary-button" *ngIf="torneo.postiLiberi != 0" (click)="openIscrivitiModal(iscrivitiModal, torneo.id)">
+                            <button class="btn btn-card posti-full" (click)="openIscrivitiModal(iscrivitiModal, torneo.id)" [disabled]="torneo.postiLiberi == 0">
                                 <i class="bi bi-controller"></i>
-
-                            </button>
-                            <button class="btn btn-card btn-danger" *ngIf="torneo.postiLiberi == 0" [disabled]="torneo.postiLiberi == 0">
-                                <i class="bi bi-controller"></i>
-
                             </button>
                         </div>
 
@@ -67,7 +58,6 @@
             <h4 class="modal-title ">Dettaglio torneo - {{nomeTorneoDaVedere}}</h4>
             <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
                 <i class="bi bi-x-circle-fill"></i>
-
             </button>
         </div>
         <div *ngFor="let torneo of mieiTornei | async">
@@ -76,7 +66,7 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" ngbTooltip="generali"><i class="bi bi-info-circle-fill"></i>
+                            <button class="nav-link active" id="tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" ngbTooltip="generali"><i class="bi bi-info-circle"></i>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -85,7 +75,7 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" ngbTooltip="premi"><i class="bi bi-trophy-fill"></i>
-
+        
                             </button>
                         </li>
                     </ul>
@@ -93,31 +83,36 @@
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="row">
                                 <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Nome : <span
-                                                class="bolder">{{torneo.nome}}</span></label>
+                                    <div class="input-container">
+                                        <label class="icon text">Nome</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.nome}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Gioco : <span
-                                                class="bolder">{{torneo.gioco}}</span></label>
+                                    <div class="input-container">
+                                        <label class="icon text">Gioco</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.gioco}}" readonly>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                <label for="floatingInput">Piattaforma : <span
-                                        class="bolder">{{torneo.piattaforma}}</span></label>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-container">
+                                        <label class="icon text">Piattaforma</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.piattaforma}}" readonly>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                <label for="floatingInput">Descrizione : <span
-                                        class="bolder">{{torneo.descrizione}}</span></label>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-container">
+                                        <label class="icon text">Descrizione</label>
+                                        <textarea type="text" class="input-field" placeholder="{{torneo.descrizione}}" readonly></textarea>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -125,34 +120,30 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Numero partite : <span
-                                                class="bolder">{{torneo.partite}}</span></label>
+                                    <div class="input-container">
+                                        <label class="icon text">Partite</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.partite}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Quota da versare : <span
-                                                class="bolder">{{torneo.quota}}€</span></label>
+                                    <div class="input-container">
+                                        <label class="icon text">Quota</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.quota}}" readonly>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Capienza massima : <span
-                                                class="bolder">{{torneo.capienza}}</span></label>
+                                    <div class="input-container">
+                                        <label class="icon text">Posti Max</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.capienza}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Capienza minima : <span
-                                                class="bolder">{{torneo.capienzaMinima}}</span></label>
+                                    <div class="input-container">
+                                        <label class="icon text">Posti Min</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.capienzaMinima}}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -160,28 +151,33 @@
 
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="row">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Primo premio : <span
-                                                class="bolder">{{torneo.premioPrimo}}</span></label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Secondo premio : <span
-                                                class="bolder">{{torneo.premioSecondo}}</span></label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
-                                        <label for="floatingInput">Terzo premio : <span
-                                                class="bolder">{{torneo.premioTerzo}}</span></label>
+                                <div class="col-6">
+                                    <div class="input-container">
+                                        <label class="icon text">Primo premio</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.premioPrimo}}" readonly>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="input-container">
+                                        <label class="icon text">Secondo premio</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.premioSecondo}}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="input-container">
+                                        <label class="icon text">Terzo premio</label>
+                                        <input type="text" class="input-field" placeholder="{{torneo.premioTerzo}}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 

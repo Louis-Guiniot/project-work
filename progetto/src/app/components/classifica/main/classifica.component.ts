@@ -19,22 +19,45 @@ export class ClassificaComponent implements OnInit {
   constructor(private classificaService: ClassificaService, private store: Store, private utenteService: UtenteService, private torneoService: MieiTorneiService) {
 
     this.classificaService.classifica()
-    
    }
 
    utente = sessionStorage.getItem('username')
-   generata
+   idSessione = Number (sessionStorage.getItem('id'))
+
 
 
 
    home = "/home"
+   generata
+   contaPlayer = 0
+   totalePlayer = 0
+   punteggioMio = 0
+   posizione = 0
 
   ngOnInit(): void {
+    this.generata = sessionStorage.getItem('generata')
     console.log("username", this.utente)
+    console.log(sessionStorage.getItem('generata'))
+
+
+    this.store.pipe(select(selectClassifica)).subscribe(classifica => {
+      classifica.forEach(clas =>{
+        if(clas.idUtente == 0){
+          this.punteggioMio = clas.punteggio 
+          this.posizione = this.contaPlayer + 1
+        }
+        this.contaPlayer ++
+      })
+      this.totalePlayer = this.contaPlayer + 1
+      this.contaPlayer = 0
+    })
 
   }
 
+  
+
   genera(){
+    sessionStorage.setItem('generata','true')
     window.location.reload()
   }
 

@@ -5,9 +5,12 @@
                 Home
             </div>
             <div class="text">
-                {{sesso === 'femmina' ? 'Benvenuta' : 'Benvenuto'}}<span class="text-purple">TheTournament</span> ! <br> Questa piattaforma ti permettera' di <span class="primary-text">partecipare</span> a tornei video-ludici online e <span class="primary-text">gestirli</span>                .
+                {{sesso === 'femmina' ? 'Benvenuta' : 'Benvenuto'}}<span class="text-purple">TheTournament</span> ! <br> Questa piattaforma ti permettera' di <span class="primary-text">partecipare</span> a tornei video-ludici online e <span class="primary-text">gestirli</span>.
                 <br> Inoltre potrai <span class="primary-text">iscriverti</span> a qualunque torneo disponibile, <span class="primary-text">simulando</span> la partecipazione ad esso. <br>
             </div>
+        </div>
+        <div class="count-tournaments">
+            <button class="btn contrast-button">players in gara {{playerInGara}}</button>
         </div>
         <div class="grid-players">
             <ng-container *ngFor="let class of classificaGlobale | async">
@@ -34,8 +37,8 @@
 <ng-template #dettaglioGlobale let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Dettaglio globale : {{usernameUtentePassato | uppercase}}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true" id="span-close">&times;</span>
+        <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
+            <i class="bi bi-x-circle-fill"></i>
         </button>
     </div>
     <div class="modal-body">

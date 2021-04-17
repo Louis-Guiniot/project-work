@@ -134,8 +134,7 @@ export class TorneoEffects {
             action.descrizione
         ).pipe(
             map((response) => initTornei({ response }))
-            // prova senza redirect
-            , tap(() => this.router.navigateByUrl('/miei-tornei'))
+            ,tap(() => window.location.reload())
         ))
     ));
 }

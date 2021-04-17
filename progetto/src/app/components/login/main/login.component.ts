@@ -72,7 +72,19 @@ export class LoginComponent implements OnInit {
 
   }
 
- 
+  toggled = true
+  passwordType = 'password'
+
+  togglePassword(){
+    if(this.toggled){
+      this.toggled = false
+      this.passwordType = 'text'
+    }
+    else{
+      this.toggled = true
+      this.passwordType = 'password'
+    }
+  }
 
   resetForm(){
 

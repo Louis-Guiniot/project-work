@@ -32,14 +32,28 @@ export class HomeComponent implements OnInit {
   idPlayerPassato : number
   usernameUtentePassato : string
   openPlayerDetailModal(content:string, idPlayer:number, utenteUsername: string){
-    this.modalService.open(content, {centered: true})
+    this.modalService.open(content)
     this.idPlayerPassato = idPlayer
     this.usernameUtentePassato = utenteUsername
 
     console.log("aperto modale dettaglio globale player : "+ this.idPlayerPassato, this.usernameUtentePassato)
   }
 
+  playerInGara = 0
+  conta = 0
+
   ngOnInit(): void {
+
+    this.store.pipe(select(selectClassificaGlobale)).subscribe((tornei) => {
+      tornei.forEach(torneo => {
+          this.conta ++ 
+          console.log("trovato")
+      })
+
+      this.playerInGara = this.conta
+      this.conta = 0
+    })
+
   }
 
   get classificaGlobale():Observable<ClassificaGlobale[]> {

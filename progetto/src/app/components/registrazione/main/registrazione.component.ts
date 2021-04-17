@@ -85,6 +85,19 @@ export class RegistrazioneComponent implements OnInit {
     console.log('errore ?',this.erroreSign)
   }
 
+  toggled = true
+  passwordType = 'password'
+
+  togglePassword(){
+    if(this.toggled){
+      this.toggled = false
+      this.passwordType = 'text'
+    }
+    else{
+      this.toggled = true
+      this.passwordType = 'password'
+    }
+  }
 
   resetForm(){
     this.creaNuovoUtenteForm.reset()

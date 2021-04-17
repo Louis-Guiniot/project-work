@@ -81,7 +81,11 @@ export class ProfiloComponent implements OnInit {
 
   datanascita = ""
 
+  
   edita(){
+
+    sessionStorage.setItem('sesso',this.editaUtenteForm.value.genere)
+
     this.utenteService.aggiornaUtente(
       this.idutente,
       this.editaUtenteForm.value.nome,
@@ -93,8 +97,19 @@ export class ProfiloComponent implements OnInit {
       this.datanascita
     )
 
-    sessionStorage.setItem('sesso',this.editaUtenteForm.value.genere)
-
     window.location.reload()
+  }
+  
+  toggled = false
+  passwordType = 'password'
+  togglePassword(){
+    if(this.toggled){
+      this.toggled = false
+      this.passwordType = 'text'
+    }
+    else{
+      this.toggled = true
+      this.passwordType = 'password'
+    }
   }
 }

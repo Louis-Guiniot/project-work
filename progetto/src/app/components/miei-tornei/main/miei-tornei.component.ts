@@ -73,15 +73,24 @@ export class MieiTorneiComponent implements OnInit {
   idCreatore = Number(sessionStorage.getItem('id'))
   numeroTornei = 0
 
+
+  torneiPlayer = 0
+  conta = 0
+  arrayTornei = []
+
   ngOnInit(): void {
 
     this.store.pipe(select(selectTorneo)).subscribe((tornei) => {
-      tornei.forEach(torneo => {
+      this.arrayTornei = tornei
+      this.arrayTornei.forEach(torneo => {
         if(torneo.idCreatore == this.idCreatore){
-          this.numeroTornei = this.numeroTornei + 1
+          this.conta ++ 
           console.log("trovato")
         }
       })
+
+      this.torneiPlayer = this.conta
+      this.conta = 0
     })
 
     this.creaNuovoTorneoForm = this.fb.group({
@@ -137,7 +146,6 @@ export class MieiTorneiComponent implements OnInit {
       this.creaNuovoTorneoForm.value.descrizione
     )
 
-    // window.location.reload()
 
   }
 

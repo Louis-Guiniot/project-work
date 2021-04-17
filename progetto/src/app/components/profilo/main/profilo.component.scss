@@ -1,31 +1,4 @@
+@import "src/styles/buttons.scss";
+@import "src/styles/grid-base.scss";
 @import "src/styles/input.scss";
 @import "src/styles/typography.scss";
-@import "src/styles/buttons.scss";
-@import "src/styles/modal.scss";
-@import "src/styles/grid-base.scss";
-table {
-    width: auto;
-    margin: auto;
-    border: collapse;
-}
-
-td:nth-child(even) {
-    text-align: left;
-    padding-left: 15px;
-}
-
-td:nth-child(odd) {
-    text-align: right;
-    border-right: 5px solid #8C52FF;
-    padding-right: 15px;
-}
-
-#last-tr {
-    border-top: 5px solid #8C52FF;
-}
-
-td {
-    width: 50%;
-    font-size: 40px;
-    font-weight: 300;
-}

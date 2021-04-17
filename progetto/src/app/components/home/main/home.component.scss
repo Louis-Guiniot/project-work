@@ -63,6 +63,11 @@
     }
 }
 
+.count-tournaments {
+    width: 100%;
+    text-align: right;
+}
+
 .detail-span {
     padding: 1px;
     font-size: 35px;
@@ -82,5 +87,21 @@
     td:nth-child(odd) {
         font-weight: 200;
         color: #fff;
+    }
+}
+
+@media (max-width: 700px) {
+    .content {
+        width: 100%;
+    }
+    .contrast-button {
+        width: auto;
+    }
+    .grid-players {
+        grid-template-columns: 100%;
+        padding: 5px;
+    }
+    .table-globale {
+        font-size: 20px;
     }
 }

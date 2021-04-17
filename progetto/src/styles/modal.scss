@@ -7,7 +7,7 @@
 }
 
 .step-modal {
-    height: 400px;
+    height: 500px;
 }
 
 .tab-content {
@@ -28,6 +28,7 @@
 }
 
 .modal-body {
+    border: 0;
     border-radius: 0;
     background-color: #121212;
 }
@@ -35,12 +36,14 @@
 .modal-footer {
     background-color: #121212;
     border-radius: 0;
+    border: 0;
 }
 
 .modal-header {
     border-radius: 0;
     background-color: #121212;
     text-transform: uppercase;
+    border: 0;
 }
 
 .modal-title {
@@ -55,15 +58,11 @@
     }
 }
 
-.modal-body label {
-    font-size: 20px;
-}
-
 .modal-body .form-control {
     color: #fff;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
     .header {
         font-size: 30px;
     }
