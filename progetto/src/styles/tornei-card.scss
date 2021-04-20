@@ -38,7 +38,24 @@
 
 .count-tournaments {
     width: 100%;
-    text-align: right;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    .btn-left {
+        text-align: left;
+        i {
+            font-size: 50px;
+            color: #BB86FC;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    .btn-right {
+        button {
+            width: fit-content;
+        }
+        text-align: right;
+    }
 }
 
 .card {
@@ -90,5 +107,10 @@
     .grid-cards {
         grid-template-columns: 100%;
         padding: 5px;
+    }
+    .count-tournaments {
+        button {
+            font-size: 20px;
+        }
     }
 }

@@ -15,8 +15,13 @@
     </div>
 
     <div class="count-tournaments">
-        <button class="btn contrast-button float-left" (click)="openInsertModal(insertFormTorneo)">crea torneo</button>
-        <button class="btn contrast-button float-right">miei tornei online {{torneiPlayer}}</button>
+        <div class="btn-left">
+            <i class="bi bi-plus-circle-fill" (click)="openInsertModal(insertFormTorneo)"></i>
+
+        </div>
+        <div class="btn-right">
+            <button class="btn contrast-button">miei tornei online {{torneiPlayer}}</button>
+        </div>
     </div>
 
     <div class="grid-cards">
@@ -70,13 +75,13 @@
                         <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Nome</label>
-                                <input type="text" class="input-field" placeholder="nome" formControlName="nome" ngbAutoFocus>
+                                <input type="text" class="input-field" placeholder="inserisci nome" formControlName="nome" ngbAutoFocus>
                             </div>
                         </div>
                         <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Gioco</label>
-                                <input type="text" class="input-field" placeholder="gioco" formControlName="gioco">
+                                <input type="text" class="input-field" placeholder="inserisci gioco" formControlName="gioco">
                             </div>
                         </div>
                     </div>
@@ -85,7 +90,7 @@
                         <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Piattaforma</label>
-                                <input type="text" class="input-field" placeholder="piattaforma" formControlName="piattaforma">
+                                <input type="text" class="input-field" placeholder="inserisci piattaforma" formControlName="piattaforma">
                             </div>
                         </div>
                     </div>
@@ -107,13 +112,13 @@
                         <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Partite</label>
-                                <input type="text" class="input-field" placeholder="Partite" formControlName="partite">
+                                <input type="text" class="input-field" placeholder="inserisci n° partite" formControlName="partite">
                             </div>
                         </div>
                         <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Quota</label>
-                                <input type="text" class="input-field" placeholder="Quota" formControlName="quota">
+                                <input type="text" class="input-field" placeholder="inserisci quota" formControlName="quota">
                             </div>
                         </div>
                     </div>
@@ -122,13 +127,13 @@
                         <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Posti Max</label>
-                                <input type="text" class="input-field" placeholder="Posti max" formControlName="capienza">
+                                <input type="text" class="input-field" placeholder="inserisci posti max" formControlName="capienza">
                             </div>
                         </div>
                         <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Posti Min</label>
-                                <input type="text" class="input-field" placeholder="Posti min" formControlName="capienzaMinima">
+                                <input type="text" class="input-field" placeholder="inserisci posti min" formControlName="capienzaMinima">
                             </div>
                         </div>
                     </div>
@@ -136,28 +141,28 @@
 
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Primo premio</label>
-                                <input type="text" class="input-field" placeholder="Primo premio" formControlName="premioPrimo">
+                                <input type="text" class="input-field" placeholder="inserisci 1° premio" formControlName="premioPrimo">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Secondo premio</label>
-                                <input type="text" class="input-field" placeholder="Secondo premio" formControlName="premioSecondo">
+                                <input type="text" class="input-field" placeholder="inserisci 2° premio" formControlName="premioSecondo">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <div class="input-container">
                                 <label class="icon text">Terzo premio</label>
-                                <input type="text" class="input-field" placeholder="Terzo premio" formControlName="premioTerzo">
+                                <input type="text" class="input-field" placeholder="inserisci 3° premio" formControlName="premioTerzo">
                             </div>
                         </div>
                     </div>
@@ -278,7 +283,7 @@
 
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col">
                                     <div class="input-container">
                                         <label class="icon text">Primo premio</label>
                                         <input type="text" class="input-field" placeholder="{{torneo.premioPrimo}}" formControlName="premioPrimo">
@@ -287,7 +292,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col">
                                     <div class="input-container">
                                         <label class="icon text">Secondo premio</label>
                                         <input type="text" class="input-field" placeholder="{{torneo.premioSecondo}}" formControlName="premioSecondo">
@@ -296,7 +301,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col">
                                     <div class="input-container">
                                         <label class="icon text">Terzo premio</label>
                                         <input type="text" class="input-field" placeholder="{{torneo.premioTerzo}}" formControlName="premioTerzo">
