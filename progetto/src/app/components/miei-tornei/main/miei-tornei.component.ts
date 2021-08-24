@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { selectTorneo } from 'src/app/redux/miei-tornei';
-import { MieiTorneiService } from 'src/app/services/miei-tornei/miei-tornei.service';
-import { Torneo } from 'src/app/core/model/Torneo.interface';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
 import { HttpCommunicationsService } from 'src/app/core/model/http/http-communications.service';
+import { MieiTorneiService } from 'src/app/services/miei-tornei/miei-tornei.service';
 
 @Component({
   selector: 'app-miei-tornei',
@@ -17,81 +14,31 @@ import { HttpCommunicationsService } from 'src/app/core/model/http/http-communic
 })
 export class MieiTorneiComponent implements OnInit {
 
-  constructor(private fb:FormBuilder,private store: Store, private router: Router,private mieiTorneiService: MieiTorneiService,private modalService: NgbModal, private http: HttpCommunicationsService) {
-    this.mieiTorneiService.elencoTornei()
+  get currentUser(): any {
+    return JSON.parse(sessionStorage.getItem("utente"));
   }
 
-  thLabels = [
-    {label:'nome'},{label:'gioco'},{label:'piattaforma'},{label:'capienza'},
-    {label:'iscrizioni'},{label:'posti liberi'},{label:'partite'},
-    {label:'quota'},{label:'stato'},
-  ]
-
-  closeResult = ''
-  openInsertModal(content:string) {
-    this.modalService.open(content, { size: 'xl' });
-    console.log("aperto modale creazione torneo")
+  get torneiTot(): number {
+    return this.countPronti + this.countTerminati + this.countTornei;
   }
 
-  idTorneoDaEditare: number
-  openEditModal(content:string,idtorneo:number) {
-    this.modalService.open(content, { size: 'xl' });
-    console.log("aperto modale modifica torneo con id : ", idtorneo)
-    this.idTorneoDaEditare = idtorneo
+  constructor(private fb: FormBuilder, private store: Store, private router: Router, private mieiTorneiService: MieiTorneiService, private modalService: NgbModal, private http: HttpCommunicationsService) {
+    this.getTornei();
   }
 
-  idTorneoDaEliminare:number
-  nomeTorneoDaEliminare: string
-  openDeleteModal(content:string,idtorneo:number,nometorneo:string) {
-    this.modalService.open(content, { size: 'xl' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      this.editaTorneoForm.reset();
-      this.creaNuovoTorneoForm.reset();
-    });
-    
-    console.log("aperto modale eliminazione torneo con id : " , idtorneo)
-    this.idTorneoDaEliminare = idtorneo
-    this.nomeTorneoDaEliminare = nometorneo
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
+  imgSrc = "../../../../assets/images/kraken-2.png";
+  countTornei = 0;
+  countTerminati = 0;
+  countPronti = 0;
 
   creaNuovoTorneoForm: FormGroup
   editaTorneoForm: FormGroup
 
-  idCreatore = Number(sessionStorage.getItem('id'))
-  numeroTornei = 0
-
-
-  torneiPlayer = 0
-  conta = 0
-  arrayTornei = []
+  arrayTornei = [];
+  filtri = [];
 
   ngOnInit(): void {
 
-    this.store.pipe(select(selectTorneo)).subscribe((tornei) => {
-      this.arrayTornei = tornei
-      this.arrayTornei.forEach(torneo => {
-        if(torneo.idCreatore == this.idCreatore){
-          this.conta ++ 
-          console.log("trovato")
-        }
-      })
-
-      this.torneiPlayer = this.conta
-      this.conta = 0
-    })
 
     this.creaNuovoTorneoForm = this.fb.group({
       nome: ['', Validators.required],
@@ -123,56 +70,86 @@ export class MieiTorneiComponent implements OnInit {
 
   }
 
-  get mieiTornei():Observable<Torneo[]>{
-    return this.store.pipe(select(selectTorneo))
+  crea() {
+
   }
 
-  crea(){
+  edita() {
 
-    console.log(this.creaNuovoTorneoForm)
+  }
 
-    this.mieiTorneiService.nuovoTorneo(
-      this.creaNuovoTorneoForm.value.nome,
-      this.creaNuovoTorneoForm.value.gioco,
-      this.creaNuovoTorneoForm.value.piattaforma,
-      this.creaNuovoTorneoForm.value.capienza,
-      this.creaNuovoTorneoForm.value.capienzaMinima,
-      this.creaNuovoTorneoForm.value.partite,
-      this.creaNuovoTorneoForm.value.quota,
-      this.creaNuovoTorneoForm.value.premioPrimo,
-      this.creaNuovoTorneoForm.value.premioSecondo,
-      this.creaNuovoTorneoForm.value.premioTerzo,
-      this.idCreatore,
-      this.creaNuovoTorneoForm.value.descrizione
-    )
+  elimina() {
 
 
   }
 
-  edita(){
-    this.mieiTorneiService.aggiornaTorneo(
-      this.idTorneoDaEditare,
-      this.editaTorneoForm.value.nome,
-      this.editaTorneoForm.value.gioco,
-      this.editaTorneoForm.value.piattaforma,
-      this.editaTorneoForm.value.capienza,
-      this.editaTorneoForm.value.capienzaMinima,
-      this.editaTorneoForm.value.partite,
-      this.editaTorneoForm.value.quota,
-      this.editaTorneoForm.value.premioPrimo,
-      this.editaTorneoForm.value.premioSecondo,
-      this.editaTorneoForm.value.premioTerzo,
-      this.editaTorneoForm.value.descrizione
-    )
+  getTornei() {
+    this.mieiTorneiService.getMieiTornei(this.currentUser.id).subscribe(tornei => {
+      this.arrayTornei = tornei.result;
+      this.arrayTornei.forEach(torneo => {
+        if (torneo.stato === "CONCLUSO") {
+          this.countTerminati++;
+        } else if (torneo.stato === "IN CORSO") {
+          this.countTornei++;
+        } else if (torneo.stato === "PRONTO") {
+          this.countPronti++;
+        }
+      })
+
+      this.caricaFiltri();
+      this.filtri.forEach(filtro => {
+        if (filtro.desc === "TUTTI") {
+          filtro.attivo = 1;
+        }
+      })
+    });
+  }
+
+  getTorneiAll() {
+    this.mieiTorneiService.getMieiTornei(this.currentUser.id).subscribe(tornei => {
+      this.arrayTornei = tornei.result;
+
+      this.filtri.forEach(filtro => {
+        if (filtro.desc === "TUTTI") {
+          filtro.attivo = 1;
+        }
+      })
+    });
+  }
+
+  caricaFiltri() {
+
+    if (this.countPronti > 0) {
+      this.filtri.push({ id: 1, desc: 'ONLINE', lbl: 'PRONTI' });
+    }
+
+    if (this.countTornei > 0) {
+      this.filtri.push({ id: 2, desc: 'INCORSO', lbl: 'IN CORSO' });
+    }
+
+    if (this.countTerminati > 0) {
+      this.filtri.push({ id: 3, desc: 'CONCLUSO', lbl: 'CONCLUSI' });
+    }
+
+    this.filtri.push({ id: 4, desc: 'TUTTI', lbl: 'TUTTI' });
 
   }
 
-  elimina(){
-    console.log(this.idTorneoDaEliminare)
-    this.mieiTorneiService.eliminaTorneo(this.idTorneoDaEliminare)
+  filtra(filtroIn) {
+    filtroIn.attivo = 1;
+    this.filtri.forEach(filtro => {
+      if (filtroIn.id != filtro.id) {
+        filtro.attivo = 0;
+      }
+    })
 
-    window.location.reload()
-
+    if (filtroIn.desc !== 'TUTTI') {
+      this.mieiTorneiService.getMieiTorneiFiltrati(filtroIn.desc, this.currentUser.id).subscribe(tornei => {
+        this.arrayTornei = tornei.result;
+      });
+    } else {
+      this.getTorneiAll();
+    }
   }
 
 }

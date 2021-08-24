@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { ClassificaGlobale } from 'src/app/core/model/ClassificaGlobale';
-import { Utente } from 'src/app/core/model/Utente.interface';
-import { selectClassificaGlobale } from 'src/app/redux/classificaGlobale';
-import { selectUtente } from 'src/app/redux/utente';
+import { Store } from '@ngrx/store';
 import { ClassificaGlobaleService } from 'src/app/services/classificaGlobale/classifica-globale.service';
-import { UtenteService } from 'src/app/services/utente/utente.service';
+import { UtenteService } from './../../../services/utente/utente.service';
+
+function sortByDate(a, b) {
+  if (a.punteggioTotale > b.punteggioTotale) {
+    return -1;
+  }
+  if (a.punteggioTotale < b.punteggioTotale) {
+    return 1;
+  }
+  return 0;
+}
 
 @Component({
   selector: 'app-home',
@@ -17,51 +23,65 @@ import { UtenteService } from 'src/app/services/utente/utente.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private classificaGlobaleService: ClassificaGlobaleService, 
+    private classificaGlobaleService: ClassificaGlobaleService,
     private utenteService: UtenteService,
-    private store: Store, 
-    private modalService: NgbModal) { 
+    private store: Store,
+    private modalService: NgbModal,
+    private router: Router) {
 
-    this.classificaGlobaleService.classificaGlobale()
-    this.utenteService.elencoUtenti();
+    this.getUtenti();
 
   }
 
-  sesso = sessionStorage.getItem('sesso')
+  utenti = [];
 
-  idPlayerPassato : number
-  usernameUtentePassato : string
-  openPlayerDetailModal(content:string, idPlayer:number, utenteUsername: string){
-    this.modalService.open(content)
-    this.idPlayerPassato = idPlayer
-    this.usernameUtentePassato = utenteUsername
+  classificaGlobale: any;
+  classificaGlobaleTrovata: any;
 
-    console.log("aperto modale dettaglio globale player : "+ this.idPlayerPassato, this.usernameUtentePassato)
+  imgSrc = "../../../../assets/images/kraken-2.png";
+  imgSrc2 = "../../../../assets/images/octopus.png";
+  imgSrc3 = "../../../../assets/images/medal.png";
+
+
+  getUtenti() {
+    this.utenteService.elencoUtenti().subscribe(utenti => {
+      let utentiTrovati: any;
+      utentiTrovati = utenti;
+      this.utenti = utentiTrovati.result;
+      this.getElencoClassificaGlobale();
+    });
   }
 
-  playerInGara = 0
-  conta = 0
+  getElencoClassificaGlobale() {
+    this.classificaGlobaleService.elencoClassifica().subscribe(classifica => {
+      let clas: any;
+      clas = classifica;
+      this.classificaGlobale = clas.result;
+
+      this.classificaGlobale.forEach(element => {
+        this.utenti.forEach(utente => {
+          if (element.idPlayer == utente.id) {
+            element.username = utente.username;
+            if (utente.coloreavatar != null) {
+              element.coloreAvatar = utente.coloreavatar
+            } else {
+              element.coloreAvatar = "blu";
+            }
+          }
+        });
+      });
+
+      this.classificaGlobale.sort(sortByDate);
+
+    });
+  }
+
+  goToTornei() {
+    this.router.navigateByUrl('/tornei')
+  }
 
   ngOnInit(): void {
 
-    this.store.pipe(select(selectClassificaGlobale)).subscribe((tornei) => {
-      tornei.forEach(torneo => {
-          this.conta ++ 
-          console.log("trovato")
-      })
-
-      this.playerInGara = this.conta
-      this.conta = 0
-    })
-
-  }
-
-  get classificaGlobale():Observable<ClassificaGlobale[]> {
-    return this.store.pipe(select(selectClassificaGlobale))
-  }
-
-  get utenti():Observable<Utente[]>{
-    return this.store.pipe(select(selectUtente))
   }
 
 

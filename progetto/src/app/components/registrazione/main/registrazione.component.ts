@@ -11,46 +11,13 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class RegistrazioneComponent implements OnInit {
 
-  constructor(private fb:FormBuilder,private store: Store, private router: Router,private loginService: LoginService) { 
-
-
-    this.mesiSelect = [
-      {label:'Gennaio',value:'01'},
-      {label:'Febbraio',value:'02'}, 
-      {label:'Marzo',value:'03'},
-      {label:'Aprile',value:'04'},
-      {label:'Maggio',value:'05'}, 
-      {label:'Giugno',value:'06'},
-      {label:'Luglio',value:'07'},
-      {label:'Agosto',value:'08'},
-      {label:'Settembre',value:'09'},
-      {label:'Ottombre',value:'10'},
-      {label:'Novembre',value:'11'},
-      {label:'Dicembre',value:'12'}
-    ]
-
-    for(let i = 1; i<=31; i++){
-      this.giorniSelect.push({label:i})
-    }
-
-    for(let i = 1970; i<=2021; i++){
-      this.anniSelect.push({label:i})
-    }
+  constructor(private fb: FormBuilder, private store: Store, private router: Router, private loginService: LoginService) {
 
   }
-  
-  creaNuovoUtenteForm:FormGroup
 
-  sessoSelect = [
-    {label:'maschio'},{label:'femmina'},{label:'altro'}
-  ]
-
-  giorniSelect = []
-  anniSelect = []
-  mesiSelect = []
-
-  datanascita:string
-
+  creaNuovoUtenteForm: FormGroup
+  erroreCreazione = false;
+  erroreMsg = '';
 
   ngOnInit(): void {
 
@@ -59,48 +26,45 @@ export class RegistrazioneComponent implements OnInit {
       cognome: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      email: ['', Validators.required],
-      genere: ['', Validators.required],
-      mese: ['', Validators.required],
-      giorno: ['', Validators.required],
-      anno: ['', Validators.required],
+      email: ['', Validators.required]
     })
   }
 
-  erroreSign : string
+  erroreSign: string
 
-  registrati(){
-    this.datanascita = this.creaNuovoUtenteForm.value.mese + "-" + this.creaNuovoUtenteForm.value.giorno + "-" + this.creaNuovoUtenteForm.value.anno
-    this.loginService.nuovoUtente(
-      this.creaNuovoUtenteForm.value.nome,
-      this.creaNuovoUtenteForm.value.cognome,
-      this.creaNuovoUtenteForm.value.username,
-      this.creaNuovoUtenteForm.value.password,
-      this.creaNuovoUtenteForm.value.email,
-      this.creaNuovoUtenteForm.value.genere,
-      this.datanascita
-    )
+  registrati() {
+    this.loginService.registraUtente(this.creaNuovoUtenteForm.value).subscribe(res => {
+      if (res.result == null) {
+        this.erroreCreazione = true;
+        this.erroreMsg = res.errore
+      } else {
+        this.loginService.loginUtente(this.creaNuovoUtenteForm.value.username, this.creaNuovoUtenteForm.value.password).subscribe(res => {
+          if (res.result != null) {
+            sessionStorage.setItem("utente", JSON.stringify(res.result))
+            this.router.navigate(['/home']);
+          }
+        })
+      }
+    })
 
-    this.erroreSign = sessionStorage.getItem('errorSignUp')
-    console.log('errore ?',this.erroreSign)
   }
 
   toggled = true
   passwordType = 'password'
 
-  togglePassword(){
-    if(this.toggled){
+  togglePassword() {
+    if (this.toggled) {
       this.toggled = false
       this.passwordType = 'text'
     }
-    else{
+    else {
       this.toggled = true
       this.passwordType = 'password'
     }
   }
 
-  resetForm(){
+  resetForm() {
     this.creaNuovoUtenteForm.reset()
-    sessionStorage.removeItem('errorSignUp')    
+    sessionStorage.removeItem('errorSignUp')
   }
 }

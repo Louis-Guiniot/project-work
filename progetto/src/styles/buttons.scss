@@ -1,52 +1,56 @@
 .btn {
-    font-size: 25px;
-    border-radius: 10px;
+  font-size: 25px;
+  border-radius: 10px;
 }
 
 .close {
-    color: #fff;
+  color: #fff;
 }
 
 .btn-card {
-    width: 100%;
-    background-color: #1f1b24;
+  width: 100%;
+  background-color: #1f1b24;
+  color: #fff;
+  border: 2px solid rgba(233, 233, 233, 0.555);
+  &:hover {
+    cursor: pointer;
+    background-color: var(--accent);
+    border: 2px solid var(--accent);
     color: #fff;
-    border: 2px solid rgba(233, 233, 233, 0.555);
-    &:hover {
-        cursor: pointer;
-        background-color: #BB86FC;
-        border: 2px solid #BB86FC;
-        color: #fff;
-    }
+  }
 }
 
 .btn-insert {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .primary-button {
-    background-color: #BB86FC;
+  background-color: var(--accent);
+  color: #fff;
+  &:hover {
+    background-color: var(--accent-900);
     color: #fff;
-    &:hover {
-        background-color: #a56aee;
-        color: #fff;
-    }
+  }
 }
 
 .contrast-button {
+  background-color: #1f1b24;
+  color: #fff;
+  border: 1px solid rgba(233, 233, 233, 0.555);
+  cursor: default;
+  &:hover {
+    cursor: default;
     background-color: #1f1b24;
     color: #fff;
-    border: 1px solid rgba(233, 233, 233, 0.555);
-    cursor: default;
-    &:hover {
-        cursor: default;
-        background-color: #1f1b24;
-        color: #fff;
-    }
+  }
+}
+
+.btn {
+  font-size: 20px;
 }
 
 @media (max-width: 800px) {
-    .btn {
-        width: auto;
-    }
+  .btn {
+    width: auto;
+  }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { windowWhen } from 'rxjs/operators';
+import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -12,30 +12,35 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb:FormBuilder,private store: Store, private router: Router,private loginService: LoginService) { 
+  @ViewChild(ModalDirective, { static: false }) modal: ModalDirective;
+
+  utente: any;
+
+  modalRef: BsModalRef;
+
+  loginUtenteForm: FormGroup
+  erroreLogin = false;
+
+
+  recuperoForm: FormGroup;
+  erroreRecupero = false;
+  checkRecupero = false;
+  nonTrovata = false;
+
+  segnalaOK: any;
+
+
+  toggled = true
+  passwordType = 'password'
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private router: Router,
+    private loginService: LoginService,
+    private modalService: BsModalService) {
 
   }
-
-  creaNuovoUtenteForm:FormGroup
-  loginUtenteForm:FormGroup
-
-  inputFormLogin = [
-    {formControlName:'username',placeholder:'username',type:'text'},
-    {formControlName:'password',placeholder:'password',type:'password'}
-  ]
-
-  inputFormRegistrazione = [
-    {formControlName:'nome',placeholder:'nome',type:'text'},{formControlName:'cognome',placeholder:'cognome',type:'text'},
-    {formControlName:'username',placeholder:'username',type:'text'},{formControlName:'password',placeholder:'password',type:'password'},
-    {formControlName:'email',placeholder:'email',type:'text'},{formControlName:'datanascita',placeholder:'data di nascita gg-mm-aaaa',type:'text'},
-  ]
-
-  radioFormRegistrazione = [
-    {label:'maschio'},{label:'femmina'},{label:'altro'}
-  ]
-
-
-  active = 1
 
   ngOnInit(): void {
 
@@ -44,52 +49,76 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
     })
 
-  }
-
-  erroreLogin: string
-  count = 0
-
-  login(){
-    this.loginService.loginUtente(this.loginUtenteForm.value.username,this.loginUtenteForm.value.password)
-
-    this.erroreLogin = sessionStorage.getItem('error')
-    console.log('errore ?',this.erroreLogin)
-
-    if(sessionStorage.getItem('error')){
-      this.count ++
-    }
-
-    console.log("conta", this.count)
-
-    if(this.count == 5){
-      window.alert("login sbagliata troppe volte, per motivi di sicurezza la pagina verrà ricaricata")
-      this.count = 0
-
-      sessionStorage.removeItem('error')
-      window.location.reload()
-    }
-
+    this.recuperoForm = this.fb.group({
+      email: ['', Validators.required],
+      password: [''],
+    })
 
   }
 
-  toggled = true
-  passwordType = 'password'
+  login() {
+    this.loginService.loginUtente(this.loginUtenteForm.value.username, this.loginUtenteForm.value.password).subscribe(val => {
+      if (val.result != null) {
+        sessionStorage.setItem("utente", JSON.stringify(val.result))
+        this.router.navigate(['/home'])
+      } else {
+        this.erroreLogin = true;
+      }
+    })
+  }
 
-  togglePassword(){
-    if(this.toggled){
+  checkEmail() {
+    this.loginService.checkEmail(this.recuperoForm.value.email).subscribe(res => {
+      if (res.result != null) {
+        this.checkRecupero = true;
+        this.utente = res.result;
+        this.recuperoForm.get('email').clearValidators();
+        this.recuperoForm.get('password').setValidators(Validators.required);
+        this.recuperoForm.updateValueAndValidity();
+      } else {
+        this.nonTrovata = true;
+      }
+    })
+  }
+
+  reimposta() {
+    this.utente.password = this.recuperoForm.value.password;
+    this.loginService.updateUtente(this.utente).subscribe(res => {
+      if (res.result != null) {
+        this.segnalaOK = true;
+      }
+    })
+  }
+
+
+  togglePassword() {
+    if (this.toggled) {
       this.toggled = false
       this.passwordType = 'text'
     }
-    else{
+    else {
       this.toggled = true
       this.passwordType = 'password'
     }
   }
 
-  resetForm(){
+  resetForm() {
 
     this.erroreLogin = null
     this.loginUtenteForm.reset()
   }
 
+  openModal() {
+    this.modal.show();
+  }
+
+  closeModal() {
+    this.modal.hide();
+  }
+
+  handler(type: string, $event: ModalDirective) {
+    if ($event.dismissReason) {
+      this.recuperoForm.reset();
+    }
+  }
 }

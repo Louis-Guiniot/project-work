@@ -1,42 +1,45 @@
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <span class="nav-item nome-progetto">TheT</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            
-            <ng-container *ngIf="isToggle">
-                <i class="bi bi-chevron-bar-up" (click)="openMenu()"></i>
-            </ng-container>
-            <ng-container *ngIf="!isToggle">
-                <i class="bi bi-list" (click)="closeMenu()"></i>            
-            </ng-container>
+<!-- <nav class="navbar-expand-lg" id="navbar" [ngClass]="isScrolling ? 'scrolling' : 'no-scrolling'">
+  <div class="container-fluid p-0 d-flex flex-column flex-md-row">
 
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height:auto;">
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="homeUrl" [routerLinkActive]="['active']"><i class="bi bi-house-door-fill"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="mieiTorneiUrl" [routerLinkActive]="['active']"><i class="bi bi-server"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="torneiUrl" [routerLinkActive]="['active']"><i class="bi bi-globe"></i>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="loggato()">
-                    <a class="nav-link" [routerLink]="profiloUrl" [routerLinkActive]="['active']"><i class="bi bi-person-circle"></i></a>
-                </li>
-                <li class="nav-item" *ngIf="!loggato()">
-                    <a class="nav-link" [routerLink]="signUpUrl" [routerLinkActive]="['active']">REGISTRATI</a>
-                </li>
-                <li class="nav-item" *ngIf="!loggato()">
-                    <a class="nav-link" [routerLink]="loginUrl" [routerLinkActive]="['active']">ACCEDI</a>
-                </li>
-                <li class="nav-item" *ngIf="loggato()">
-                    <a class="nav-link" (click)="logout()"><i class="bi bi-arrow-right-circle"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    <span class="nav-item nome-progetto" (click)="toggle()">TT</span>
+
+    <ul class="flex-column flex-md-row p-0" [ngClass]="isToggle ? 'd-inline-flex' : 'd-none'">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="homeUrl" [routerLinkActive]="['active']"><i
+            class="bi bi-house-door-fill"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="mieiTorneiUrl" [routerLinkActive]="['active']"><i class="bi bi-server"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="torneiUrl" [routerLinkActive]="['active']"><i class="bi bi-globe"></i>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="loggato()">
+        <a class="nav-link" [routerLink]="profiloUrl" [routerLinkActive]="['active']"><i
+            class="bi bi-person-circle"></i></a>
+      </li>
+      <li class="nav-item" *ngIf="!loggato()">
+        <a class="nav-link" [routerLink]="signUpUrl" [routerLinkActive]="['active']">REGISTRATI</a>
+      </li>
+      <li class="nav-item" *ngIf="!loggato()">
+        <a class="nav-link" [routerLink]="loginUrl" [routerLinkActive]="['active']">ACCEDI</a>
+      </li>
+      <li class="nav-item" *ngIf="loggato()">
+        <a class="nav-link" (click)="logout()"><i class="bi bi-arrow-right-circle"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
+
+<div class="topnav">
+  <a [routerLink]="homeUrl" [routerLinkActive]="['active']">Home</a>
+  <a [routerLink]="torneiUrl" [routerLinkActive]="['active']">Tornei online</a>
+  <a [routerLink]="mieiTorneiUrl" [routerLinkActive]="['active']" *ngIf="loggato()">Miei tornei</a>
+  <a [routerLink]="profiloUrl" [routerLinkActive]="['active']" *ngIf="loggato()">Profilo</a>
+  <a [routerLink]="signUpUrl" [routerLinkActive]="['active']" *ngIf="!loggato()">REGISTRATI</a>
+  <a [routerLink]="loginUrl" [routerLinkActive]="['active']" *ngIf="!loggato()">ACCEDI</a>
+  <a (click)="logout()" *ngIf="loggato()" class="float-right"><i class="bi bi-box-arrow-right"></i></a>
+
+</div>

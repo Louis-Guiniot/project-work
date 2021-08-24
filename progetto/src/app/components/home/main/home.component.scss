@@ -1,107 +1,72 @@
-@import "src/styles/input.scss";
-@import "src/styles/buttons.scss";
-@import "src/styles/typography.scss";
-@import "src/styles/modal.scss";
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #8C52FF;
-    color: white;
-    text-align: center;
-    p {
-        margin: 0;
-        padding: 1rem;
-        font-size: 20px;
-        font-weight: 300;
-    }
+@import "../../../../styles/typography.scss";
+
+.header-octo {
+  img {
+    width: 70%;
+  }
 }
 
-.carousel {
-    margin: auto;
-    width: 60%;
+.item {
+  border-radius: 30px 15px 30px 15px;
+  transition: all 300ms ease-in-out;
+  -webkit-box-shadow: 5px 5px 0px 0px #289fed, 10px 10px 0px 0px #5fb8ff;
+  box-shadow: 5px 5px 0px 0px #289fed, 10px 10px 0px 0px #5fb8ff;
+  .header {
     img {
-        width: 100%;
-        height: 400px;
+      width: 50px;
     }
-}
+  }
+  .username {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
 
-.box {
-    width: 100%;
-    padding: 2%;
-}
-
-.wrapper {
-    display: grid;
-    width: 100%;
-    margin: 0;
-    grid-template-rows: auto auto;
-    grid-template-columns: 100%;
-    gap: 25px;
-}
-
-.content {
-    grid-row-end: 2;
-}
-
-.grid-players {
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    gap: 20px;
-    padding: 15px;
-}
-
-.card {
-    border: 1px solid #fff;
-    background-color: #1f1b24;
-    &:hover {
-        cursor: pointer;
-        #detail-span {
-            text-decoration: underline;
-        }
+  &:hover {
+    .divider {
+      width: 100%;
     }
+  }
+
+  .divider {
+    border-bottom: 8px rgb(61, 122, 245) solid;
+    width: 25px;
+    transition: 300ms ease-in-out;
+  }
+
+  .info {
+    display: flex;
+    justify-content: space-between;
+    .valore {
+      width: 50px;
+      text-align: center;
+    }
+  }
 }
 
-.count-tournaments {
-    width: 100%;
-    text-align: right;
+.header-base {
+  font-size: 2rem;
+  font-weight: 900;
 }
 
-.detail-span {
-    padding: 1px;
-    font-size: 35px;
-    font-weight: 500;
-    width: 100%;
+.content-base {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  width: 40ch;
 }
 
-.table-globale {
-    font-size: 35px;
-    border-top: none;
-    width: 100%;
-    td:nth-child(even) {
-        color: #8C52FF;
-        font-weight: 300;
-        text-align: right;
-    }
-    td:nth-child(odd) {
-        font-weight: 200;
-        color: #fff;
-    }
+.posizione {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--accent);
+  border: 1px lightgray solid;
+  position: absolute;
+  top: -15px;
+  right: 0px;
+  width: 45px;
+  text-align: center;
+  background: #f1f1f1;
 }
 
-@media (max-width: 700px) {
-    .content {
-        width: 100%;
-    }
-    .contrast-button {
-        width: auto;
-    }
-    .grid-players {
-        grid-template-columns: 100%;
-        padding: 5px;
-    }
-    .table-globale {
-        font-size: 20px;
-    }
+.medal {
+  width: 30px;
 }

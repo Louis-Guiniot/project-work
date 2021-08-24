@@ -1,0 +1,97 @@
+.torneo {
+  border-radius: 30px 15px 30px 15px;
+  transition: all 300ms ease-in-out;
+  -webkit-box-shadow: 5px 5px 0px 0px #289fed, 10px 10px 0px 0px #5fb8ff;
+  box-shadow: 5px 5px 0px 0px #289fed, 10px 10px 0px 0px #5fb8ff;
+
+  .header {
+    .nome,
+    .stato {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    .stato {
+      width: 30%;
+      text-align: right;
+    }
+
+    .nome {
+      width: 70%;
+    }
+
+    .fa-gg-circle {
+      padding-bottom: 5px;
+      border-bottom: 5px solid var(--accent);
+    }
+  }
+
+  .info-lbl {
+    font-weight: 700;
+  }
+
+  .liberi {
+    font-weight: 700;
+  }
+
+  .octo-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img:not(.state) {
+    width: 100px;
+    opacity: 0.4;
+  }
+
+  .state {
+    width: 30px;
+  }
+}
+
+.card-recap {
+  width: 100%;
+  background: var(--accent);
+  color: white;
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-align: center;
+  display: inline-flex;
+
+  .count,
+  .lbl {
+    padding: 5%;
+  }
+  .count {
+    background-color: var(--accent-900);
+    width: 25%;
+  }
+}
+
+.filtro {
+  background: azure;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--accent);
+  font-weight: 900;
+}
+
+.filtro-attivo {
+  background-color: var(--accent);
+  color: white;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 50%;
+  top: -16px;
+  right: -16px;
+  position: absolute;
+  z-index: 10;
+}

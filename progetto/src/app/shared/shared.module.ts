@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgwWowModule } from 'ngx-wow';
 
 @NgModule({
   declarations: [],
@@ -9,13 +11,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgwWowModule,
+    ModalModule.forRoot()
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    NgwWowModule
   ]
 })
 export class SharedModule { }

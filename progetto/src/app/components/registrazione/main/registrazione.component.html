@@ -1,64 +1,85 @@
-<div class="box-log">
-    <div class="form">
-        <form [formGroup]="creaNuovoUtenteForm">
-            <div class="body">
+<section>
+    <form [formGroup]="creaNuovoUtenteForm">
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-12 col-lg-6">
+                    <form [formGroup]="creaNuovoUtenteForm">
+                        <div class="body relative">
 
-                <div class="row">
-                    <div class="col">
-                        <div class="input-container">
-                            <input type="text" formControlName="nome" class="input-field" placeholder="Nome">
+
+                            <img src="../../../../assets/images/octologin.png" alt="" class="octo-bg">
+
+                            <div class="d-flex gap-2 flex-column">
+                                <div class="d-flex">
+                                    <div class="input-container mr-2">
+                                        <input type="text" formControlName="username" class="input-field"
+                                            placeholder="Username">
+                                        <i class="bi bi-person-circle icon"></i>
+
+                                    </div>
+                                    <div class="input-container ml-2">
+                                        <input type="{{passwordType}}" formControlName="password" class="input-field"
+                                            placeholder="Password">
+                                        <i class="bi bi-eye-fill icon" (click)="togglePassword()" *ngIf="toggled"></i>
+                                        <i class="bi bi-eye-slash-fill icon" (click)="togglePassword()"
+                                            *ngIf="!toggled"></i>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="input-container mr-2">
+                                        <input type="text" formControlName="nome" class="input-field"
+                                            placeholder="Nome">
+                                    </div>
+                                    <div class="input-container ml-2">
+                                        <input type="text" formControlName="cognome" class="input-field"
+                                            placeholder="Cognome">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="input-container">
+                                        <input type="text" formControlName="email" class="input-field"
+                                            placeholder="Email">
+                                        <i class="icon">@</i>
+                                    </div>
+                                </div>
+
+                                <div class="buttons">
+                                    <button (click)="registrati();" type="submit" class="btn primary-button mr-1"
+                                        [disabled]="creaNuovoUtenteForm.invalid">
+                                        registrati
+                                    </button>
+                                    <button (click)="resetForm();" class="btn btn-danger">
+                                        cancella
+                                    </button>
+                                </div>
+
+                                <div class="messages">
+                                    <div class="found" routerLink="/login">
+                                        Hai già un account? Accedi!
+                                    </div>
+                                    <div class="error" *ngIf="erroreCreazione">
+                                        <span class="msg-error">{{erroreMsg}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="input-container">
-                            <input type="text" formControlName="cognome" class="input-field" placeholder="Cognome">
-                        </div>
-                    </div>
+
+                        <!-- <div class="messages mt-3">
+                            <div class="found" (click)="openModal(template)">
+                                Non ricordi la password? Clicca per reimpostarla
+                            </div>
+                            <div class="error" *ngIf="erroreLogin">
+                                <span class="msg-error">Credenziali errate, riprova</span>
+                            </div>
+                        </div> -->
+                    </form>
                 </div>
-
-
-                <div class="row">
-                    <div class="col">
-                        <div class="input-container">
-                            <i class="bi bi-person-circle icon"></i>
-                            <input type="text" formControlName="username" class="input-field" placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="input-container">
-                            <ng-container *ngIf="toggled">
-                                <i class="bi bi-eye-fill icon" (click)="togglePassword()"></i>
-                            </ng-container>
-                            <ng-container *ngIf="!toggled">
-                                <i class="bi bi-eye-slash-fill icon" (click)="togglePassword()"></i>
-                            </ng-container>
-                            <input type="{{passwordType}}" formControlName="password" class="input-field" placeholder="Password">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input-container">
-                    <i class="bi bi-at icon"></i>
-                    <input type="text" formControlName="email" class="input-field" placeholder="Indirizzo e-mail">
-                </div>
-
-                <div class="buttons">
-                    <button (click)="registrati();" type="submit" class="btn primary-button" [disabled]="creaNuovoUtenteForm.invalid">
-                        conferma
-                    </button>
-                    <button (click)="resetForm();" class="btn btn-danger">
-                        cancella
-                    </button>
-                </div>
-
-                <ng-container *ngIf="erroreSign != null ">
-                    <div class="error">
-                        <span class="msg-error">username e/o email gia' presenti, riprova</span>
-                    </div>
-
-                </ng-container>
-
             </div>
-        </form>
-    </div>
-</div>
+        </div>
+    </form>
+</section>

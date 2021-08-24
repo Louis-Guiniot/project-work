@@ -1,354 +1,125 @@
-<div class="box">
-    <div class="wrapper">
-        <div class="text content">
-            <p>
-                Questa è la pagina di <span class="primary-text">menagement</span> dei tuoi tornei. <br> Qui potrai creare, modificare ed eliminare i tuoi tornei con un semplice
-                <span class="primary-text">click</span>.
-                <br>
-
-                <ng-container *ngIf="numeroTornei == 0">
-                    Oh no, non hai mai creato un torneo fino ad ora. Che aspetti ? <br> Clicca su crea e sbizzarrisciti. <br>
-                </ng-container>
-            </p>
-
-        </div>
-    </div>
-
-    <div class="count-tournaments">
-        <div class="btn-left">
-            <i class="bi bi-plus-circle-fill" (click)="openInsertModal(insertFormTorneo)"></i>
-
-        </div>
-        <div class="btn-right">
-            <button class="btn contrast-button">miei tornei online {{torneiPlayer}}</button>
-        </div>
-    </div>
-
-    <div class="grid-cards">
-        <ng-container class="item" *ngFor="let torneo of mieiTornei| async">
-            <ng-container *ngIf="torneo.idCreatore == idCreatore">
-                <div class="card" [ngClass]="{'torneo-card-full' : torneo.postiLiberi == 0}" (click)="openEditModal(updateTorneoForm, torneo.id)">
-                    <div class="card-body">
-                        <span class="detail-span primary-text">{{torneo.nome}}</span>
-                        <h3 class="card-subtitle mb-2 text-muted">{{torneo.gioco}} - {{torneo.piattaforma}}</h3>
-                        <p class="text">
-                            Iscrizioni al momento {{torneo.iscrizioni}}
-                            <br> Posti liberi <span class="posti-full">{{torneo.postiLiberi}}</span>
-                            <br> Stato <span class="primary-text posti-full">{{torneo.stato | uppercase}}</span> <br>
+<section class="box bg-grey">
+    <div class="header">
+        <div class="container">
+            <div class="row flex-column flex-md-row justify-content-center align-items-center">
+                <div class="col-12 col-lg-6 wow fadeInLeft">
+                    <div class="title">
+                        <span class="sub">M</span>iei Tornei
+                    </div>
+                    <div class="content mb-3">
+                        Questa è la pagina di <span class="primary-text">menagement</span> dei tuoi tornei. <br> Qui
+                        potrai
+                        creare, modificare
+                        ed eliminare i tuoi tornei con un semplice
+                        <span class="primary-text">click</span>.
+                        <br>
+                        <br>
+                        <ng-container *ngIf="torneiTot == 0">
+                            Oh no, non hai mai creato un torneo fino ad ora. Che aspetti ? <br> Clicca su <span
+                                class="primary-text">aggiungi
+                                torneo</span> e sbizzarrisciti. <br>
+                        </ng-container>
                     </div>
                 </div>
-            </ng-container>
-        </ng-container>
-    </div>
-</div>
+                <div class="col-12 col-lg-6 mt-3 mt-lg-0" data-aos="flip-up">
+                    <div class="row d-flex justify-content-center justify-content-lg-end">
+                        <div class="col-8 colo-lg-6">
 
-
-
-<ng-template #insertFormTorneo let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Creazione nuovo torneo</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <i class="bi bi-x-circle-fill"></i>
-        </button>
-    </div>
-    <form [formGroup]="creaNuovoTorneoForm" (ngSubmit)="crea()">
-        <div class="modal-body step-modal">
-
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" ngbTooltip="generali"><i class="bi bi-info-circle"></i>
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" ngbTooltip="requisiti"><i class="bi bi-gear-wide-connected"></i>
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" ngbTooltip="premi"><i class="bi bi-trophy-fill"></i>
-
-                    </button>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Nome</label>
-                                <input type="text" class="input-field" placeholder="inserisci nome" formControlName="nome" ngbAutoFocus>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Gioco</label>
-                                <input type="text" class="input-field" placeholder="inserisci gioco" formControlName="gioco">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Piattaforma</label>
-                                <input type="text" class="input-field" placeholder="inserisci piattaforma" formControlName="piattaforma">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Descrizione</label>
-                                <textarea type="text" class="input-field" placeholder="inserisci descrizione" formControlName="descrizione"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Partite</label>
-                                <input type="text" class="input-field" placeholder="inserisci n° partite" formControlName="partite">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Quota</label>
-                                <input type="text" class="input-field" placeholder="inserisci quota" formControlName="quota">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Posti Max</label>
-                                <input type="text" class="input-field" placeholder="inserisci posti max" formControlName="capienza">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Posti Min</label>
-                                <input type="text" class="input-field" placeholder="inserisci posti min" formControlName="capienzaMinima">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Primo premio</label>
-                                <input type="text" class="input-field" placeholder="inserisci 1° premio" formControlName="premioPrimo">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Secondo premio</label>
-                                <input type="text" class="input-field" placeholder="inserisci 2° premio" formControlName="premioSecondo">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-container">
-                                <label class="icon text">Terzo premio</label>
-                                <input type="text" class="input-field" placeholder="inserisci 3° premio" formControlName="premioTerzo">
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-        </div>
-
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">
-                chiudi
-            </button>
-            <button type="submit" class="btn primary-button" [disabled]="creaNuovoTorneoForm.invalid" (click)="modal.close('Save click')">
-                aggiungi
-            </button>
-        </div>
-    </form>
-</ng-template>
-
-<ng-template #updateTorneoForm let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Modifica torneo</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <i class="bi bi-x-circle-fill"></i>        
-        </button>
-    </div>
-    <form [formGroup]="editaTorneoForm" (ngSubmit)="edita()">
-        <div *ngFor="let torneo of mieiTornei | async">
-            <div *ngIf="torneo.id == idTorneoDaEditare">
-                <div class="modal-body step-modal">
-
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" ngbTooltip="generali"><i class="bi bi-info-circle"></i>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" ngbTooltip="requisiti"><i class="bi bi-gear-wide-connected"></i>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" ngbTooltip="premi"><i class="bi bi-trophy-fill"></i>
-        
-                            </button>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Nome</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.nome}}" formControlName="nome" ngbAutoFocus>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Gioco</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.gioco}}" formControlName="gioco">
-                                    </div>
-                                </div>
+                            <div class="card-recap mb-1">
+                                <div class="count">{{countTornei}}</div>
+                                <div class="lbl">Online</div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Piattaforma</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.piattaforma}}" formControlName="piattaforma">
-                                    </div>
-                                </div>
+                            <div class="card-recap mb-1">
+                                <div class="count">{{countPronti}}</div>
+                                <div class="lbl">Pronti</div>
                             </div>
 
-
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Descrizione</label>
-                                        <textarea type="text" class="input-field" placeholder="{{torneo.descrizione}}" formControlName="descrizione"></textarea>
-                                    </div>
-                                </div>
+                            <div class="card-recap">
+                                <div class="count">{{countTerminati}}</div>
+                                <div class="lbl">Terminati</div>
                             </div>
-
-                        </div>
-
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Partite</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.partite}}" formControlName="partite">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Quota</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.quota}}" formControlName="quota">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Posti Max</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.capienza}}" formControlName="capienza">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Posti Min</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.capienzaMinima}}" formControlName="capienzaMinima">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Primo premio</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.premioPrimo}}" formControlName="premioPrimo">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Secondo premio</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.premioSecondo}}" formControlName="premioSecondo">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-container">
-                                        <label class="icon text">Terzo premio</label>
-                                        <input type="text" class="input-field" placeholder="{{torneo.premioTerzo}}" formControlName="premioTerzo">
-                                    </div>
-                                </div>
-                            </div>
-
 
                         </div>
                     </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Close click')" ngbAutofocus>
-                            chiudi
-                        </button>
-                    <button type="button" class="btn btn-danger" (click)="openDeleteModal(deleteTorneo,torneo.id,torneo.nome)">
-                            elimina
-                        </button>
-                    <button type="submit" class="btn primary-button" (click)="modal.close('Save click')">
-                        salva
-                    </button>
                 </div>
             </div>
         </div>
-    </form>
-</ng-template>
-
-<ng-template #deleteTorneo let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Elimina torneo</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <i class="bi bi-x-circle-fill"></i>
-        </button>
     </div>
-    <form (ngSubmit)="elimina()">
-        <div class="modal-body">
-            <p class="text">Sei sicuro di voler eliminare il torneo <b class="primary-text">{{nomeTorneoDaEliminare}}</b> ?</p>
+</section>
+
+<section class="bg-white" *ngIf="arrayTornei && arrayTornei.length > 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-12 d-flex justify-content-center flex-wrap">
+                        <button class="filtro relative" *ngFor="let filtro of filtri"
+                            [ngClass]="filtro.attivo == 1 ? 'filtro-attivo' : 'non-attivo' " (click)="filtra(filtro)">
+                            {{filtro.lbl}}
+                            <span class="absolute badge bg-danger" *ngIf="filtro.attivo">
+                                {{arrayTornei.length}}
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn primary-button" (click)="modal.close('Close click')" ngbAutofocus>
-                        chiudi
-                    </button>
-            <button type="submit" class="btn btn-danger">
-                        elimina
-                    </button>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of arrayTornei" data-aos="fade-right">
+                <div class="torneo border p-3 mt-3 mb-3">
+
+                    <div class="header d-inline-flex justify-content-between w-100 mb-3">
+                        <div class="nome">
+                            {{item.nome}}
+                        </div>
+                        <div class="stato d-flex justify-content-evenly">
+                            <img src="../../../../assets/images/settings.png" alt="" class="state">
+                            <img src="../../../../assets/images/pyramid1.png" alt="" class="state"
+                                *ngIf="item.stato === 'PRONTO' ">
+                            <img src="../../../../assets/images/pyramid2.png" alt="" class="state"
+                                *ngIf="item.stato === 'CONCLUSO' ">
+                            <img src="../../../../assets/images/pyramid3.png" alt="" class="state"
+                                *ngIf="item.stato === 'IN CORSO' ">
+                        </div>
+                    </div>
+
+                    <div class="item-body relative">
+                        <div class="d-flex justify-content-between">
+                            <div class="gioco">
+                                <div class="info-lbl d-block">gioco</div>
+                                {{item.gioco}}
+                            </div>
+                            <div class="platform text-right">
+                                <div class="info-lbl d-block" d-block>piattaforma </div>
+                                {{item.piattaforma}}
+                            </div>
+                        </div>
+
+                        <div class="posti d-flex justify-content-between mt-3">
+                            <div class="capienza">
+                                <div class="info-lbl d-block">posti liberi</div>
+                                <span class="liberi text-danger"
+                                    *ngIf="item.postiLiberi == 0">{{item.postiLiberi}}</span>
+                                <span class="liberi text-success"
+                                    *ngIf="item.postiLiberi > 0">{{item.postiLiberi}}</span>
+                            </div>
+                            <div class="tot-iscrizioni text-right">
+                                <div class="info-lbl d-block">iscrizioni</div>
+                                {{item.iscrizioni}}/{{item.capienza}}
+                            </div>
+                        </div>
+
+                        <div class="octo-bg">
+                            <!-- <img src="../../../../assets/images/octobg.png" alt=""> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </form>
-</ng-template>
+    </div>
+</section>
