@@ -10,20 +10,26 @@
                             <img src="../../../../assets/images/octologin.png" alt="" class="octo-bg">
 
                             <div class="d-flex gap-2 flex-column">
-                                <div class="d-flex">
-                                    <div class="input-container mr-2">
+                                <div class="d-flex flex-column flex-lg-row gap-2">
+                                    <div class="input-container mr-lg-2">
                                         <input type="text" formControlName="username" class="input-field"
                                             placeholder="Username">
                                         <i class="bi bi-person-circle icon"></i>
-
                                     </div>
-                                    <div class="input-container ml-2">
+
+                                    <div class="input-container ml-lg-2 relative"
+                                        [ngClass]="errorePsw ? 'errore-psw' : 'no-error'">
                                         <input type="{{passwordType}}" formControlName="password" class="input-field"
                                             placeholder="Password">
                                         <i class="bi bi-eye-fill icon" (click)="togglePassword()" *ngIf="toggled"></i>
                                         <i class="bi bi-eye-slash-fill icon" (click)="togglePassword()"
                                             *ngIf="!toggled"></i>
+
+                                        <div class="message-pdw msg-error" *ngIf="errorePsw">
+                                            Minimo 8 caratteri
+                                        </div>
                                     </div>
+
                                 </div>
 
                                 <div class="d-flex">
@@ -54,29 +60,17 @@
                                         cancella
                                     </button>
                                 </div>
-
-                                <div class="messages">
-                                    <div class="found" routerLink="/login">
-                                        Hai già un account? Accedi!
-                                    </div>
-                                    <div class="error" *ngIf="erroreCreazione">
-                                        <span class="msg-error">{{erroreMsg}}</span>
-                                    </div>
-                                </div>
-
                             </div>
-
-
                         </div>
 
-                        <!-- <div class="messages mt-3">
-                            <div class="found" (click)="openModal(template)">
-                                Non ricordi la password? Clicca per reimpostarla
+                        <div class="messages mt-2">
+                            <div class="error" *ngIf="erroreCreazione">
+                                <span class="msg-error">Username e/o email già presenti.</span>
                             </div>
-                            <div class="error" *ngIf="erroreLogin">
-                                <span class="msg-error">Credenziali errate, riprova</span>
+                            <div class="found" routerLink="/login">
+                                Hai già un account? Accedi!
                             </div>
-                        </div> -->
+                        </div>
                     </form>
                 </div>
             </div>

@@ -295,6 +295,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="row justify-content-center">
+                    <div class="col-12 d-flex justify-content-center mb-3">
+                        <i class="fas fa-list mr-3" (click)="mostraOpzioni()"
+                            [ngClass]="mostraList ? 'vis-attiva' : 'vis-no-attiva' "></i>
+                        <i class="fas fa-th" (click)="mostraOpzioni()"
+                            [ngClass]="mostraGrid ? 'vis-attiva' : 'vis-no-attiva' "></i>
+                    </div>
                     <div class="col-12 d-flex justify-content-center flex-wrap">
                         <button class="filtro relative" *ngFor="let filtro of filtri"
                             [ngClass]="filtro.attivo == 1 ? 'filtro-attivo' : 'non-attivo' " (click)="filtra(filtro)">
@@ -304,14 +310,13 @@
                                 <span class="visually-hidden">unread messages</span>
                             </span>
                         </button>
-
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of arrayTornei" data-aos="fade-right">
+        <div class="row" *ngIf="mostraGrid">
+            <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of arrayTornei">
                 <div class="torneo border p-3 mt-3 mb-3">
 
                     <div class="header d-inline-flex justify-content-between w-100 mb-3">
@@ -361,6 +366,25 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="mostraList">
+            <div class="col-12 col-lg-8 p-0">
+                <table matSort (matSortChange)="sortData($event)" class="list-table">
+                    <tr>
+                        <th mat-sort-header="nome">Nome</th>
+                        <th mat-sort-header="gioco">Gioco</th>
+                        <th mat-sort-header="piattaforma">Piattaforma</th>
+                    </tr>
+
+                    <tr *ngFor="let torneo of sortedData">
+                        <td>{{torneo.nome}}</td>
+                        <td>{{torneo.gioco}}</td>
+                        <td>{{torneo.piattaforma}}</td>
+
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

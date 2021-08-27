@@ -22,15 +22,8 @@ function sortByDate(a, b) {
 })
 export class HomeComponent implements OnInit {
 
-  constructor(
-    private classificaGlobaleService: ClassificaGlobaleService,
-    private utenteService: UtenteService,
-    private store: Store,
-    private modalService: NgbModal,
-    private router: Router) {
-
-    this.getUtenti();
-
+  get currentUser(): any {
+    return JSON.parse(sessionStorage.getItem("utente"));
   }
 
   utenti = [];
@@ -42,6 +35,16 @@ export class HomeComponent implements OnInit {
   imgSrc2 = "../../../../assets/images/octopus.png";
   imgSrc3 = "../../../../assets/images/medal.png";
 
+  constructor(
+    private classificaGlobaleService: ClassificaGlobaleService,
+    private utenteService: UtenteService,
+    private store: Store,
+    private modalService: NgbModal,
+    private router: Router) {
+
+    this.getUtenti();
+
+  }
 
   getUtenti() {
     this.utenteService.elencoUtenti().subscribe(utenti => {
@@ -65,7 +68,7 @@ export class HomeComponent implements OnInit {
             if (utente.coloreavatar != null) {
               element.coloreAvatar = utente.coloreavatar
             } else {
-              element.coloreAvatar = "blu";
+              element.coloreAvatar = "blue";
             }
           }
         });

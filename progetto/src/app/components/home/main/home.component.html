@@ -3,7 +3,10 @@
     <div class="row flex-column flex-md-row justify-content-center align-items-end">
       <div class="col-12 col-lg-6">
         <div class="title">
-          <span class="sub">B</span>envenuto nella ciurma Gamer!
+          <div *ngIf="currentUser != null"><span class="sub">B</span>entornato nella ciurma {{currentUser.username}}
+          </div>
+          <div *ngIf="currentUser == null"><span class="sub">B</span>envenuto nella ciurma gamer
+          </div>
         </div>
         <div class="content">
           Sei appena sbarcato nel mondo di TT Lorem ipsum, dolor sit amet

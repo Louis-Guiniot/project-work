@@ -7,16 +7,15 @@
 
                         <img src="../../../../assets/images/octologin.png" alt="" class="octo-bg">
                         <div class="d-flex flex-column gap-2">
-                            <div class="d-flex">
-                                <div class="input-container mr-2">
+                            <div class="d-flex flex-column flex-lg-row gap-2">
+                                <div class="input-container mr-lg-2">
                                     <input type="text" formControlName="username" class="input-field"
                                         placeholder="Username">
                                     <i class="bi bi-person-circle icon"></i>
 
                                 </div>
-                                <div class="input-container ml-2">
 
-
+                                <div class="input-container ml-lg-2">
                                     <input type="{{passwordType}}" formControlName="password" class="input-field"
                                         placeholder="Password">
                                     <i class="bi bi-eye-fill icon" (click)="togglePassword()" *ngIf="toggled"></i>
@@ -40,12 +39,15 @@
 
                     </div>
 
-                    <div class="messages">
+                    <div class="messages mt-2">
+                        <div class="error" *ngIf="erroreLogin">
+                            <span class="msg-error">Credenziali errate, riprova</span>
+                        </div>
                         <div class="found" (click)="openModal()">
                             Non ricordi la password? Clicca per reimpostarla
                         </div>
-                        <div class="error" *ngIf="erroreLogin">
-                            <span class="msg-error">Credenziali errate, riprova</span>
+                        <div class="found" routerLink="/registrazione">
+                            Non hai un account? Registrati!
                         </div>
                     </div>
                 </form>

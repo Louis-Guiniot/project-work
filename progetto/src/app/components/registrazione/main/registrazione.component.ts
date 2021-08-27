@@ -17,7 +17,7 @@ export class RegistrazioneComponent implements OnInit {
 
   creaNuovoUtenteForm: FormGroup
   erroreCreazione = false;
-  erroreMsg = '';
+  errorePsw = false;
 
   ngOnInit(): void {
 
@@ -33,19 +33,23 @@ export class RegistrazioneComponent implements OnInit {
   erroreSign: string
 
   registrati() {
-    this.loginService.registraUtente(this.creaNuovoUtenteForm.value).subscribe(res => {
-      if (res.result == null) {
-        this.erroreCreazione = true;
-        this.erroreMsg = res.errore
-      } else {
-        this.loginService.loginUtente(this.creaNuovoUtenteForm.value.username, this.creaNuovoUtenteForm.value.password).subscribe(res => {
-          if (res.result != null) {
-            sessionStorage.setItem("utente", JSON.stringify(res.result))
-            this.router.navigate(['/home']);
-          }
-        })
-      }
-    })
+    if (this.creaNuovoUtenteForm.value.password.lenght > 8) {
+      this.loginService.registraUtente(this.creaNuovoUtenteForm.value).subscribe(res => {
+        if (res.result == null) {
+          this.erroreCreazione = true;
+        } else {
+          this.loginService.loginUtente(this.creaNuovoUtenteForm.value.username, this.creaNuovoUtenteForm.value.password).subscribe(res => {
+            if (res.result != null) {
+              sessionStorage.setItem("utente", JSON.stringify(res.result))
+              this.router.navigate(['/home']);
+            }
+          })
+        }
+      })
+    } else {
+      this.errorePsw = true;
+    }
+
 
   }
 
@@ -65,6 +69,6 @@ export class RegistrazioneComponent implements OnInit {
 
   resetForm() {
     this.creaNuovoUtenteForm.reset()
-    sessionStorage.removeItem('errorSignUp')
+    this.errorePsw = false;
   }
 }

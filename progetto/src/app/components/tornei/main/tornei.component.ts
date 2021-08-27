@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -15,7 +16,7 @@ import { UtenteService } from 'src/app/services/utente/utente.service';
   templateUrl: './tornei.component.html',
   styleUrls: ['./tornei.component.scss']
 })
-export class TorneiComponent implements OnInit {
+export class TorneiComponent implements OnInit, AfterViewInit {
 
 
   arrayTornei = [];
@@ -24,6 +25,11 @@ export class TorneiComponent implements OnInit {
   countCorso = 0;
 
   filtri = [];
+
+  sortedData = [];
+
+  mostraGrid = true;
+  mostraList = false;
 
 
   constructor(
@@ -42,7 +48,6 @@ export class TorneiComponent implements OnInit {
     this.mieiTorneiService.elencoTornei()
     this.classificaGlobaleService.classificaGlobale()
     this.getTorneiOnline();
-
   }
 
   thLabels = [
@@ -86,12 +91,17 @@ export class TorneiComponent implements OnInit {
 
   }
 
+  ngAfterViewInit() {
+
+  }
+
   getTorneiOnline() {
     this.mieiTorneiService.getTorneiOnline().subscribe(res => {
       if (res.result != null) {
         let tornei = res;
         this.arrayTornei = tornei.result;
         this.countTornei = this.arrayTornei.length;
+        this.sortedData = this.arrayTornei.slice();
       }
 
       this.arrayTornei.forEach(torneo => {
@@ -109,18 +119,24 @@ export class TorneiComponent implements OnInit {
         }
       })
 
+
+
+
     });
   }
 
   getTorneiOnlineAll() {
     this.mieiTorneiService.getTorneiOnline().subscribe(tornei => {
       this.arrayTornei = tornei.result;
-
+      this.sortedData = this.arrayTornei.slice();
       this.filtri.forEach(filtro => {
         if (filtro.desc === "TUTTI") {
           filtro.attivo = 1;
         }
       })
+
+
+
     });
   }
 
@@ -149,10 +165,15 @@ export class TorneiComponent implements OnInit {
     if (filtroIn.desc !== 'TUTTI') {
       this.mieiTorneiService.getTorneiOnlineFiltrati(filtroIn.desc).subscribe(tornei => {
         this.arrayTornei = tornei.result;
+        this.sortedData = this.arrayTornei.slice();
       });
     } else {
       this.getTorneiOnlineAll();
     }
+
+
+
+
   }
 
 
@@ -189,4 +210,38 @@ export class TorneiComponent implements OnInit {
     this.router.navigateByUrl("/classifica")
     sessionStorage.setItem('generata', 'false')
   }
+
+  sortData(sort: Sort) {
+    const data = this.arrayTornei.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'nome': return compare(a.nome, b.nome, isAsc);
+        case 'gioco': return compare(a.gioco, b.gioco, isAsc);
+        case 'piattaforma': return compare(a.piattaforma, b.piattaforma, isAsc);
+
+        default: return 0;
+      }
+    });
+  }
+
+
+  mostraOpzioni() {
+    if (this.mostraGrid) {
+      this.mostraGrid = false;
+      this.mostraList = true;
+    } else {
+      this.mostraList = false;
+      this.mostraGrid = true;
+    }
+  }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

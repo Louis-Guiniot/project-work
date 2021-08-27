@@ -1,10 +1,16 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { StepperOrientation } from '@angular/cdk/stepper';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpCommunicationsService } from 'src/app/core/model/http/http-communications.service';
 import { MieiTorneiService } from 'src/app/services/miei-tornei/miei-tornei.service';
+
+
 
 @Component({
   selector: 'app-miei-tornei',
@@ -22,10 +28,6 @@ export class MieiTorneiComponent implements OnInit {
     return this.countPronti + this.countTerminati + this.countTornei;
   }
 
-  constructor(private fb: FormBuilder, private store: Store, private router: Router, private mieiTorneiService: MieiTorneiService, private modalService: NgbModal, private http: HttpCommunicationsService) {
-    this.getTornei();
-  }
-
   imgSrc = "../../../../assets/images/kraken-2.png";
   countTornei = 0;
   countTerminati = 0;
@@ -34,11 +36,24 @@ export class MieiTorneiComponent implements OnInit {
   creaNuovoTorneoForm: FormGroup
   editaTorneoForm: FormGroup
 
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+
   arrayTornei = [];
   filtri = [];
 
-  ngOnInit(): void {
+  stepperOrientation: Observable<StepperOrientation>;
 
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private router: Router,
+    private mieiTorneiService: MieiTorneiService,
+    private modalService: NgbModal,
+    private http: HttpCommunicationsService,
+    breakpointObserver: BreakpointObserver) {
 
     this.creaNuovoTorneoForm = this.fb.group({
       nome: ['', Validators.required],
@@ -67,6 +82,27 @@ export class MieiTorneiComponent implements OnInit {
       premioTerzo: ['', Validators.required],
       descrizione: ['', Validators.required],
     })
+
+    this.firstFormGroup = this.fb.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this.fb.group({
+      secondCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this.fb.group({
+      thirdCtrl: ['', Validators.required]
+    });
+
+    this.stepperOrientation = breakpointObserver.observe('(min-width: 800px)')
+      .pipe(map(({ matches }) => matches ? 'horizontal' : 'vertical'));
+
+    this.getTornei();
+  }
+
+  ngOnInit(): void {
+
+
+
 
   }
 
@@ -120,7 +156,7 @@ export class MieiTorneiComponent implements OnInit {
   caricaFiltri() {
 
     if (this.countPronti > 0) {
-      this.filtri.push({ id: 1, desc: 'ONLINE', lbl: 'PRONTI' });
+      this.filtri.push({ id: 1, desc: 'PRONTO', lbl: 'PRONTI' });
     }
 
     if (this.countTornei > 0) {
