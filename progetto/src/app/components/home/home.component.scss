@@ -1,0 +1,72 @@
+@import "src/styles/typography.scss";
+
+.header-octo {
+  img {
+    width: 70%;
+  }
+}
+
+.item {
+  border-radius: 30px 15px 30px 15px;
+  transition: all 300ms ease-in-out;
+  -webkit-box-shadow: 5px 5px 0px 0px #289fed, 10px 10px 0px 0px #5fb8ff;
+  box-shadow: 5px 5px 0px 0px #289fed, 10px 10px 0px 0px #5fb8ff;
+  .header {
+    img {
+      width: 50px;
+    }
+  }
+  .username {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+
+  &:hover {
+    .divider {
+      width: 100%;
+    }
+  }
+
+  .divider {
+    border-bottom: 8px rgb(61, 122, 245) solid;
+    width: 25px;
+    transition: 300ms ease-in-out;
+  }
+
+  .info {
+    display: flex;
+    justify-content: space-between;
+    .valore {
+      width: 50px;
+      text-align: center;
+    }
+  }
+}
+
+.header-base {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.content-base {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  width: 40ch;
+}
+
+.posizione {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--accent);
+  border: 1px lightgray solid;
+  position: absolute;
+  top: -15px;
+  right: 0px;
+  width: 45px;
+  text-align: center;
+  background: #f1f1f1;
+}
+
+.medal {
+  width: 30px;
+}

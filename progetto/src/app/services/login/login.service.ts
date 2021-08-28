@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 
@@ -11,7 +10,7 @@ export class LoginService {
 
   [x: string]: any;
 
-  constructor(private store: Store, private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   usersUrl: any;
 

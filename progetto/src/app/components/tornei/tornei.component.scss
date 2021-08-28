@@ -1,0 +1,14 @@
+@import "src/styles/typography.scss";
+@import "src/styles/tornei.scss";
+@import "src/styles/input.scss";
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.list-table {
+  td,
+  th {
+    padding: 5px 25px 5px 0;
+  }
+}

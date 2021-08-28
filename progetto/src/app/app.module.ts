@@ -1,31 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { NgwWowModule } from 'ngx-wow';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { CoreModule } from 'src/app/core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClassificaComponent } from './components/classifica/main/classifica.component';
-import { HomeComponent } from './components/home/main/home.component';
-import { LoginComponent } from './components/login/main/login.component';
-import { MieiTorneiComponent } from './components/miei-tornei/main/miei-tornei.component';
+import { ClassificaComponent } from './components/classifica/classifica.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { MieiTorneiComponent } from './components/miei-tornei/miei-tornei.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { PageNfoundComponent } from './components/page-nfound/main/page-nfound.component';
-import { ProfiloComponent } from './components/profilo/main/profilo.component';
-import { RegistrazioneComponent } from './components/registrazione/main/registrazione.component';
-import { TorneiComponent } from './components/tornei/main/tornei.component';
-import { reducers } from './redux';
-import { ClassificaEffects } from './redux/classifica/classifica.effects';
-import { ClassificaGlobaleEffects } from './redux/classificaGlobale/classificaGlobale.effects';
-import { IscrizioneEffects } from './redux/iscrizioni/iscrizioni.effects';
-import { TorneoEffects } from './redux/miei-tornei/miei-tornei.effect';
-import { UtenteEffects } from './redux/utente/utente.effects';
-import { SharedModule } from './shared/shared.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { PageNfoundComponent } from './components/page-nfound/page-nfound.component';
+import { ProfiloComponent } from './components/profilo/profilo.component';
+import { RegistrazioneComponent } from './components/registrazione/registrazione.component';
+import { TorneiComponent } from './components/tornei/tornei.component';
 
 @NgModule({
   declarations: [
@@ -43,20 +38,17 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     HttpClientModule,
     CoreModule,
-    NgwWowModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([
-      TorneoEffects,
-      UtenteEffects,
-      IscrizioneEffects,
-      ClassificaEffects,
-      ClassificaGlobaleEffects,
-    ]),
     BrowserAnimationsModule,
-    ModalModule.forRoot()
+    CommonModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ModalModule.forRoot(),
+    MatTableModule,
+    MatSortModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent],

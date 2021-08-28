@@ -38,8 +38,8 @@
   <a [routerLink]="torneiUrl" [routerLinkActive]="['active']">Tornei online</a>
   <a [routerLink]="mieiTorneiUrl" [routerLinkActive]="['active']" *ngIf="loggato()">Miei tornei</a>
   <a [routerLink]="profiloUrl" [routerLinkActive]="['active']" *ngIf="loggato()">Profilo</a>
-  <a [routerLink]="signUpUrl" [routerLinkActive]="['active']" *ngIf="!loggato()">REGISTRATI</a>
-  <a [routerLink]="loginUrl" [routerLinkActive]="['active']" *ngIf="!loggato()">ACCEDI</a>
+  <a [routerLink]="loginUrl" [routerLinkActive]="['active']" *ngIf="!loggato()" class="float-right">Accedi</a>
+  <a [routerLink]="signUpUrl" [routerLinkActive]="['active']" *ngIf="!loggato()" class="float-right">Registrati</a>
   <a (click)="logout()" *ngIf="loggato()" class="float-right"><i class="bi bi-box-arrow-right"></i></a>
 
 </div>
