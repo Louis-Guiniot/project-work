@@ -31,66 +31,6 @@
         </div>
     </div>
 
-    <ng-template #iscrivitiModal let-modal>
-        <div class="modal-header ">
-            <h4 class="modal-title ">Iscrizione torneo</h4>
-            <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
-                <i class="bi bi-x-circle-fill"></i>
-
-            </button>
-        </div>
-        <div class="modal-body">
-            <ng-container *ngIf="!iscritto && !simulato">
-                <div class="text">
-                    <p>Sei pronto per giocare ?<br> Clicca su <span class="primary-text">iscriviti</span> per confermare
-                        l'iscrizione al torneo.
-                    </p>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="iscritto && !simulato">
-                <div class="text">
-                    <p>
-                        Iscrizione <span class="primary-text">completata</span>, siamo pronti! <br> Ora non resta che
-                        <span class="primary-text">simulare</span> il torneo. <br> I tuoi punti e quelli dei tuoi
-                        avversari verranno generati <span class="primary-text">casualmente</span>.
-                        <br> Che la forza sia con te.
-                    </p>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="simulato">
-                <div class="text">
-                    <p>
-                        Simulazione <span class="primary-text">completata</span>, ora vai a vedere il tuo risultato!
-                        <br> Avrai vinto?
-                    </p>
-                </div>
-            </ng-container>
-        </div>
-        <div class="modal-footer">
-            <ng-container *ngIf="!iscritto">
-                <button class="btn primary-button" (click)="iscriviti()" ngbAutofocus>iscriviti</button>
-            </ng-container>
-
-            <ng-container *ngIf="iscritto && !simulato">
-                <button class="btn primary-button" (click)="simula()">
-                    simula
-                </button>
-            </ng-container>
-
-            <ng-container *ngIf="simulato">
-                <button class="btn primary-button" (click)="goToClassifica()" (click)="modal.close( 'Close click' )">
-                    vai alla classifica
-                </button>
-            </ng-container>
-
-            <ng-container *ngIf="!iscritto">
-                <button class="btn btn-danger " (click)="modal.dismiss( 'Close click') ">
-                    chiudi
-                </button>
-            </ng-container>
-
-        </div>
-    </ng-template>
 
     <ng-template #dettaglioGlobale let-modal>
         <div class="modal-header">
@@ -225,10 +165,9 @@
                             </div>
                         </div>
 
-                        <div class="octo-bg">
-                            <!-- <img src="../../../../assets/images/octobg.png" alt=""> -->
-                        </div>
                     </div>
+
+                    <button class="primary-btn btn" (click)="openModal(item)">iscriviti</button>
 
                 </div>
             </div>
@@ -257,3 +196,7 @@
         </div>
     </div>
 </section>
+
+<ng-template #iscrivitiModal let-modal>
+
+</ng-template>

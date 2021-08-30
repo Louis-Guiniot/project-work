@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'tornei', component: TorneiComponent },
   { path: 'miei-tornei', component: MieiTorneiComponent, canActivate: [LoginGuardService] },
   { path: 'registrazione', component: RegistrazioneComponent },
-  { path: 'classifica', component: ClassificaComponent, canActivate: [LoginGuardService] },
+  { path: 'classifica/:idIscrizione/:idTorneo', component: ClassificaComponent, canActivate: [LoginGuardService] },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNfoundComponent },
 

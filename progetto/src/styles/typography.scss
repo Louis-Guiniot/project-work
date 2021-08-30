@@ -1,30 +1,22 @@
 @media (min-width: 400px) {
-  .box {
-    .header {
-      .title {
-        font-size: 2.6rem;
-        font-weight: 900;
-      }
-      .content {
-        font-size: 1.5rem;
-        margin-top: 1rem;
-      }
-    }
+  .title {
+    font-size: 2.6rem;
+    font-weight: 900;
+  }
+  .content {
+    font-size: 1.5rem;
+    margin-top: 1rem;
   }
 }
 
 @media (max-width: 400px) {
-  .box {
-    .header {
-      .title {
-        font-size: 2.2rem;
-        font-weight: 900;
-      }
-      .content {
-        font-size: 1rem;
-        margin-top: 1rem;
-      }
-    }
+  .title {
+    font-size: 2.2rem;
+    font-weight: 900;
+  }
+  .content {
+    font-size: 1rem;
+    margin-top: 1rem;
   }
 }
 
@@ -35,6 +27,10 @@
 .primary-text {
   font-weight: 900;
   color: var(--accent);
+}
+
+.primary-hover:hover {
+  color: var(--accent-900);
 }
 
 .messages {

@@ -24,6 +24,7 @@ export class ProfiloComponent implements OnInit {
   emailFormControl = new FormControl(this.currentUser.email, [
     Validators.required,
     Validators.email,
+
   ]);
   passwordFormControl = new FormControl(this.currentUser.password, [
     Validators.required
@@ -42,29 +43,6 @@ export class ProfiloComponent implements OnInit {
   ]);
 
   constructor(private router: Router, private fb: FormBuilder, private utenteService: UtenteService, private loginService: LoginService) {
-
-    this.mesiSelect = [
-      { label: 'Gennaio', value: '01' },
-      { label: 'Febbraio', value: '02' },
-      { label: 'Marzo', value: '03' },
-      { label: 'Aprile', value: '04' },
-      { label: 'Maggio', value: '05' },
-      { label: 'Giugno', value: '06' },
-      { label: 'Luglio', value: '07' },
-      { label: 'Agosto', value: '08' },
-      { label: 'Settembre', value: '09' },
-      { label: 'Ottombre', value: '10' },
-      { label: 'Novembre', value: '11' },
-      { label: 'Dicembre', value: '12' }
-    ]
-
-    for (let i = 1; i <= 31; i++) {
-      this.giorniSelect.push({ label: i })
-    }
-
-    for (let i = 1970; i <= 2021; i++) {
-      this.anniSelect.push({ label: i })
-    }
 
     this.editaUtenteForm = this.fb.group({
       id: this.currentUser.id,

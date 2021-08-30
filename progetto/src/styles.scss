@@ -25,7 +25,10 @@ footer {
 
 :root {
   --accent: #3d7af5;
-  --accent-900: hsl(220, 90%, 55%);
+  --accent-100: #6e9cf7;
+  --accent-500: #3c72dd;
+  --accent-900: #0a47c2;
+
   --accent-op: hsla(220, 90%, 55%, 0.377);
 }
 
@@ -40,3 +43,10 @@ section {
 .bg-white {
   background-color: #fff;
 }
+
+.puntatore:hover {
+  cursor: pointer;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";

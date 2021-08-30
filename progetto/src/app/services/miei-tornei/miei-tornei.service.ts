@@ -33,4 +33,9 @@ export class MieiTorneiService {
     return this.http.get(`${this.usersUrl + c}/${stato}`);
   }
 
+  getTorneo(idTorneo): Observable<any> {
+    let c = "findTorneo";
+    return this.http.get(`${this.usersUrl + c}/${idTorneo}`);
+  }
+
 }

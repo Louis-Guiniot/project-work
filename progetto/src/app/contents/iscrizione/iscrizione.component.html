@@ -1,0 +1,58 @@
+<div class="modal-header ">
+  <h4 class="modal-title ">Iscrizione torneo</h4>
+  <button type="button " class="close " aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <i class="bi bi-x-circle-fill"></i>
+
+  </button>
+</div>
+<div class="modal-body">
+  <div *ngIf="!iscritto && !simulato">
+    <div class="text">
+      <p>Sei pronto per giocare ?<br> Clicca su <span class="primary-text">iscriviti</span> per confermare
+        l'iscrizione al torneo.
+      </p>
+    </div>
+  </div>
+  <div *ngIf="iscritto && !simulato">
+    <div class="text">
+      <p>
+        Iscrizione <span class="primary-text">completata</span>, siamo pronti! <br> Ora non resta che
+        <span class="primary-text">simulare</span> il torneo. <br> I tuoi punti e quelli dei tuoi
+        avversari verranno generati <span class="primary-text">casualmente</span>.
+        <br> Che la forza sia con te.
+      </p>
+    </div>
+  </div>
+  <div *ngIf="simulato">
+    <div class="text">
+      <p>
+        Simulazione <span class="primary-text">completata</span>, ora vai a vedere il tuo risultato!
+        <br> Avrai vinto?
+      </p>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div *ngIf="!iscritto">
+    <button class="btn primary-button" (click)="iscriviti()" ngbAutofocus>iscriviti</button>
+  </div>
+
+  <div *ngIf="iscritto && !simulato">
+    <button class="btn primary-button" (click)="simula()">
+      simula
+    </button>
+  </div>
+
+  <div *ngIf="simulato">
+    <button class="btn primary-button" (click)="goToClassifica()">
+      vai alla classifica
+    </button>
+  </div>
+
+  <div *ngIf="!iscritto">
+    <button class="btn btn-danger " (click)="modal.dismiss( 'Close click') ">
+      chiudi
+    </button>
+  </div>
+
+</div>

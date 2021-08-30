@@ -21,6 +21,7 @@ import { PageNfoundComponent } from './components/page-nfound/page-nfound.compon
 import { ProfiloComponent } from './components/profilo/profilo.component';
 import { RegistrazioneComponent } from './components/registrazione/registrazione.component';
 import { TorneiComponent } from './components/tornei/tornei.component';
+import { IscrizioneComponent } from './contents/iscrizione/iscrizione.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TorneiComponent } from './components/tornei/tornei.component';
     RegistrazioneComponent,
     PageNfoundComponent,
     ClassificaComponent,
+    IscrizioneComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ import { TorneiComponent } from './components/tornei/tornei.component';
     ModalModule.forRoot(),
     MatTableModule,
     MatSortModule,
-    MatStepperModule
+    MatStepperModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
